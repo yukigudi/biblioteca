@@ -5,7 +5,7 @@ class PDF extends FPDF
 {
 // Cabecera de página
 function Header()
-{
+{ 
     // Arial bold 15
     $this->SetFont('Arial','B',9);
     // Movernos a la derecha

@@ -1,4 +1,4 @@
-<?php
+ <?php
     session_start();
     $id=$_SESSION['Id_usuario'];
     $usuario=$id;
@@ -129,8 +129,7 @@
                  <?php   }?>
 
              </ul>
-        </nav>
-         <!-- Page Content  -->
+        </nav>         <!-- Page Content  -->
         <div class="menu">
             <nav style="background-color:#952F57" class="p-2 navbar navbar-expand-lg navbar-light">
                 <div class="container-fluid">
@@ -147,7 +146,7 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto">
-                         <!--   <li class="nav-item">
+                          <!--  <li class="nav-item">
                                 <a data-toggle="modal" data-target="#exampleModalScrollable1" class="text-white h5 nav-link" href="#" title="Nuestra empresa"><i class="mr-2 icofont-building-alt"></i></a>
                             </li>
 
@@ -160,7 +159,7 @@
                             <li class="nav-item">
                                 <a href="../prestamos/pendientes.php" class="text-white h5 nav-link" href="#"><i class="icofont-notification" title="Notificaciones"><span style="position: relative; top: -8px;" class="bg-warning badge count">
                                       <?php 
-                                       /* require_once("../conexion/conexion.php");
+                                     /*   require_once("../conexion/conexion.php");
                                         $buscar_pend="SELECT COUNT(Id_prestamo) AS numero FROM prestamos WHERE Fecha_devolucion<NOW() AND Estatus='Pendiente'";
                                         $confirmar=$conexion->query($buscar_pend);
                                         $rows=$confirmar->fetch_assoc();
@@ -187,55 +186,120 @@
                 </div>
             </nav>
         </div>
-        <div class="container table-responsive">
+        <div class="container">
             <br><br><br><br>
-            <form action="#" class="form" method="POST">
-                <div class="form-row container">
-                    <div class="col-md-6 col-lg-5">
-                        <div class="input-group">
-                            <input type="search" name="dato" placeholder="Nombre del puesto" class="form-control shadow-sm border-0" pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+" maxlength="15">
-                            <div class="input-group-prepend p-0" style="z-index: 0;">
-                              <button name="buscar" type="submit" class="input-group-text btn btn-danger border-0 shadow-sm icofont-search-1"></button>
-                            </div> 
-                        </div>
-                    </div>
+            <div class="container">
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                  <strong>Nota:</strong> El número de copias no debe ser mayor a 3.
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
                 </div>
-                <br>
-                <div class="container-fluid" id="datos">
-                    <table class='table table-sm table-hover bg-white shadow-sm'>
-                        <thead>
-                            <tr class='bg-warning text-white font-weight-bold'>
-                                <th class='text-center'><small>ID</small></th>
-                                <th class='text-center'><small>Descripción</small></th>
-                                <th colspan='2' class='text-center'><small>Acciones</small></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                    <?php 
-                        if (isset($_POST['buscar'])) {
-                            require_once("../conexion/conexion.php");
-                            $dato=$_POST['dato'];
-                            $query="SELECT * FROM puesto WHERE Descripcion LIKE '$dato%' AND Activo=1";
-                            $resultado=$conexion->query($query);                                    
-                                  while ($fila=$resultado->fetch_assoc()) { 
-                                    $id=$fila['Id_puesto'];
-                                  ?>                                       
-                            <tr class='text-center'>
-                                <td><small><?php echo $fila['Id_puesto']; ?></small></td>
-                                <td><small><?php echo $fila['Descripcion']; ?></small></td>
-                                <td><a class="bg-primary py-1 rounded-lg" href="modificar_puesto.php?id=<?php echo $fila['Id_puesto'] ?>"><span class='h6 text-white icofont-ui-edit px-1'></span></a></td>
-                                <td><a class="bg-danger py-1 rounded-lg" href="#" onclick="confirmar(<?php echo $id; ?>)"><span class='h6 text-white icofont-ui-delete px-1'></span></a></td>   
-                            </tr>
-                    <?php
-                        }
-                        }
+            </div>
+            <br>
+            <div class="bg-white rounded-lg formulario">
+                <?php 
+                        $id=$_REQUEST['id'];
+                        require_once("../conexion/conexion.php");
+                        $query="SELECT * FROM libros WHERE Id_libro=$id";
+                        $resultado=$conexion->query($query);
+                        $fila=$resultado->fetch_assoc();
                      ?>
-                        </tbody>
-                    </table>
+                <form class="p-4 needs-validation" action="realizar_edicion.php?id=<?php echo $fila['Id_libro'] ?>" method="POST" novalidate>
+                  <center><label for=""><h4>ACTUALIZAR LIBROS</h4></label></center>
+                <div class="form-row">
+                  <div class="col-md-4 col-lg-6 mb-4">
+                    <label for="validationCustom01">Titulo</label>
+                    <input type="text" class="form-control" id="validationCustom01"required name="titulo" placeholder="Titulo" value="<?php echo $fila['Titulo']; ?>"  pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+" maxlength="50">
+                    <div class="valid-feedback">
+                      Correcto!
+                    </div>
+                    <div class="invalid-feedback">
+                      Porfavor rellena el campo.
+                    </div>
+                  </div>
+                  <div class="col-md-4 col-lg-3 mb-4">
+                    <label for="validationCustom02">Copias</label>
+                    <input type="text" class="form-control" id="validationCustom02" required name="copias" placeholder="Número de copias" value="<?php echo $fila['Copias']; ?>" pattern="[0-9]{1}">
+                    <div class="valid-feedback">
+                      Correcto!
+                    </div>
+                    <div class="invalid-feedback">
+                      Porfavor rellena el campo.
+                    </div>
+                  </div>
+                  <div class="col-md-4 col-lg-3 mb-4">
+                    <label for="validationCustom03">Editorial</label>
+                    <input type="text" class="form-control" id="validationCustom03" required name="editorial" placeholder="Editorial" value="<?php echo $fila['Editorial']; ?>" pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+" maxlength="30">
+                    <div class="valid-feedback">
+                      Correcto!
+                    </div>
+                    <div class="invalid-feedback">
+                      Porfavor rellena el campo.
+                    </div>
+                  </div>
                 </div>
-                </form>
+                 <div class="form-row">
+                  <div class="col-md-6 col-lg-3 mb-3">
+                    <label for="validationCustom04">Fecha de ultima edición</label>
+                    <input type="date" class="form-control" id="validationCustom04" required name="fecha" value="<?php echo $fila['Fecha_edicion']; ?>">
+                    <div class="valid-feedback">
+                      Correcto!
+                    </div>
+                    <div class="invalid-feedback">
+                      Porfavor rellena el campo.
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-lg-3 mb-3">
+                    <label for="validationCustom05">Categoría</label>
+                    <input type="text" class="form-control" id="validationCustom05" required name="cate" placeholder="Categoría" value="<?php echo $fila['Categoria']; ?>" pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+" maxlength="30">
+                    <div class="valid-feedback">
+                      Correcto!
+                    </div>
+                    <div class="invalid-feedback">
+                      Porfavor rellena el campo.
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-lg-3 mb-3">
+                    <label for="validationCustom06">Número de Estante</label>
+                    <input type="text" class="form-control" id="validationCustom06" required name="estante" placeholder="Número de estante" value="<?php echo $fila['Estante']; ?>" pattern="[0-9]{1}">
+                    <div class="valid-feedback">
+                      Correcto!
+                    </div>
+                    <div class="invalid-feedback">
+                      Porfavor rellena el campo.
+                    </div>
+                  </div>
+                 </div>
+                <button class="btn btn-warning text-white" type="submit" name="registrar">Actualizar</button>
+              </form>
+            </div>
+          <br>
           </div>
+        <script src="../push/push.min.js" type="text/javascript"></script> 
+        <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function() {
+          'use strict';
+          window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+              form.addEventListener('submit', function(event) {
+                if (form.checkValidity() === false) {
+                  event.preventDefault();
+                  event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+              }, false);
+            });
+          }, false);
+        })();
+
+        </script>
     </div>
+     
     <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
       <div class="modal-dialog modal-dialog-scrollable" role="document">
         <div class="modal-content">
@@ -349,7 +413,6 @@
       </div>
     </div>
     <!-- Footer -->
-    <!-- Footer -->
     <footer class=" ">
         <div class="container-fluid text-center">
             <div class="row">
@@ -384,6 +447,11 @@
     <script src="../vendor/jquery/jquery.min.js" type="text/javascript"></script>
     <!-- Bootstrap JS -->
     <script src="../vendor/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script>
+         $(document).ready(function(){
+            $('.toast').toast('show');
+         });
+     </script>
     <script type="text/javascript">
         $(document).ready(function () {
             $('#sidebarCollapse').on('click', function () {
@@ -409,36 +477,6 @@
              document.webkitCancelFullScreen();
          }
      }
-    </script>
-    <script language="javascript"> 
-    function confirmar(id){ 
-        swal({
-        title: "Advertecia!",
-        text: "¿Esta seguro de eliminar el puesto?",
-        type: "warning",
-        showCancelButton: true,
-        confirmButtonClass: "btn-primary ",
-        confirmButtonText: "Eliminar",
-        cancelButtonClass: "btn-danger",
-        cancelButtonText: "Cancelar",
-        closeOnConfirm: false,
-        closeOnCancel: false
-      },
-      function(isConfirm) {
-        if (isConfirm) {
-            window.location="eliminar.php?id="+id;
-        }else{
-            swal({
-              title: "Operación cancelada!",
-              text: "El puesto no fue eliminado",
-              type: "error",
-              confirmButtonClass: "btn-primary",
-              confirmButtonText: "Volver",
-              closeOnConfirm: false
-            },);
-        }
-      });
-    }
     </script>
     <script>
        function abrirReporte() {

@@ -1,4 +1,4 @@
-<?php
+ <?php
     session_start();
     $id=$_SESSION['Id_usuario'];
     $usuario=$id;
@@ -22,27 +22,14 @@
   <?php 
                 require_once ("../conexion/conexion.php");
                 $id=$_REQUEST['id'];
-               /* $titulo = $_POST['titulo'];
+                $titulo = $_POST['titulo'];
                 $copias = $_POST['copias'];
                 $editorial = $_POST['editorial'];
                 $fecha = $_POST['fecha'];
                 $cate = $_POST['cate'];
-                $estante = $_POST['estante'];*/
-                $estado=$_POST['estado'];
-                $nombre=$_POST['titulo'];
-                $nivel=$_POST['nivel'];
-                $material=$_POST['material'];
+                $estante = $_POST['estante'];
 
-                $query = "UPDATE libros SET Titulo='$nombre',estado='$estado',nivel='$nivel',material='$material' WHERE Id_libro=$id ";
-//echo $query;
-              /*  $query = "UPDATE libros SET Titulo='$titulo',Copias=$copias,Editorial='$editorial',Fecha_edicion='$fecha',Categoria='$cate',Estante='$estante' WHERE Id_libro=$id ";
-                $estado=$_POST['estado'];
-                $nombre=$_POST['titulo'];
-                $nivel=$_POST['nivel'];
-                $material=$_POST['material'];*/
-
-                
-                
+                $query = "UPDATE libros SET Titulo='$titulo',Copias=$copias,Editorial='$editorial',Fecha_edicion='$fecha',Categoria='$cate',Estante='$estante' WHERE Id_libro=$id ";
                 $verificar=$conexion->query($query);
                 if ($verificar) {
                     echo '<script>

@@ -39,22 +39,24 @@ $pdf->Image('../images/logo1.png',10,8,20);
     $pdf->Ln(20);
     $pdf->cell(15,10,'ID',1,0,'C',0);
     $pdf->cell(65,10,'Titulo',1,0,'C',0);
-    $pdf->cell(17,10,'Copias',1,0,'C',0);
-    $pdf->cell(38,10,'Editorial',1,0,'C',0);
-    $pdf->cell(45,10,utf8_decode('Fecha de edición'),1,0,'C',0);
+    $pdf->cell(17,10,'Estado',1,0,'C',0);
+    $pdf->cell(38,10,'Nivel',1,0,'C',0);
+    $pdf->cell(45,10,'Material',1,0,'C',0);
+   /* $pdf->cell(45,10,utf8_decode('Fecha de edición'),1,0,'C',0);
     $pdf->cell(45,10,utf8_decode('Categoría'),1,0,'C',0);
-    $pdf->cell(17,10,'Estante',1,1,'C',0);
+    $pdf->cell(17,10,'Estante',1,1,'C',0);*/
 
 $pdf->SetFont('Arial','I',9);
-
+$pdf->Ln(10);
 while ($row=$resultado->fetch_assoc()) {
+   
 	$pdf->cell(15,10,$row['Id_libro'],1,0,'C',0);
 	$pdf->cell(65,10,utf8_decode($row['Titulo']),1,0,'C',0);
-	$pdf->cell(17,10,$row['Copias'],1,0,'C',0);
-    $pdf->cell(38,10,utf8_decode($row['Editorial']),1,0,'C',0);
-    $pdf->cell(45,10,$row['Fecha_edicion'],1,0,'C',0);
-    $pdf->cell(45,10,utf8_decode($row['Categoria']),1,0,'C',0);
-    $pdf->cell(17,10,$row['Estante'],1,1,'C',0);
+	$pdf->cell(17,10,$row['estado'],1,0,'C',0);
+    $pdf->cell(38,10,$row['nivel'],1,0,'C',0);
+    $pdf->cell(45,10,$row['material'],1,0,'C',0);
+   /*$pdf->cell(45,10,utf8_decode($row['Categoria']),1,0,'C',0);
+    $pdf->cell(17,10,$row['Estante'],1,1,'C',0);*/
 }
 $pdf->Output();
  ?>

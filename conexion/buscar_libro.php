@@ -7,11 +7,12 @@
 		$query="SELECT * FROM libros WHERE Titulo LIKE '".$texto."%'";
 	}
 	$resultado=$conexion->query($query);
-<<<<<<< HEAD
-	if ($resultado->num_rows > 0) { 
-=======
+
 	if ($resultado->num_rows > 0) {
->>>>>>> 869fea6f89f8d5bc1dc5a566bbf8892aaa413baf
+
+
+	if ($resultado->num_rows > 0) { 
+
 		$salida.="
 			<table class='table table-sm table-hover'>
 		        <thead>

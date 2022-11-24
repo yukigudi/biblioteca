@@ -37,101 +37,100 @@
                 <small><b class="ml-2">ISEJA</b> Control de libros</small>
             </div>
             <ul class="list-unstyled components">
-                 <li class="">
-                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><span
-                             class="icofont-library mr-3 h4 text-white"></span>Libros<i
-                             class="icofont-rounded-down text-white"></i></a>
-                     <ul class="collapse list-unstyled" id="homeSubmenu">
-                         <li>
-                             <a href="../libros/registrar_libros.php">Registrar</a>
-                         </li>
-                         <li>
-                             <a href="../libros/libros.php">Consultar</a>
-                         </li>
-                         <li>
-                             <a onClick='abrirReporte()' href="#">Reportes</a>
-                         </li>
-                     </ul>
-                 </li>
-                 <li class="">
-                     <a href="#modulosSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><span
-                             class="icofont-listing-box mr-3 h4 text-white"></span>Modulos<i
-                             class="icofont-rounded-down text-white"></i></a>
-                     <ul class="collapse list-unstyled" id="modulosSubmenu">
-                         <li>
-                             <a href="../modulos_envio/registrar_envio.php">Envio</a>
-                         </li>
-                         <li>
-                             <a href="../modulos_retorno/registrar_retorno.php">Retorno</a>
-                         </li>
-                         <li>
-                             <a href="../modulos_recibido/registro.php">Recibo</a>
-                         </li>
-                       <!--  <li>
+                <li class="">
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><span
+                            class="icofont-library mr-3 h4 text-white"></span>Libros<i
+                            class="icofont-rounded-down text-white"></i></a>
+                    <ul class="collapse list-unstyled" id="homeSubmenu">
+                        <li>
+                            <a href="../libros/registrar_libros.php">Registrar</a>
+                        </li>
+                        <li>
+                            <a href="../libros/libros.php">Consultar</a>
+                        </li>
+                        <li>
+                            <a onClick='abrirReporte()' href="#">Reportes</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="">
+                    <a href="#modulosSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><span
+                            class="icofont-listing-box mr-3 h4 text-white"></span>Modulos<i
+                            class="icofont-rounded-down text-white"></i></a>
+                    <ul class="collapse list-unstyled" id="modulosSubmenu">
+                        <li>
+                            <a href="../modulos_envio/registrar_envio.php">Envio</a>
+                        </li>
+                        <li>
+                            <a href="../modulos_retorno/registrar_retorno.php">Retorno</a>
+                        </li>
+                        <li>
+                            <a href="../modulos_recibido/registro.php">Recibo</a>
+                        </li>
+                        <!--  <li>
                              <a onClick='abrirReporte1()' href="#">Reportes</a>
                          </li>-->
-                     </ul>
-                 </li>
-                 <li class="">
-                     <a href="#incidenciasSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><span
-                             class="icofont-bulb-alt mr-3 h4 text-white"></span>Incidencias<i
-                             class="icofont-rounded-down text-white"></i></a>
-                     <ul class="collapse list-unstyled" id="incidenciasSubmenu">
-                         <li>
-                             <a href="../incidencias/registrar_incidencias.php">Registrar</a>
-                         </li>
-                         <li>
-                             <a onClick='abrirReporte2()' href="#">Reportes</a>
-                         </li>
-                     </ul>
-                 </li>
-                 <li class="">
-                     <a href="#empleadosSubmenu" data-toggle="collapse" aria-expanded="false"
-                         class="dropdown-toggle"><span
-                             class="icofont-business-man mr-3 h4 text-white"></span>Empleados<i
-                             class="icofont-rounded-down text-white"></i></a>
-                     <ul class="collapse list-unstyled" id="empleadosSubmenu">
-                         <li>
-                             <a href="../empleados/registrar_empleados.php">Registrar</a>
-                         </li>
-                         <li>
-                             <a href="../empleados/empleados.php">Consultar</a>
-                         </li>
-                         <li>
-                             <a onClick='abrirReporte3()' href="#">Reportes</a>
-                         </li>
-                     </ul>
-                 </li>
-                 <li class="">
-                     <a href="#puestoSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><span
-                             class="icofont-ui-user mr-3 h4 text-white"></span>Puestos<i
-                             class="icofont-rounded-down text-white"></i></a>
-                     <ul class="collapse list-unstyled" id="puestoSubmenu">
-                         <li>
-                             <a href="../puestos/registrar_puesto.php">Registrar</a>
-                         </li>
-                         <li>
-                             <a href="../puestos/puestos.php">Consultar</a>
-                         </li>
-                     </ul>
-                 </li>
-                 <?php if ($_SESSION['Id_usuario'] == 1) {?>
-                 <li class="">
-                     <a href="#userSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><span
-                             class="icofont-users-alt-4 mr-3 h4 text-white"></span>Usuarios<i
-                             class="icofont-rounded-down text-white"></i></a>
-                     <ul class="collapse list-unstyled" id="userSubmenu">
-                         <li>
-                             <a href="../usuarios/registrar_usuarios.php">Registrar</a>
-                         </li>
-                         <li>
-                             <a href="../usuarios/usuarios.php">Consultar</a>
-                         </li>
-                     </ul>
-                 </li>
-                 <?php   }?>
+                    </ul>
+                </li>
+                <li class="">
+                    <a href="#incidenciasSubmenu" data-toggle="collapse" aria-expanded="false"
+                        class="dropdown-toggle"><span class="icofont-bulb-alt mr-3 h4 text-white"></span>Incidencias<i
+                            class="icofont-rounded-down text-white"></i></a>
+                    <ul class="collapse list-unstyled" id="incidenciasSubmenu">
+                        <li>
+                            <a href="../incidencias/registrar_incidencias.php">Registrar</a>
+                        </li>
+                        <li>
+                            <a onClick='abrirReporte2()' href="#">Reportes</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="">
+                    <a href="#empleadosSubmenu" data-toggle="collapse" aria-expanded="false"
+                        class="dropdown-toggle"><span class="icofont-business-man mr-3 h4 text-white"></span>Empleados<i
+                            class="icofont-rounded-down text-white"></i></a>
+                    <ul class="collapse list-unstyled" id="empleadosSubmenu">
+                        <li>
+                            <a href="../empleados/registrar_empleados.php">Registrar</a>
+                        </li>
+                        <li>
+                            <a href="../empleados/empleados.php">Consultar</a>
+                        </li>
+                        <li>
+                            <a onClick='abrirReporte3()' href="#">Reportes</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="">
+                    <a href="#puestoSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><span
+                            class="icofont-ui-user mr-3 h4 text-white"></span>Puestos<i
+                            class="icofont-rounded-down text-white"></i></a>
+                    <ul class="collapse list-unstyled" id="puestoSubmenu">
+                        <li>
+                            <a href="../puestos/registrar_puesto.php">Registrar</a>
+                        </li>
+                        <li>
+                            <a href="../puestos/puestos.php">Consultar</a>
+                        </li>
+                    </ul>
+                </li>
+                <?php if ($_SESSION['Id_usuario'] == 1) {?>
+                <li class="">
+                    <a href="#userSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><span
+                            class="icofont-users-alt-4 mr-3 h4 text-white"></span>Usuarios<i
+                            class="icofont-rounded-down text-white"></i></a>
+                    <ul class="collapse list-unstyled" id="userSubmenu">
+                        <li>
+                            <a href="../usuarios/registrar_usuarios.php">Registrar</a>
+                        </li>
+                        <li>
+                            <a href="../usuarios/usuarios.php">Consultar</a>
+                        </li>
+                    </ul>
+                </li>
+                <?php   }?>
 
-             </ul>
+            </ul>
         </nav>
         <!-- Page Content  -->
         <div class="menu">
@@ -202,128 +201,133 @@
             <div class="bg-white rounded-lg formulario">
                 <form class="p-4 needs-validation" action="registrar_envio.php" method="POST" novalidate>
                     <div id="lineas">
-                    <center><label for="">
-                            <h4>REGISTRAR ENVIO</h4>
-                        </label></center>
-                    <div class="form-row">
-                        <div class="col-md-6 col-lg-3 mb-4">
-                            <label for="validationCustom02">Ubicación actual</label>
-                            <select id="validationCustom02" name="ubicacion_actual" class="form-control" required>
-                            <option value="">Seleccione</option>
-                                <option value="bodega_chica">Bodega chica</option>
-                                <option value="bodega_grande">Bodega grande</option>
-                            </select>
-                            <div class="valid-feedback">
-                                Correcto!
+                        <center><label for="">
+                                <h4>REGISTRAR ENVIO</h4>
+                            </label></center>
+                        <div class="form-row">
+                            <div class="col-md-6 col-lg-3 mb-4">
+                                <label for="validationCustom02">Ubicación actual</label>
+                                <select id="validationCustom02" name="ubicacion_actual" class="form-control" required>
+                                    <option value="">Seleccione</option>
+                                    <option value="bodega_chica">Bodega chica</option>
+                                    <option value="bodega_grande">Bodega grande</option>
+                                </select>
+                                <div class="valid-feedback">
+                                    Correcto!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Porfavor rellena el campo.
+                                </div>
                             </div>
-                            <div class="invalid-feedback">
-                                Porfavor rellena el campo.
+                            <div class="col-md-6 col-lg-3 mb-4">
+                                <label for="validationCustom02">Envío a</label>
+                                <select id="validationCustom02" name="envioa" class="form-control" required>
+                                    <option value="plazas">Plazas</option>
+                                    <option value="municipio">Municipio</option>
+                                </select>
+                                <div class="valid-feedback">
+                                    Correcto!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Porfavor rellena el campo.
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6 col-lg-3 mb-4">
-                            <label for="validationCustom02">Envío a</label>
-                            <select id="validationCustom02" name="envioa" class="form-control" required>
-                                <option value="plazas">Plazas</option>
-                                <option value="municipio">Municipio</option>
-                            </select>
-                            <div class="valid-feedback">
-                                Correcto!
+                            <div class="col-md-6 col-lg-4 mb-3">
+                                <label for="fecha_actual">Fecha actual</label>
+                                <input type="date" class="form-control" id="fecha_actual" name="fecha"
+                                    value="<?php echo date("Y-m-d")?>">
+                                <div class="valid-feedback">
+                                    Correcto!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Porfavor rellena el campo.
+                                </div>
                             </div>
-                            <div class="invalid-feedback">
-                                Porfavor rellena el campo.
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-4 mb-3">
-                            <label for="fecha_actual">Fecha actual</label>
-                            <input type="date" class="form-control" id="fecha_actual" name="fecha" value="<?php echo date("Y-m-d")?>">
-                            <div class="valid-feedback">
-                                Correcto!
-                            </div>
-                            <div class="invalid-feedback">
-                                Porfavor rellena el campo.
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-3 mb-3">
-                            <label for="usuario_recibe">Recibe</label>
-                            <select id="usuario_recibe" name="recibe" class="form-control" required>
-                            <option value="">Selecciona</option>
-                            <?php 
+                            <div class="col-md-6 col-lg-3 mb-3">
+                                <label for="usuario_recibe">Recibe</label>
+                                <select id="usuario_recibe" name="recibe" class="form-control" required>
+                                    <option value="">Selecciona</option>
+                                    <?php 
                             
                             $query="SELECT * FROM usuarios";
                         
                         $resultado=$conexion->query($query);
                         if ($resultado->num_rows > 0) {
                             while ($fila=$resultado->fetch_assoc()) { ?>
-                                 <option value="<?php echo$fila['Id_usuario']; ?>"><?php echo$fila['Nombre_usuario']; ?></option>
-                                <?php }}?>
-                               <!-- <option value="plazas">Plazas</option>
+                                    <option value="<?php echo$fila['Id_usuario']; ?>">
+                                        <?php echo$fila['Nombre_usuario']; ?></option>
+                                    <?php }}?>
+                                    <!-- <option value="plazas">Plazas</option>
                                 <option value="municipio">Municipio</option> -->
-                            </select>
-                            <div class="valid-feedback">
-                                Correcto!
+                                </select>
+                                <div class="valid-feedback">
+                                    Correcto!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Porfavor rellena el campo.
+                                </div>
                             </div>
-                            <div class="invalid-feedback">
-                                Porfavor rellena el campo.
+                            <div class="col-md-6 col-lg-3 mb-3">
+                                <label for="testigo">Testigo</label>
+                                <input type="text" class="form-control" id="testigo" name="testigo">
+                                <div class="valid-feedback">
+                                    Correcto!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Porfavor rellena el campo.
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-6 col-lg-3 mb-3">
-                            <label for="testigo">Testigo</label>
-                            <input type="text" class="form-control" id="testigo" name="testigo">
-                            <div class="valid-feedback">
-                                Correcto!
+                        <div class="form-row">
+                            <div class="col-md-6 col-lg-9 mb-4">
+                                <hr>
                             </div>
-                            <div class="invalid-feedback">
-                                Porfavor rellena el campo.
+                            <div onclick="agregarLinea()" class="col-md-6 col-lg-3 mb-4"><i
+                                    class="icofont-plus-square"></i> Agregar linea de captura
                             </div>
                         </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="col-md-6 col-lg-9 mb-4">
-                            <hr>
-                        </div>
-                        <div onclick="agregarLinea()" class="col-md-6 col-lg-3 mb-4"><i class="icofont-plus-square"></i> Agregar linea de captura
-                        </div>
-                    </div>
 
 
 
-                    <div class="form-row envios">
-                        <div class="col-md-8 col-lg-8 mb-4">
-                            <label for="modulos">Módulo</label>
-                            <select id="modulos[]" name="modulos[]" class="form-control" required>
-                            <option value="">Selecciona</option>
-                            <?php 
+                        <div class="form-row envios">
+                            <div class="col-md-8 col-lg-8 mb-4">
+                                <label for="modulos">Módulo</label>
+                                <select id="modulos[]" name="modulos[]" class="form-control" required>
+                                    <option value="">Selecciona</option>
+                                    <?php 
                             $query="SELECT * FROM libros";
                         
                         $resultado=$conexion->query($query);
                         if ($resultado->num_rows > 0) {
                             while ($fila=$resultado->fetch_assoc()) { ?>
-                                 <option value="<?php echo$fila['Id_libro']; ?>"><?php echo$fila['Titulo']; ?></option>
-                                <?php }}?>
-                             </select>
-                              
-                            <div class="valid-feedback">
-                                Correcto!
+                                    <option value="<?php echo$fila['Id_libro']; ?>"><?php echo$fila['Titulo']; ?>
+                                    </option>
+                                    <?php }}?>
+                                </select>
+
+                                <div class="valid-feedback">
+                                    Correcto!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Porfavor rellena el campo.
+                                </div>
                             </div>
-                            <div class="invalid-feedback">
-                                Porfavor rellena el campo.
+                            <div class="col-md-6 col-lg-3 mb-4">
+                                <label for="cantidad">Cantidad</label>
+                                <input type="text" class="form-control" id="cantidad[]" name="cantidad[]">
+                                <div class="valid-feedback">
+                                    Correcto!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Porfavor rellena el campo.
+                                </div>
                             </div>
+
                         </div>
-                        <div class="col-md-6 col-lg-3 mb-4">
-                            <label for="cantidad">Cantidad</label>
-                            <input type="text" class="form-control" id="cantidad[]" name="cantidad[]">
-                            <div class="valid-feedback">
-                                Correcto!
-                            </div>
-                            <div class="invalid-feedback">
-                                Porfavor rellena el campo.
-                            </div>
-                        </div>
-                       
+
                     </div>
-   
-                 </div>
-                    <button class="btn btn-warning text-white" type="submit" name="registrar" onClick='contarCampos()'>Registrar</button>
+                    <button class="btn btn-warning text-white" type="submit" name="registrar"
+                        onClick='contarCampos()'>Registrar</button>
                 </form>
             </div>
             <br>
@@ -354,28 +358,56 @@
             if (isset($_POST['registrar'])) {
                 require_once ("../conexion/conexion.php");
                 $titulo = $_POST['titulo'];
-                $copias = $_POST['copias'];
-                $editorial = $_POST['editorial'];
-                $fecha = $_POST['fecha'];
-                $cate = $_POST['cate'];
-                $estante = $_POST['estante'];
+                $ubicacion = $_POST['ubicacion_actual'];
+                $envioa=$_POST['envioa'];
+                $recibe=$_POST['usuario_recibe'];
+                $testigo=$_POST['testigo'];
+                $fecha_actual=$_POST['fecha_actual'];
+                //$copias = $_POST['copias'];
+                //$editorial = $_POST['editorial'];
+                //$fecha = $_POST['fecha'];
+                //$cate = $_POST['cate'];
+                //$estante = $_POST['estante'];
+                $modulos = $_POST['modulos'];
+                $cantidad = $_POST['cantidad'];
 
 
 
+                //$cantidad=array("3","4","6");
 
-                if (isset($_POST['modulos']) AND is_array($_POST['modulos'])) { 
-                    echo 'OK';
+               // foreach($modulos as $key => $value) {
+                   //                 echo 'cantidad: '.$cantidad[$key].', libro: '.$value.'</br>';
+                                    //consulta sql
+                 //                 }
+              //echo "I like " . $cars[0] . ", " . $cars[1] . " and " . $cars[2] . ".";
+
+
+                //if (isset($_POST['modulos']) AND is_array($_POST['modulos'])) { 
+                    if (isset($modulos) AND is_array($modulos)) {
+
+                        foreach($modulos as $key => $value) {
+
+                            $query_inserta = "INSERT INTO envio_modulos (ubicacion,envio,fecha,recibe,testigo,titulo,cantidad) values('$ubicacion','$envioa','$fecha_actual','$recibe','$testigo',$value,'$cantidad[$key]')";
+
+                            echo  $query_inserta."<br/>";
+
+                           // echo 'cantidad: '.$cantidad[$key].', libro: '.$value.'</br>';
+                            //consulta sql
+                          }
+
+                   // echo 'OK';
                     // acceder a la primera posicion de val
-                    echo $_POST['modulos'][0]."</br>";
+                   // echo $_POST['modulos'][0]."</br>";
                   
                     // tambien puedes utilizar un foreach para recorrer todos los campos de val
-                    foreach($_POST['modulos'] as $key => $value) {
-                      echo 'Clave de val: '.$key.', valor: '.$value.'</br>'; 
-                    }
+                   // foreach($_POST['modulos'] as $key => $value) {
+                     // echo 'Clave de val: '.$key.', valor: '.$value.'</br>'; 
+                     
+                    //}
                   }else{
                     echo 'no es'; 
                   }
-                  if (isset($_POST['cantidad']) AND is_array($_POST['cantidad'])) { 
+                 /* if (isset($_POST['cantidad']) AND is_array($_POST['cantidad'])) { 
                     echo 'OK';
                     // acceder a la primera posicion de val
                     echo $_POST['cantidad'][0]."</br>";
@@ -386,7 +418,7 @@
                     }
                   }else{
                     echo 'no es';
-                  }
+                  }*/
 
 
                /* $query = "INSERT INTO libros (Titulo,Copias,Editorial,Fecha_edicion,Categoria,Estante) values('$titulo',$copias,'$editorial','$fecha','$cate',$estante)";
@@ -633,16 +665,19 @@
         }
     }
     </script>
-    <script language="javascript"> 
-    function agregarLinea(){ 
+    <script language="javascript">
+    function agregarLinea() {
         var $c = $('.envios').length;
-        $('#lineas').append('<div class="form-row envios"><div class="col-md-8 col-lg-8 mb-4"><select id="modulos[]" name="modulos[]" class="form-control" required><option value="">Selecciona</option> <?php  $query="SELECT * FROM libros"; $resultado=$conexion->query($query); if ($resultado->num_rows > 0) {while ($fila=$resultado->fetch_assoc()) { ?><option value="<?php echo$fila['Id_libro']; ?>"><?php echo$fila['Titulo']; ?></option><?php }} ?> </select> <div class="valid-feedback"> Correcto! </div> <div class="invalid-feedback"> Porfavor rellena el campo.</div> </div><div class="col-md-6 col-lg-3 mb-4"><input type="text" class="form-control" id="cantidad[]" name="cantidad[]"><div class="valid-feedback">Correcto!</div><div class="invalid-feedback">Porfavor rellena el campo.</div></div></div>');
-       
-       
-       console.log($c);
-       // console.log('yeiiiiii');
+        $('#lineas').append(
+            '<div class="form-row envios"><div class="col-md-8 col-lg-8 mb-4"><select id="modulos[]" name="modulos[]" class="form-control" required><option value="">Selecciona</option> <?php  $query="SELECT * FROM libros"; $resultado=$conexion->query($query); if ($resultado->num_rows > 0) {while ($fila=$resultado->fetch_assoc()) { ?><option value="<?php echo$fila['Id_libro']; ?>"><?php echo$fila['Titulo']; ?></option><?php }} ?> </select> <div class="valid-feedback"> Correcto! </div> <div class="invalid-feedback"> Porfavor rellena el campo.</div> </div><div class="col-md-6 col-lg-3 mb-4"><input type="text" class="form-control" id="cantidad[]" name="cantidad[]"><div class="valid-feedback">Correcto!</div><div class="invalid-feedback">Porfavor rellena el campo.</div></div></div>'
+            );
+
+
+        console.log($c);
+        // console.log('yeiiiiii');
     }
-    function contarCampos(){
+
+    function contarCampos() {
         var $c = $('.envios').length;
         console.log($c);
     }

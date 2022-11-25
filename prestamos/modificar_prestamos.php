@@ -464,9 +464,8 @@
                 </div>  
                 <div class="col-md-4 text-white mt-3 mb-2">
                     <div class="contaiter">
-                        <a href="../conexion/desarolladores.php">Desarolladores</a>
-                        <br>
-                        <small>Version 3.0</small>
+                        
+                        <small>Version 1.0</small>
                     </div>
                 </div>
                 <div class="col-md-4 text-white mt-3 mb-2">

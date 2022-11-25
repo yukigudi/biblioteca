@@ -536,9 +536,8 @@
                 </div>  
                 <div class="col-md-4 text-white mt-3 mb-2">
                     <div class="contaiter">
-                        <a href="../conexion/desarolladores.php">Desarolladores</a>
-                        <br>
-                        <small>Version 3.0</small>
+                        
+                        <small>Version 1.0</small>
                     </div>
                 </div>
                 <div class="col-md-4 text-white mt-3 mb-2">
@@ -594,23 +593,17 @@
      }
     </script>
     <script>
-       function abrirReporte() {
+      function abrirReporte() {
        window.open("../reporte_libros/index.php","Reporte de libros","directories=no location=no");
        }
        function abrirReporte1() {   
-       window.open("../reporte_personas/index.php","Reporte de personas","directories=no location=no");
+       window.open("../reporte_modulos/index.php","Reporte de módulos","directories=no location=no");
        }
-       function abrirReporte2() {
-       window.open("../reporte_autores/index.php","Reporte de autores","directories=no location=no");
+       function abrirReporte2() {   
+       window.open("../reporte_incidencias/index.php","Reporte de incidencias","directories=no location=no");
        }
        function abrirReporte3() {
        window.open("../reporte_empleados/index.php","Reporte de empleados","directories=no location=no");
-       }
-       function abrirReporte4() {
-       window.open("../reporte_consultas/index.php","Reporte de consultas","directories=no location=no");
-       }
-       function abrirReporte5() {
-       window.open("../reporte_prestamos/index.php","Reporte de prestamos","directories=no location=no");
        }
     </script>
 </body>

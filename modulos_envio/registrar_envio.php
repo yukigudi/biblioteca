@@ -67,9 +67,9 @@
                         <li>
                             <a href="../modulos_recibido/registro.php">Recibo</a>
                         </li>
-                        <!--  <li>
+                        <li>
                              <a onClick='abrirReporte1()' href="#">Reportes</a>
-                         </li>-->
+</li>
                     </ul>
                 </li>
                 <li class="">
@@ -357,53 +357,28 @@
     <?php 
             if (isset($_POST['registrar'])) {
                 require_once ("../conexion/conexion.php");
-                $titulo = $_POST['titulo'];
                 $ubicacion = $_POST['ubicacion_actual'];
                 $envioa=$_POST['envioa'];
-                $recibe=$_POST['usuario_recibe'];
+                $recibe=$_POST['recibe'];
                 $testigo=$_POST['testigo'];
-                $fecha_actual=$_POST['fecha_actual'];
-                //$copias = $_POST['copias'];
-                //$editorial = $_POST['editorial'];
-                //$fecha = $_POST['fecha'];
-                //$cate = $_POST['cate'];
-                //$estante = $_POST['estante'];
+                $fecha_actual=$_POST['fecha'];
                 $modulos = $_POST['modulos'];
                 $cantidad = $_POST['cantidad'];
+                $fecha=date("Y-m-d H:i:s");
 
-
-
-                //$cantidad=array("3","4","6");
-
-               // foreach($modulos as $key => $value) {
-                   //                 echo 'cantidad: '.$cantidad[$key].', libro: '.$value.'</br>';
-                                    //consulta sql
-                 //                 }
-              //echo "I like " . $cars[0] . ", " . $cars[1] . " and " . $cars[2] . ".";
-
-
-                //if (isset($_POST['modulos']) AND is_array($_POST['modulos'])) { 
                     if (isset($modulos) AND is_array($modulos)) {
 
                         foreach($modulos as $key => $value) {
 
-                            $query_inserta = "INSERT INTO envio_modulos (ubicacion,envio,fecha,recibe,testigo,titulo,cantidad) values('$ubicacion','$envioa','$fecha_actual','$recibe','$testigo',$value,'$cantidad[$key]')";
+                            $query = "INSERT INTO envio_modulos (fecha,usuario,ubicacion,envioa,fecha,recibe,testigo,titulo,cantidad) values('$fecha',$usuario,'$ubicacion','$envioa','$fecha_actual',$recibe,'$testigo',$value,$cantidad[$key])";
 
-                            echo  $query_inserta."<br/>";
-
+                            echo  $query."<br/>";
+                            $verificar=$conexion->query($query);
+                            
                            // echo 'cantidad: '.$cantidad[$key].', libro: '.$value.'</br>';
                             //consulta sql
                           }
 
-                   // echo 'OK';
-                    // acceder a la primera posicion de val
-                   // echo $_POST['modulos'][0]."</br>";
-                  
-                    // tambien puedes utilizar un foreach para recorrer todos los campos de val
-                   // foreach($_POST['modulos'] as $key => $value) {
-                     // echo 'Clave de val: '.$key.', valor: '.$value.'</br>'; 
-                     
-                    //}
                   }else{
                     echo 'no es'; 
                   }
@@ -421,13 +396,13 @@
                   }*/
 
 
-               /* $query = "INSERT INTO libros (Titulo,Copias,Editorial,Fecha_edicion,Categoria,Estante) values('$titulo',$copias,'$editorial','$fecha','$cate',$estante)";
-                $verificar=$conexion->query($query);
+               //$query = "INSERT INTO libros (Titulo,Copias,Editorial,Fecha_edicion,Categoria,Estante) values('$titulo',$copias,'$editorial','$fecha','$cate',$estante)";
+               // $verificar=$conexion->query($query);
                 if ($verificar) {
                     echo '<script>
                     swal({
                     title: "Operación exitosa",
-                    text: "El libro fue registrado correctamente!",
+                    text: "El envio de módulos fue registrado correctamente!",
                     type: "success",
                     showCancelButton: true,
                     cancelButtonClass: "btn-warning",
@@ -448,181 +423,42 @@
                     echo '<script>
                     swal({
                     title: "Operación fallida",
-                    text: "Ocurrio un error al registrar el libro!",
+                    text: "Ocurrio un error al registrar el envio de módulos!",
                     type: "error",
                     showCancelButton: true,
                     cancelButtonClass: "btn-warning",
                     cancelButtonText: "Intentar de nuevo",
                     confirmButtonClass: "btn-success",
-                    confirmButtonText: "Ver libros",
+                    confirmButtonText: "ok",
                     closeOnConfirm: false
                   },
                   function(isConfirm) {
                       if (isConfirm) {
-                        window.location="libros.php";
+                        window.location="registrar_envio.php";
                       } else {
-                        window.location="registrar_libros.php";
+                        window.location="registrar_envio.php";
                       }
                     });
                     </script>';
-                }*/
+                }
             }
         ?>
-    <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalScrollableTitle">Contáctanos</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body bg-light">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="card">
-                                <div class="card-body">
-                                    <span class="text-info icofont-map h1"></span>
-                                    <br>
-                                    <small>Barrio: Bonampack</small>
-                                    <br>
-                                    <small>Calle: Yaxchilan</small>
-                                    <br>
-                                    <small>Número: 18</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="card">
-                                <div class="card-body">
-                                    <span class="text-info icofont-envelope h1"></span>
-                                    <br>
-                                    <small>Email: winalllpz@gmail.com</small>
-                                    <br>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="card">
-                                <div class="card-body">
-                                    <span class="text-info icofont-brand-whatsapp h1"></span>
-                                    <br>
-                                    <small>Tel: 9191936817</small>
-                                    <br>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="card">
-                                <div class="card-body">
-                                    <span class="text-info icofont-facebook h1"></span>
-                                    <br>
-                                    <small>@GoldenLibrary</small>
-                                    <br>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="exampleModalScrollable1" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalScrollableTitle">Quiénes somos</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body bg-light">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <span class="text-info icofont-hat h1"></span>
-                                    <p class="card-title">Misión</p>
-                                    <small>Nuestra misión es poder dar a conocer toda la sabiduría a través de nuestros
-                                        libros. Tener un repertorio digno para todas las personas; clases sociales,
-                                        edades, grados y campos de estudio. Que nuestros libros sean del mayor agrado de
-                                        nuestros visitadores, contando la mejor calidad de servicio en préstamos de
-                                        títulos. Siempre con el cello de la casa.</small>
-                                    <br>
-                                </div>
-                            </div>
-                        </div>
-                        <br>
-                        <div class="col-sm-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <span class="text-info icofont-eye h1"></span>
-                                    <p class="card-title">Visión</p>
-                                    <small>Nuestra visión es tener siempre tener una atención del público a pesar del
-                                        tiempo en la que estamos, ser una de las instituciones de títulos literarios más
-                                        conocidos del mundo. Tener instalaciones de calidad para preservar el buen
-                                        espacio para leer, contar con el mejor trato de visitador-empleado, ya que
-                                        nuestro público lo merece.</small>
-                                    <br>
-                                </div>
-                            </div>
-                        </div>
-                        <br>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <span class="text-info icofont-chart-histogram-alt h1"></span>
-                                    <p class="card-title">Objetivo General</p>
-                                    <small>Tener un sistema para poder llevar a cabo la administración de los registros
-                                        que se generan día con día y hacer más fácil la búsqueda de visitantes, las
-                                        personas que tienen préstamos y los adeudos de libros. También llevar un
-                                        registro de los libros que puedan estar dañados y así hacer una petición de
-                                        cambios.</small>
-                                    <br>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
+    
     <!-- Footer -->
     <footer class=" ">
         <div class="container-fluid text-center">
             <div class="row">
-                <div class="col-md-4">
+                 <div class="col-md-4 text-white mt-3 mb-2">
+                   
+                </div><div class="col-md-4">
                     <p class="text-white pt-3"><small><b>Copyright &copy; 2022 </b>ISEJA Control de libros todos los
                             derechos reservados</small></p>
                 </div>
                 <div class="col-md-4 text-white mt-3 mb-2">
                     <div class="contaiter">
-                        <a href="../conexion/desarolladores.php">Desarolladores</a>
-                        <br>
-                        <small>Version 3.0</small>
-                    </div>
-                </div>
-                <div class="col-md-4 text-white mt-3 mb-2">
-                    <div class="container">
-                        <div class="d-inline">
-                            <a href="" class="rounded-lg border border-info pt-2 p-2"><span
-                                    class="icofont-facebook text-white h6"></span></a>
-                        </div>
-                        <div class="d-inline">
-                            <a href="" class="rounded-lg border border-info pt-2 p-2"><span
-                                    class="icofont-brand-whatsapp text-white h6"></span></a>
-                        </div>
-                        <div class="d-inline">
-                            <a href="" class="rounded-lg border border-info pt-2 p-2"><span
-                                    class="icofont-instagram text-white h6"></span></a>
-                        </div>
+                        
+                        <small>Version 1.0</small>
                     </div>
                 </div>
             </div>
@@ -670,7 +506,7 @@
         var $c = $('.envios').length;
         $('#lineas').append(
             '<div class="form-row envios"><div class="col-md-8 col-lg-8 mb-4"><select id="modulos[]" name="modulos[]" class="form-control" required><option value="">Selecciona</option> <?php  $query="SELECT * FROM libros"; $resultado=$conexion->query($query); if ($resultado->num_rows > 0) {while ($fila=$resultado->fetch_assoc()) { ?><option value="<?php echo$fila['Id_libro']; ?>"><?php echo$fila['Titulo']; ?></option><?php }} ?> </select> <div class="valid-feedback"> Correcto! </div> <div class="invalid-feedback"> Porfavor rellena el campo.</div> </div><div class="col-md-6 col-lg-3 mb-4"><input type="text" class="form-control" id="cantidad[]" name="cantidad[]"><div class="valid-feedback">Correcto!</div><div class="invalid-feedback">Porfavor rellena el campo.</div></div></div>'
-            );
+        );
 
 
         console.log($c);
@@ -683,29 +519,18 @@
     }
     </script>
     <script>
-    function abrirReporte() {
-        window.open("../reporte_libros/index.php", "Reporte de libros", "directories=no location=no");
-    }
-
-    function abrirReporte1() {
-        window.open("../reporte_personas/index.php", "Reporte de personas", "directories=no location=no");
-    }
-
-    function abrirReporte2() {
-        window.open("../reporte_autores/index.php", "Reporte de autores", "directories=no location=no");
-    }
-
-    function abrirReporte3() {
-        window.open("../reporte_empleados/index.php", "Reporte de empleados", "directories=no location=no");
-    }
-
-    function abrirReporte4() {
-        window.open("../reporte_consultas/index.php", "Reporte de consultas", "directories=no location=no");
-    }
-
-    function abrirReporte5() {
-        window.open("../reporte_prestamos/index.php", "Reporte de prestamos", "directories=no location=no");
-    }
+ function abrirReporte() {
+       window.open("../reporte_libros/index.php","Reporte de libros","directories=no location=no");
+       }
+       function abrirReporte1() {   
+       window.open("../reporte_modulos/index.php","Reporte de módulos","directories=no location=no");
+       }
+       function abrirReporte2() {   
+       window.open("../reporte_incidencias/index.php","Reporte de incidencias","directories=no location=no");
+       }
+       function abrirReporte3() {
+       window.open("../reporte_empleados/index.php","Reporte de empleados","directories=no location=no");
+       }
     </script>
 </body>
 

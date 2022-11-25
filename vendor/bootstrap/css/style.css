@@ -96,7 +96,7 @@ a:focus {
     color: #fff;
 }
 #sidebar ul li a:hover {
-    background: #FFC107;
+    background: #952F57;
     color: #fff;
     border-left: 4px solid #fff;
 }
@@ -104,7 +104,7 @@ a:focus {
 #sidebar ul li.active>a,
 a[aria-expanded="true"] {
     color: $fff;
-    background: #FFC107;
+    background: #952F57;
     font-weight: bold;
     border-left: 4px solid #fff;
 }

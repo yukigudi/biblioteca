@@ -1,262 +1,188 @@
-<?php
-    session_start();
-    $id=$_SESSION['Id_usuario'];
-    $usuario=$id;
-    if ($id == null || $id='') {
-        header("location:../index.php");
-    }
+ <?php
+  session_start();
+  include('../menu.php');
+  $id = $_SESSION['Id_usuario'];
+  $usuario = $id;
+  if ($id == null || $id = '') {
+    header("location:index.php");
+  }
   ?>
-<!DOCTYPE html>
-<html>
+ <!DOCTYPE html>
+ <html>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <head>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>ISEJA Control de libros</title>
+   <title>ISEJA Control de libros</title>
 
-    <!-- Bootstrap CSS CDN -->
-    <link rel="stylesheet" type="text/css" href="../vendor/bootstrap/css/bootstrap.min.css">
-    <!-- Our Custom CSS -->
-    <link rel="stylesheet" href="../vendor/bootstrap/css/style.css">
-    <link rel="stylesheet" type="text/css" href="../icofont/icofont.min.css">
-    <link rel="stylesheet" type="text/css" href="../vendor/bootstrap/css/sweetalert.css">
-    <script src="../vendor/bootstrap/js/sweetalert.min.js" type="text/javascript"></script>
-</head>
+   <!-- Bootstrap CSS CDN -->
+   <link rel="stylesheet" type="text/css" href="../vendor/bootstrap/css/bootstrap.min.css">
+   <!-- Our Custom CSS -->
+   <link rel="stylesheet" href="../vendor/bootstrap/css/style.css">
+   <link rel="stylesheet" type="text/css" href="../icofont/icofont.min.css">
+   <link rel="stylesheet" type="text/css" href="../vendor/bootstrap/css/sweetalert.css">
+   <script src="../vendor/bootstrap/js/sweetalert.min.js" type="text/javascript"></script>
+ </head>
 
-<body>
-    <div class="wrapper">
-        <!-- Sidebar  -->
-        <nav id="sidebar">
-            <div class="sidebar-header">
-                <img width="45" height="45" src="../images/logo.png" alt="">
-                <small><b class="ml-2">ISEJA</b> Control de libros</small>
-            </div>
-            <ul class="list-unstyled components">
-                <li class="">
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><span
-                            class="icofont-library mr-3 h4 text-white"></span>Libros<i
-                            class="icofont-rounded-down text-white"></i></a>
-                    <ul class="collapse list-unstyled" id="homeSubmenu">
-                        <li>
-                            <a href="../libros/registrar_libros.php">Registrar</a>
-                        </li>
-                        <li>
-                            <a href="../libros/libros.php">Consultar</a>
-                        </li>
-                        <li>
-                            <a onClick='abrirReporte()' href="#">Reportes</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="">
-                    <a href="#modulosSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><span
-                            class="icofont-listing-box mr-3 h4 text-white"></span>Modulos<i
-                            class="icofont-rounded-down text-white"></i></a>
-                    <ul class="collapse list-unstyled" id="modulosSubmenu">
-                        <li>
-                            <a href="../modulos_envio/registrar_envio.php">Envio</a>
-                        </li>
-                        <li>
-                            <a href="../modulos_retorno/registrar_retorno.php">Retorno</a>
-                        </li>
-                        <li>
-                            <a href="../modulos_recibido/registro.php">Recibo</a>
-                        </li>
-                        <!--  <li>
-                             <a onClick='abrirReporte1()' href="#">Reportes</a>
-                         </li>-->
-                    </ul>
-                </li>
-                <li class="">
-                    <a href="#incidenciasSubmenu" data-toggle="collapse" aria-expanded="false"
-                        class="dropdown-toggle"><span class="icofont-bulb-alt mr-3 h4 text-white"></span>Incidencias<i
-                            class="icofont-rounded-down text-white"></i></a>
-                    <ul class="collapse list-unstyled" id="incidenciasSubmenu">
-                        <li>
-                            <a href="../incidencias/registrar_incidencias.php">Registrar</a>
-                        </li>
-                        <li>
-                            <a onClick='abrirReporte2()' href="#">Reportes</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="">
-                    <a href="#empleadosSubmenu" data-toggle="collapse" aria-expanded="false"
-                        class="dropdown-toggle"><span class="icofont-business-man mr-3 h4 text-white"></span>Empleados<i
-                            class="icofont-rounded-down text-white"></i></a>
-                    <ul class="collapse list-unstyled" id="empleadosSubmenu">
-                        <li>
-                            <a href="../empleados/registrar_empleados.php">Registrar</a>
-                        </li>
-                        <li>
-                            <a href="../empleados/empleados.php">Consultar</a>
-                        </li>
-                        <li>
-                            <a onClick='abrirReporte3()' href="#">Reportes</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="">
-                    <a href="#puestoSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><span
-                            class="icofont-ui-user mr-3 h4 text-white"></span>Puestos<i
-                            class="icofont-rounded-down text-white"></i></a>
-                    <ul class="collapse list-unstyled" id="puestoSubmenu">
-                        <li>
-                            <a href="../puestos/registrar_puesto.php">Registrar</a>
-                        </li>
-                        <li>
-                            <a href="../puestos/puestos.php">Consultar</a>
-                        </li>
-                    </ul>
-                </li>
-                <?php if ($_SESSION['Id_usuario'] == 1) {?>
-                <li class="">
-                    <a href="#userSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><span
-                            class="icofont-users-alt-4 mr-3 h4 text-white"></span>Usuarios<i
-                            class="icofont-rounded-down text-white"></i></a>
-                    <ul class="collapse list-unstyled" id="userSubmenu">
-                        <li>
-                            <a href="../usuarios/registrar_usuarios.php">Registrar</a>
-                        </li>
-                        <li>
-                            <a href="../usuarios/usuarios.php">Consultar</a>
-                        </li>
-                    </ul>
-                </li>
-                <?php   }?>
+ <body>
+   <div class="wrapper">
+     <!-- Sidebar  -->
+     <nav id="sidebar">
+       <div class="sidebar-header">
+         <img width="45" height="45" src="../images/logo.png" alt="">
+         <small><b class="ml-2">ISEJA</b> Control de libros</small>
+       </div>
+       <?php menu(); ?>
+     </nav>
+     <!-- Page Content  -->
+     <div class="menu">
+       <nav style="background-color:#952F57" class="p-2 navbar navbar-expand-lg navbar-light">
+         <div class="container-fluid">
+           <i class="fas fa-align-left"></i>
+           <a href="#"><span id="sidebarCollapse" class="text-white h3 icofont-navigation-menu"></span></a>
+           <div class="ml-3 text-center text-white">
 
-            </ul>
-        </nav>
-        <!-- Page Content  -->
-        <div class="menu">
-            <nav style="background-color:#952F57" class="p-2 navbar navbar-expand-lg navbar-light">
-                <div class="container-fluid">
-                    <i class="fas fa-align-left"></i>
-                    <a href="#"><span id="sidebarCollapse" class="text-white h3 icofont-navigation-menu"></span></a>
-                    <div class="ml-3 text-center text-white">
-                        <!--- <div class="spinner-grow text-light" role="status">
-                          <span class="sr-only">Loading...</span>
-                        </div>--->
+           </div>
+           <button class="btn d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+             <i class="fas fa-align-justify"></i>
+             <span class="text-white h3 icofont-circled-down"></span>
+           </button>
+           <div class="collapse navbar-collapse" id="navbarSupportedContent">
+             <ul class="nav navbar-nav ml-auto">
+
+               <!-- Example single danger button -->
+               <li class="nav-item">
+                 <div class="btn-group">
+                   <button type="button" id="perfil" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                     <img width="43" height="43" src="../images/user.png" alt="">
+                   </button>
+                   <div class="dropdown-menu dropdown-menu-right">
+                     <a href="../usuarios/perfil.php"><button class="dropdown-item" type="button">Actualizar perfil</button></a>
+                     <a href="../usuarios/modificar_contrasena.php"><button class="dropdown-item" type="button">Cambiar contraseña</button></a>
+                     <div class="dropdown-divider"></div>
+                     <a href="../conexion/cerrar_sesion.php"><button class="dropdown-item" type="button">Cerrar sesión</button></a>
+                   </div>
+                 </div>
+               </li>
+             </ul>
+           </div>
+         </div>
+       </nav>
+     </div>
+     <div class="container">
+       <br><br><br><br>
+       <br>
+       <div class="bg-white rounded-lg formulario">
+         <form class="p-4 needs-validation" action="registrar_libros.php" method="POST" novalidate>
+           <center><label for="">
+               <h4>REGISTRAR MODULOS</h4>
+             </label></center>
+           <div class="form-row">
+             <div class="col-md-4 col-lg-3 mb-4">
+               <label for="validationCustom02">Estado</label>
+               <?php
+                $estados = array(
+                  'nuevo' => 'Nuevo',
+                  'usado' => 'Usado'
+                );
+                $niveles = array(
+                  'alfabetizacion' => 'Alfabetización',
+                  'primaria' => 'Primaria',
+                  'secundaria' => 'Secundaria',
+
+                );
+                $materiales = array(
+                  'basico' => 'Básico',
+                  'diversificado' => 'Diversificado'
+                );
+                ?>
+               <select id="estado" name="estado" class="form-control" required>
+                 <?php foreach ($estados as $var => $estado) : ?>
+                   <option value="<?php echo $var ?>" <?php if ($var == $fila['estado']) : ?> selected="selected" <?php endif; ?>><?php echo $estado ?></option>
+                 <?php endforeach; ?>
+               </select>
+
+               <div class="valid-feedback">
+                 Correcto!
+               </div>
+               <div class="invalid-feedback">
+                 Porfavor rellena el campo.
+               </div>
+             </div>
+             <!--pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+" maxlength="250"-->
+             <div class="col-md-4 col-lg-6 mb-4">
+               <label for="validationCustom010">Titulo</label>
+               <input type="text" class="form-control" autocomplete="off" id="validationCustom010" required name="titulo" placeholder="Titulo del módulo">
+               <div class="valid-feedback">
+                 Correcto!
+               </div>
+               <div class="invalid-feedback">
+                 Porfavor rellena el campo.
+               </div>
+             </div>
+             <div class="col-md-4 col-lg-3 mb-4">
+               <label for="validationCustom010">Código</label>
+               <input type="text" class="form-control" autocomplete="off" id="validationCustom011" required name="codigo" placeholder="Código del módulo">
+               <div class="valid-feedback">
+                 Correcto!
+               </div>
+               <div class="invalid-feedback">
+                 Porfavor rellena el campo.
+               </div>
+             </div>
+             <div class="col-md-4 col-lg-3 mb-4">
+               <!---pattern="[0-999]{1}--->
+               <label for="validationCustom040">Cantidad</label>
+               <input type="number" class="form-control" id="validationCustom040" required name="copias" pattern="^\d{1,3}$" placeholder="Cantidad">
+               <div class="valid-feedback">
+                 Correcto!
+               </div>
+               <div class="invalid-feedback">
+                 Porfavor rellena el campo.
+               </div>
+             </div>
+             <div class="col-md-4 col-lg-3 mb-4">
+               <label for="nivel">Nivel</label>
+               <select id="nivel" name="nivel" class="form-control" required>
+                 <?php foreach ($niveles as $var => $nivel) : ?>
+                   <option value="<?php echo $var ?>" <?php if ($var == $fila['nivel']) : ?> selected="selected" <?php endif; ?>><?php echo $nivel ?></option>
+                 <?php endforeach; ?>
+               </select>
+               <div class="valid-feedback">
+                 Correcto!
+               </div>
+               <div class="invalid-feedback">
+                 Porfavor rellena el campo.
+               </div>
+             </div>
+             <div class="col-md-4 col-lg-3 mb-4">
+               <label for="material">Material</label>
+               <select id="material" name="material" class="form-control" required>
+                 <?php foreach ($materiales as $var => $material) : ?>
+                   <option value="<?php echo $var ?>" <?php if ($var == $fila['material']) : ?> selected="selected" <?php endif; ?>><?php echo $material ?></option>
+                 <?php endforeach; ?>
+               </select>
+               <div class="valid-feedback">
+                 Correcto!
+               </div>
+               <div class="invalid-feedback">
+                 Porfavor rellena el campo.
+               </div>
+             </div>
+             <!-- <div class="col-md-4 col-lg-3 mb-4">
+                    <label for="validationCustom03">Editorial</label>
+                    <input type="text" class="form-control" id="validationCustom03" required name="editorial" placeholder="Editorial" pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+" maxlength="30">
+                    <div class="valid-feedback">
+                      Correcto!
                     </div>
-                    <button class="btn d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
-                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                        <i class="fas fa-align-justify"></i>
-                        <span class="text-white h3 icofont-circled-down"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="nav navbar-nav ml-auto">
-                            <!--  <li class="nav-item">
-                                <a data-toggle="modal" data-target="#exampleModalScrollable1" class="text-white h5 nav-link" href="#" title="Nuestra empresa"><i class="mr-2 icofont-building-alt"></i></a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a data-toggle="modal" data-target="#exampleModalScrollable" class="text-white h5 nav-link" href="#" title="Contactanos"><i class="mr-2 icofont-search-map"></i></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="text-white h5 nav-link" href="../inicio.php"><i class="icofont-ui-home" title="Inicio"></i></a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="../prestamos/pendientes.php" class="text-white h5 nav-link" href="#"><i class="icofont-notification" title="Notificaciones"><span style="position: relative; top: -8px;" class="bg-warning badge count">
-                                      <?php 
-                                     /*   require_once("../conexion/conexion.php");
-                                        $buscar_pend="SELECT COUNT(Id_prestamo) AS numero FROM prestamos WHERE Fecha_devolucion<NOW() AND Estatus='Pendiente'";
-                                        $confirmar=$conexion->query($buscar_pend);
-                                        $rows=$confirmar->fetch_assoc();
-                                        echo $rows['numero'];;*/
-                                        ?>
-                                </span></i></a>
-                            </li>-->
-                            <!-- Example single danger button -->
-                            <li class="nav-item">
-                                <div class="btn-group">
-                                    <button type="button" id="perfil" class="btn dropdown-toggle" data-toggle="dropdown"
-                                        aria-haspopup="true" aria-expanded="false">
-                                        <img width="43" height="43" src="../images/user.png" alt="">
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <a href="../usuarios/perfil.php"><button class="dropdown-item"
-                                                type="button">Actualizar perfil</button></a>
-                                        <a href="../usuarios/modificar_contrasena.php"><button class="dropdown-item"
-                                                type="button">Cambiar contraseña</button></a>
-                                        <div class="dropdown-divider"></div>
-                                        <a href="../conexion/cerrar_sesion.php"><button class="dropdown-item"
-                                                type="button">Cerrar sesión</button></a>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
+                    <div class="invalid-feedback">
+                      Porfavor rellena el campo.
                     </div>
+                  </div>
                 </div>
-            </nav>
-        </div>
-        <div class="container">
-            <br><br><br><br>
-            <br>
-            <div class="bg-white rounded-lg formulario">
-                <form class="p-4 needs-validation" action="registrar_libros.php" method="POST" novalidate>
-                    <center><label for="">
-                            <h4>REGISTRAR LIBROS</h4>
-                        </label></center>
-                    <div class="form-row">
-                        <div class="col-md-6 col-lg-3 mb-4">
-                            <label for="validationCustom02">Estado</label>
-                            <select id="validationCustom02" name="estado" class="form-control" required>
-                                <option value="nuevo">Nuevo</option>
-                                <option value="usado">usado</option>
-                            </select>
-                            <div class="valid-feedback">
-                                Correcto!
-                            </div>
-                            <div class="invalid-feedback">
-                                Porfavor rellena el campo.
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-lg-6 mb-4">
-                            <label for="validationCustom01">Nombre</label>
-                            <input type="text" class="form-control" autocomplete="off" id="validationCustom01" required
-                                name="titulo" placeholder="Titulo del libro"
-                                pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+"
-                                maxlength="50">
-                            <div class="valid-feedback">
-                                Correcto!
-                            </div>
-                            <div class="invalid-feedback">
-                                Porfavor rellena el campo.
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-lg-3 mb-4">
-                            <label for="validationCustom02">Nivel</label>
-                            <select id="validationCustom02" name="nivel" class="form-control" required>
-                                <option value="inicial">Inicial</option>
-                                <option value="primaria">Primaria</option>
-                                <option value="secundaria">Secundaria</option>
-                            </select>
-                            <div class="valid-feedback">
-                                Correcto!
-                            </div>
-                            <div class="invalid-feedback">
-                                Porfavor rellena el campo.
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-lg-3 mb-4">
-                            <label for="validationCustom03">Material</label>
-                            <select id="validationCustom02" name="material" class="form-control" required>
-                                <option value="basico">Básico</option>
-                                <option value="diversificado">Diversificado</option>
-                            </select>
-                            <div class="valid-feedback">
-                                Correcto!
-                            </div>
-                            <div class="invalid-feedback">
-                                Porfavor rellena el campo.
-                            </div>
-                        </div>
-                    </div>
-                    <!-- <div class="form-row">
+                 <div class="form-row">
                   <div class="col-md-6 col-lg-4 mb-3">
                     <label for="validationCustom04">Fecha de ultima edición</label>
                     <input type="date" class="form-control" id="validationCustom04" name="fecha">
@@ -286,64 +212,70 @@
                     <div class="invalid-feedback">
                       Porfavor rellena el campo.
                     </div>
-                  </div>
-                 </div> -->
-                    <button class="btn btn-warning text-white" type="submit" name="registrar">Registrar</button>
-                </form>
-            </div>
-            <br>
-        </div>
-        <script src="../push/push.min.js" type="text/javascript"></script>
-        <script>
-        // Example starter JavaScript for disabling form submissions if there are invalid fields
-        (function() {
-            'use strict';
-            window.addEventListener('load', function() {
-                // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                var forms = document.getElementsByClassName('needs-validation');
-                // Loop over them and prevent submission
-                var validation = Array.prototype.filter.call(forms, function(form) {
-                    form.addEventListener('submit', function(event) {
-                        if (form.checkValidity() === false) {
-                            event.preventDefault();
-                            event.stopPropagation();
-                        }
-                        form.classList.add('was-validated');
-                    }, false);
-                });
-            }, false);
-        })();
-        </script>
-    </div>
-    <?php 
-            if (isset($_POST['registrar'])) {
-                require_once ("../conexion/conexion.php");
+                  </div>-->
+           </div>
+           <button class="btn btn-warning text-white" type="submit" name="registrar">Registrar</button>
+         </form>
+       </div>
+       <br>
+     </div>
 
-               /* $titulo = $_POST['titulo'];
-                $copias = $_POST['copias'];
-                $editorial = $_POST['editorial'];
-                $fecha = $_POST['fecha'];
-                $cate = $_POST['cate'];
-                $estante = $_POST['estante'];*/
-                $estado=$_POST['estado'];
-                $nombre=$_POST['titulo'];
-                $nivel=$_POST['nivel'];
-                $material=$_POST['material'];
+     <script>
+       // Example starter JavaScript for disabling form submissions if there are invalid fields
+       (function() {
+         'use strict';
+         window.addEventListener('load', function() {
+           // Fetch all the forms we want to apply custom Bootstrap validation styles to
+           var forms = document.getElementsByClassName('needs-validation');
+           // Loop over them and prevent submission
+           var validation = Array.prototype.filter.call(forms, function(form) {
+             form.addEventListener('submit', function(event) {
+               if (form.checkValidity() === false) {
+                 event.preventDefault();
+                 event.stopPropagation();
+               }
+               form.classList.add('was-validated');
+             }, false);
+           });
+         }, false);
+       })();
+     </script>
+   </div>
+   <?php
+    if (isset($_POST['registrar'])) {
+      require_once("../conexion/conexion.php");
+      $titulo = $_POST['titulo'];
+      $codigo = $_POST['codigo'];
+      $copias = $_POST['copias'];
+      $estado = $_POST['estado'];
+      $nivel = $_POST['nivel'];
+      $material = $_POST['material'];
+      $editorial = $_POST['editorial'];
+      $fecha = date("Y-m-d");
+      $cate = $_POST['cate'];
+      $estante = $_POST['estante'];
+      $ubicacion = 7; //bodega grande en tabla ubicaciones
 
-                //$query = "INSERT INTO libros (Titulo,Copias,Editorial,Fecha_edicion,Categoria,Estante) values('$titulo',$copias,'$editorial','$fecha','$cate',$estante)";
-                $query = "INSERT INTO libros (Titulo,estado,nivel,material) values('$nombre','$estado','$nivel','$material')";
-                $verificar=$conexion->query($query);
-                if ($verificar) {
-                    echo '<script>
+      $query = "INSERT INTO libros (Titulo,codigo,Copias,estado,nivel,material,Activo) values('$titulo','$codigo',$copias,'$estado','$nivel','$material',1)";
+      $verificar = $conexion->query($query);
+      $last_id = $conexion->insert_id;
+      // $Id_envio = $last_id;
+      //guardar en tabla general de ubicaciones de los modulos
+
+      $querydetalle2 = "INSERT INTO ubicaciones_modulos (modulo_Id,ubicacion_Id,cantidad,fecha) values($last_id,$ubicacion,$copias,'$fecha')";
+      $verificar2 = $conexion->query($querydetalle2);
+
+      if ($verificar && $verificar2) {
+        echo '<script>
                     swal({
                     title: "Operación exitosa",
-                    text: "El libro fue registrado correctamente!",
+                    text: "El módulo fue registrado correctamente!",
                     type: "success",
                     showCancelButton: true,
                     cancelButtonClass: "btn-warning",
                     cancelButtonText: "Registrar",
                     confirmButtonClass: "btn-success",
-                    confirmButtonText: "Ver libros",
+                    confirmButtonText: "Ver módulos",
                     closeOnConfirm: false
                   },
                   function(isConfirm) {
@@ -354,17 +286,17 @@
                       }
                     });
                     </script>';
-                }else{
-                    echo '<script>
+      } else {
+        echo '<script>
                     swal({
                     title: "Operación fallida",
-                    text: "Ocurrio un error al registrar el libro!",
+                    text: "Ocurrio un error al registrar el módulo!",
                     type: "error",
                     showCancelButton: true,
                     cancelButtonClass: "btn-warning",
                     cancelButtonText: "Intentar de nuevo",
                     confirmButtonClass: "btn-success",
-                    confirmButtonText: "Ver libros",
+                    confirmButtonText: "Ver módulos",
                     closeOnConfirm: false
                   },
                   function(isConfirm) {
@@ -375,231 +307,70 @@
                       }
                     });
                     </script>';
-                }
-            }
-        ?>
-    <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalScrollableTitle">Contáctanos</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body bg-light">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="card">
-                                <div class="card-body">
-                                    <span class="text-info icofont-map h1"></span>
-                                    <br>
-                                    <small>Barrio: Bonampack</small>
-                                    <br>
-                                    <small>Calle: Yaxchilan</small>
-                                    <br>
-                                    <small>Número: 18</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="card">
-                                <div class="card-body">
-                                    <span class="text-info icofont-envelope h1"></span>
-                                    <br>
-                                    <small>Email: winalllpz@gmail.com</small>
-                                    <br>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="card">
-                                <div class="card-body">
-                                    <span class="text-info icofont-brand-whatsapp h1"></span>
-                                    <br>
-                                    <small>Tel: 9191936817</small>
-                                    <br>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="card">
-                                <div class="card-body">
-                                    <span class="text-info icofont-facebook h1"></span>
-                                    <br>
-                                    <small>@GoldenLibrary</small>
-                                    <br>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="exampleModalScrollable1" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalScrollableTitle">Quiénes somos</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body bg-light">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <span class="text-info icofont-hat h1"></span>
-                                    <p class="card-title">Misión</p>
-                                    <small>Nuestra misión es poder dar a conocer toda la sabiduría a través de nuestros
-                                        libros. Tener un repertorio digno para todas las personas; clases sociales,
-                                        edades, grados y campos de estudio. Que nuestros libros sean del mayor agrado de
-                                        nuestros visitadores, contando la mejor calidad de servicio en préstamos de
-                                        títulos. Siempre con el cello de la casa.</small>
-                                    <br>
-                                </div>
-                            </div>
-                        </div>
-                        <br>
-                        <div class="col-sm-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <span class="text-info icofont-eye h1"></span>
-                                    <p class="card-title">Visión</p>
-                                    <small>Nuestra visión es tener siempre tener una atención del público a pesar del
-                                        tiempo en la que estamos, ser una de las instituciones de títulos literarios más
-                                        conocidos del mundo. Tener instalaciones de calidad para preservar el buen
-                                        espacio para leer, contar con el mejor trato de visitador-empleado, ya que
-                                        nuestro público lo merece.</small>
-                                    <br>
-                                </div>
-                            </div>
-                        </div>
-                        <br>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <span class="text-info icofont-chart-histogram-alt h1"></span>
-                                    <p class="card-title">Objetivo General</p>
-                                    <small>Tener un sistema para poder llevar a cabo la administración de los registros
-                                        que se generan día con día y hacer más fácil la búsqueda de visitantes, las
-                                        personas que tienen préstamos y los adeudos de libros. También llevar un
-                                        registro de los libros que puedan estar dañados y así hacer una petición de
-                                        cambios.</small>
-                                    <br>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Footer -->
-    <footer class=" ">
-        <div class="container-fluid text-center">
-            <div class="row">
-                <div class="col-md-4">
-                    <p class="text-white pt-3"><small><b>Copyright &copy; 2022 </b>ISEJA Control de libros todos los
-                            derechos reservados</small></p>
-                </div>
-                <div class="col-md-4 text-white mt-3 mb-2">
-                    <div class="contaiter">
-                        <a href="../conexion/desarolladores.php">Desarolladores</a>
-                        <br>
-                        <small>Version 3.0</small>
-                    </div>
-                </div>
-                <div class="col-md-4 text-white mt-3 mb-2">
-                    <div class="container">
-                        <div class="d-inline">
-                            <a href="" class="rounded-lg border border-info pt-2 p-2"><span
-                                    class="icofont-facebook text-white h6"></span></a>
-                        </div>
-                        <div class="d-inline">
-                            <a href="" class="rounded-lg border border-info pt-2 p-2"><span
-                                    class="icofont-brand-whatsapp text-white h6"></span></a>
-                        </div>
-                        <div class="d-inline">
-                            <a href="" class="rounded-lg border border-info pt-2 p-2"><span
-                                    class="icofont-instagram text-white h6"></span></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- /.container -->
-    </footer>
-    <!-- jQuery CDN - Slim version (=without AJAX) -->
-    <script src="../vendor/jquery/jquery.min.js" type="text/javascript"></script>
-    <!-- Bootstrap JS -->
-    <script src="../vendor/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-    <script>
-    $(document).ready(function() {
-        $('.toast').toast('show');
-    });
-    </script>
-    <script type="text/javascript">
-    $(document).ready(function() {
-        $('#sidebarCollapse').on('click', function() {
-            $('#sidebar').toggleClass('active');
-        });
-    });
+      }
+    }
+    ?>
 
-    function launchFullScreen(element) {
-        if (element.requestFullScreen) {
-            element.requestFullScreen();
-        } else if (element.mozRequestFullScreen) {
-            element.mozRequestFullScreen();
-        } else if (element.webkitRequestFullScreen) {
-            element.webkitRequestFullScreen();
-        }
-    }
-    // Lanza en pantalla completa en navegadores que lo soporten
-    function cancelFullScreen() {
-        if (document.cancelFullScreen) {
-            document.cancelFullScreen();
-        } else if (document.mozCancelFullScreen) {
-            document.mozCancelFullScreen();
-        } else if (document.webkitCancelFullScreen) {
-            document.webkitCancelFullScreen();
-        }
-    }
-    </script>
-    <script>
-    function abrirReporte() {
-        window.open("../reporte_libros/index.php", "Reporte de libros", "directories=no location=no");
-    }
 
-    function abrirReporte1() {
-        window.open("../reporte_personas/index.php", "Reporte de personas", "directories=no location=no");
-    }
+   <!-- Footer -->
+   <footer class=" ">
+     <div class="container-fluid text-center">
+       <div class="row">
+         <div class="col-md-4 text-white mt-3 mb-2">
+           <div class="container">
 
-    function abrirReporte2() {
-        window.open("../reporte_autores/index.php", "Reporte de autores", "directories=no location=no");
-    }
+           </div>
+         </div>
+         <div class="col-md-4">
+           <p class="text-white pt-3"><small><b>Copyright &copy; 2023 </b>ISEJA Control de libros todos los derechos reservados</small></p>
+         </div>
+         <div class="col-md-4 text-white mt-3 mb-2">
+           <div class="contaiter">
 
-    function abrirReporte3() {
-        window.open("../reporte_empleados/index.php", "Reporte de empleados", "directories=no location=no");
-    }
+             <small>Version 1.0</small>
+           </div>
+         </div>
 
-    function abrirReporte4() {
-        window.open("../reporte_consultas/index.php", "Reporte de consultas", "directories=no location=no");
-    }
+       </div>
+     </div>
+     <!-- /.container -->
+   </footer>
+   <!-- jQuery CDN - Slim version (=without AJAX) -->
+   <script src="../vendor/jquery/jquery.min.js" type="text/javascript"></script>
+   <!-- Bootstrap JS -->
+   <script src="../vendor/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+   <script>
+     $(document).ready(function() {
+       $('.toast').toast('show');
+     });
+   </script>
+   <script type="text/javascript">
+     $(document).ready(function() {
+       $('#sidebarCollapse').on('click', function() {
+         $('#sidebar').toggleClass('active');
+       });
+     });
 
-    function abrirReporte5() {
-        window.open("../reporte_prestamos/index.php", "Reporte de prestamos", "directories=no location=no");
-    }
-    </script>
-</body>
+     function launchFullScreen(element) {
+       if (element.requestFullScreen) {
+         element.requestFullScreen();
+       } else if (element.mozRequestFullScreen) {
+         element.mozRequestFullScreen();
+       } else if (element.webkitRequestFullScreen) {
+         element.webkitRequestFullScreen();
+       }
+     }
+     // Lanza en pantalla completa en navegadores que lo soporten
+     function cancelFullScreen() {
+       if (document.cancelFullScreen) {
+         document.cancelFullScreen();
+       } else if (document.mozCancelFullScreen) {
+         document.mozCancelFullScreen();
+       } else if (document.webkitCancelFullScreen) {
+         document.webkitCancelFullScreen();
+       }
+     }
+   </script>
+ </body>
 
-</html>
+ </html>

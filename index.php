@@ -19,7 +19,7 @@
 			        <h5>ISEJA Control de libros</h5>
 			        <p class="text-white"></p>
 			     </div>
-			</div> --> 
+			</div> -->
 			<div class="bg-white col-sm-6 col-md-6 col-lg-6 p-0" style="margin-left: 25%;">
 				<form class="login100-form validate-form p-5" method="POST" action="index.php">
 					<span class="login100-form-title p-b-26">
@@ -72,7 +72,7 @@
 				echo '<script>
                     swal({
                     title: "Operación Fallida",
-                    text: "Datos incorrectos, intente nuevamnte!",
+                    text: "Datos incorrectos, intente nuevamente!",
                     type: "error",
                     confirmButtonClass: "btn-danger",
                     confirmButtonText: "Aceptar",

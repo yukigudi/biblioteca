@@ -1,11 +1,16 @@
 <?php
-    session_start();
-    $id=$_SESSION['Id_usuario'];
-    $usuario=$id;
-    if ($id == null || $id='') {
-        header("location:../index.php");
-    }
-  ?>
+//error_reporting(E_ALL);
+//ini_set('display_errors', 1);
+include('../menu.php');
+//session_start();
+$id = $_SESSION['Id_usuario'];
+$usuario = $id;
+if ($id == null || $id = '') {
+    header("location:../index.php");
+}
+require_once("../conexion/conexion.php");
+//echo'Ubic: '.$_POST['ubicacion_actual'];
+?>
 <!DOCTYPE html>
 <html>
 
@@ -23,6 +28,7 @@
     <link rel="stylesheet" type="text/css" href="../icofont/icofont.min.css">
     <link rel="stylesheet" type="text/css" href="../vendor/bootstrap/css/sweetalert.css">
     <script src="../vendor/bootstrap/js/sweetalert.min.js" type="text/javascript"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
@@ -33,154 +39,38 @@
                 <img width="45" height="45" src="../images/logo.png" alt="">
                 <small><b class="ml-2">ISEJA</b> Control de libros</small>
             </div>
-            <ul class="list-unstyled components">
-                 <li class="">
-                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><span
-                             class="icofont-library mr-3 h4 text-white"></span>Libros<i
-                             class="icofont-rounded-down text-white"></i></a>
-                     <ul class="collapse list-unstyled" id="homeSubmenu">
-                         <li>
-                             <a href="../libros/registrar_libros.php">Registrar</a>
-                         </li>
-                         <li>
-                             <a href="../libros/libros.php">Consultar</a>
-                         </li>
-                         <li>
-                             <a onClick='abrirReporte()' href="#">Reportes</a>
-                         </li>
-                     </ul>
-                 </li>
-                 <li class="">
-                     <a href="#modulosSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><span
-                             class="icofont-listing-box mr-3 h4 text-white"></span>Modulos<i
-                             class="icofont-rounded-down text-white"></i></a>
-                     <ul class="collapse list-unstyled" id="modulosSubmenu">
-                         <li>
-                             <a href="../modulos_envio/registrar_envio.php">Envio</a>
-                         </li>
-                         <li>
-                             <a href="../modulos_retorno/registrar_retorno.php">Retorno</a>
-                         </li>
-                         <li>
-                             <a href="../modulos_recibido/registro.php">Recibo</a>
-                         </li>
-                       <!--  <li>
-                             <a onClick='abrirReporte1()' href="#">Reportes</a>
-                         </li>-->
-                     </ul>
-                 </li>
-                 <li class="">
-                     <a href="#incidenciasSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><span
-                             class="icofont-bulb-alt mr-3 h4 text-white"></span>Incidencias<i
-                             class="icofont-rounded-down text-white"></i></a>
-                     <ul class="collapse list-unstyled" id="incidenciasSubmenu">
-                         <li>
-                             <a href="../incidencias/registrar_incidencias.php">Registrar</a>
-                         </li>
-                         <li>
-                             <a onClick='abrirReporte2()' href="#">Reportes</a>
-                         </li>
-                     </ul>
-                 </li>
-                 <li class="">
-                     <a href="#empleadosSubmenu" data-toggle="collapse" aria-expanded="false"
-                         class="dropdown-toggle"><span
-                             class="icofont-business-man mr-3 h4 text-white"></span>Empleados<i
-                             class="icofont-rounded-down text-white"></i></a>
-                     <ul class="collapse list-unstyled" id="empleadosSubmenu">
-                         <li>
-                             <a href="../empleados/registrar_empleados.php">Registrar</a>
-                         </li>
-                         <li>
-                             <a href="../empleados/empleados.php">Consultar</a>
-                         </li>
-                         <li>
-                             <a onClick='abrirReporte3()' href="#">Reportes</a>
-                         </li>
-                     </ul>
-                 </li>
-                 <li class="">
-                     <a href="#puestoSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><span
-                             class="icofont-ui-user mr-3 h4 text-white"></span>Puestos<i
-                             class="icofont-rounded-down text-white"></i></a>
-                     <ul class="collapse list-unstyled" id="puestoSubmenu">
-                         <li>
-                             <a href="../puestos/registrar_puesto.php">Registrar</a>
-                         </li>
-                         <li>
-                             <a href="../puestos/puestos.php">Consultar</a>
-                         </li>
-                     </ul>
-                 </li>
-                 <?php if ($_SESSION['Id_usuario'] == 1) {?>
-                 <li class="">
-                     <a href="#userSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><span
-                             class="icofont-users-alt-4 mr-3 h4 text-white"></span>Usuarios<i
-                             class="icofont-rounded-down text-white"></i></a>
-                     <ul class="collapse list-unstyled" id="userSubmenu">
-                         <li>
-                             <a href="../usuarios/registrar_usuarios.php">Registrar</a>
-                         </li>
-                         <li>
-                             <a href="../usuarios/usuarios.php">Consultar</a>
-                         </li>
-                     </ul>
-                 </li>
-                 <?php   }?>
-
-             </ul>
+            <?php menu(); ?>
         </nav>
-         <!-- Page Content  -->
+        <!-- Page Content  -->
         <div class="menu">
             <nav style="background-color:#952F57" class="p-2 navbar navbar-expand-lg navbar-light">
                 <div class="container-fluid">
                     <i class="fas fa-align-left"></i>
-                    <a href="#"><span id="sidebarCollapse" class="text-white h3 icofont-navigation-menu"></span></a>    
+                    <a href="#"><span id="sidebarCollapse" class="text-white h3 icofont-navigation-menu"></span></a>
                     <div class="ml-3 text-center text-white">
                         <!--- <div class="spinner-grow text-light" role="status">
                           <span class="sr-only">Loading...</span>
                         </div>--->
-                    </div> 
+                    </div>
                     <button class="btn d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <i class="fas fa-align-justify"></i>
                         <span class="text-white h3 icofont-circled-down"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto">
-                          <!--  <li class="nav-item">
-                                <a data-toggle="modal" data-target="#exampleModalScrollable1" class="text-white h5 nav-link" href="#" title="Nuestra empresa"><i class="mr-2 icofont-building-alt"></i></a>
-                            </li>
 
                             <li class="nav-item">
-                                <a data-toggle="modal" data-target="#exampleModalScrollable" class="text-white h5 nav-link" href="#" title="Contactanos"><i class="mr-2 icofont-search-map"></i></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="text-white h5 nav-link" href="../inicio.php"><i class="icofont-ui-home" title="Inicio"></i></a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="../prestamos/pendientes.php" class="text-white h5 nav-link" href="#"><i class="icofont-notification" title="Notificaciones"><span style="position: relative; top: -8px;" class="bg-warning badge count">
-                                      <?php 
-                                     /*   require_once("../conexion/conexion.php");
-                                        $buscar_pend="SELECT COUNT(Id_prestamo) AS numero FROM prestamos WHERE Fecha_devolucion<NOW() AND Estatus='Pendiente'";
-                                        $confirmar=$conexion->query($buscar_pend);
-                                        $rows=$confirmar->fetch_assoc();
-                                        echo $rows['numero'];;*/
-                                        ?>
-                                </span></i></a>
-                            </li>-->
-                            <!-- Example single danger button -->
-                            <li class="nav-item">
                                 <div class="btn-group">
-                                  <button type="button" id="perfil" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <img width="43" height="43" src="../images/user.png" alt="">
-                                  </button>
-                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a href="../usuarios/perfil.php"><button class="dropdown-item" type="button">Actualizar perfil</button></a>
-                                    <a href="../usuarios/modificar_contrasena.php"><button class="dropdown-item" type="button">Cambiar contraseña</button></a>
-                                    <div class="dropdown-divider"></div>
-                                    <a href="../conexion/cerrar_sesion.php"><button class="dropdown-item" type="button">Cerrar sesión</button></a>
+                                    <button type="button" id="perfil" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <img width="43" height="43" src="../images/user.png" alt="">
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a href="../usuarios/perfil.php"><button class="dropdown-item" type="button">Actualizar perfil</button></a>
+                                        <a href="../usuarios/modificar_contrasena.php"><button class="dropdown-item" type="button">Cambiar contraseña</button></a>
+                                        <div class="dropdown-divider"></div>
+                                        <a href="../conexion/cerrar_sesion.php"><button class="dropdown-item" type="button">Cerrar sesión</button></a>
+                                    </div>
                                 </div>
-                            </div>
                             </li>
                         </ul>
                     </div>
@@ -191,375 +81,577 @@
             <br><br><br><br>
             <br>
             <div class="bg-white rounded-lg formulario">
-                <form class="p-4 needs-validation" action="registrar_libros.php" method="POST" novalidate>
-                  <center><label for=""><h4>REGISTRAR LIBROS</h4></label></center>
-                <div class="form-row">
-                <div class="col-md-6 col-lg-3 mb-4">
-                    <label for="validationCustom02">Estado</label>
-                    <select id="validationCustom02" name="estado" class="form-control" required>
-                      <option value="nuevo">Nuevo</option>
-                      <option value="usado">usado</option>
-                    </select>
-                    <div class="valid-feedback">
-                      Correcto!
-                    </div>
-                    <div class="invalid-feedback">
-                      Porfavor rellena el campo.
-                    </div>
-                  </div>  
-                <div class="col-md-4 col-lg-6 mb-4">
-                    <label for="validationCustom01">Nombre</label>
-                    <input type="text" class="form-control" autocomplete="off" id="validationCustom01"required name="titulo" placeholder="Titulo del libro" pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+" maxlength="50">
-                    <div class="valid-feedback">
-                      Correcto!
-                    </div>
-                    <div class="invalid-feedback">
-                      Porfavor rellena el campo.
-                    </div>
-                  </div>
-                  <div class="col-md-4 col-lg-3 mb-4">
-                    <label for="validationCustom02">Nivel</label>
-                    <select id="validationCustom02" name="nivel" class="form-control" required>
-                      <option value="inicial">Inicial</option>
-                      <option value="primaria">primaria</option>
-                      <option value="secundaria">secundaria</option>
-                    </select>
-                    <div class="valid-feedback">
-                      Correcto!
-                    </div>
-                    <div class="invalid-feedback">
-                      Porfavor rellena el campo.
-                    </div>
-                  </div>
-                  <div class="col-md-4 col-lg-3 mb-4">
-                    <label for="validationCustom03">Material</label>
-                    <select id="validationCustom02" name="nivel" class="form-control" required>
-                      <option value="basico">básico</option>
-                      <option value="diversificado">diversificado</option>
-                    </select>
-                    <div class="valid-feedback">
-                      Correcto!
-                    </div>
-                    <div class="invalid-feedback">
-                      Porfavor rellena el campo.
-                    </div>
-                  </div>
-                </div>
-                <!-- <div class="form-row">
-                  <div class="col-md-6 col-lg-4 mb-3">
-                    <label for="validationCustom04">Fecha de ultima edición</label>
-                    <input type="date" class="form-control" id="validationCustom04" name="fecha">
-                    <div class="valid-feedback">
-                      Correcto!
-                    </div>
-                    <div class="invalid-feedback">
-                      Porfavor rellena el campo.
-                    </div>
-                  </div>
-                  <div class="col-md-6 col-lg-4 mb-3">
-                    <label for="validationCustom05">Categoría</label>
-                    <input type="text" class="form-control" id="validationCustom05" required name="cate" placeholder="Categoría" pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+" maxlength="30">
-                    <div class="valid-feedback">
-                      Correcto!
-                    </div>
-                    <div class="invalid-feedback">
-                      Porfavor rellena el campo.
-                    </div>
-                  </div>
-                  <div class="col-md-6 col-lg-4 mb-3">
-                    <label for="validationCustom06">Número de Estante</label>
-                    <input type="text" class="form-control" id="validationCustom06" required name="estante" placeholder="Número de estante" pattern="[0-9]{1}">
-                    <div class="valid-feedback">
-                      Correcto!
-                    </div>
-                    <div class="invalid-feedback">
-                      Porfavor rellena el campo.
-                    </div>
-                  </div>
-                 </div> -->
-                <button class="btn btn-warning text-white" type="submit" name="registrar">Registrar</button>
-              </form>
-            </div>
-          <br>
-          </div>
-        <script src="../push/push.min.js" type="text/javascript"></script> 
-        <script>
-        // Example starter JavaScript for disabling form submissions if there are invalid fields
-        (function() {
-          'use strict';
-          window.addEventListener('load', function() {
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            var forms = document.getElementsByClassName('needs-validation');
-            // Loop over them and prevent submission
-            var validation = Array.prototype.filter.call(forms, function(form) {
-              form.addEventListener('submit', function(event) {
-                if (form.checkValidity() === false) {
-                  event.preventDefault();
-                  event.stopPropagation();
-                }
-                form.classList.add('was-validated');
-              }, false);
-            });
-          }, false);
-        })();
+                <form class="p-4 needs-validation" action="registro.php" method="POST" novalidate>
+                    <div id="lineas">
+                        <center><label for="">
+                                <h4>REGISTRAR RECIBO DE MODULOS</h4>
+                            </label></center>
+                        <div class="form-row">
+                            <div class="col-md-3 col-lg-3 mb-3">
+                                <label for="fecha_actual">Fecha</label>
+                                <input type="date" class="form-control" id="fecha_actual" name="fecha" value="<?php echo date("Y-m-d") ?>" required>
+                                <div class="valid-feedback">
+                                    Correcto!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Porfavor rellena el campo.
+                                </div>
+                            </div>
 
+
+                            <div class="col-md-3 col-lg-3 mb-4">
+                                <label for="tipo">Tipo</label>
+                                <select id="tipo" name="tipo" class="form-control" required>
+                                    <option value="">Seleccione</option>
+                                    <option value="envio">Envío</option>
+                                    <option value="devolucion">Devolución</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-5 col-lg-5 mb-5">
+                                <label for="ordenes">Ordenes</label>
+
+                                <select id="ordenes" name="ordenes" class="form-control" required>
+                                </select>
+                                <input type="hidden" id="fechaorden" name="fechaorden">
+                                <input type="hidden" id="usuarioenvia" name="usuarioenvia">
+                                <input type="hidden" id="usuariorecibe" name="usuariorecibe">
+                                <input type="hidden" id="ubicacion_envio" name="ubicacion_envio">
+                                <input type="hidden" id="envioa" name="envioa">
+                                <div class="valid-feedback">
+                                    Correcto!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Porfavor rellena el campo.
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-lg-3 mb-4">
+                                <label for="ubicacion_actual">Ubicación Actual</label>
+                                <select id="ubicacion_actual" name="ubicacion_actual" class="form-control" required>
+                                    <option value="">Seleccione</option>
+
+                                    <?php
+
+                                    $query = "SELECT * FROM ubicaciones order by tipo, Id_ubicacion";
+
+                                    $resultado = $conexion->query($query);
+
+                                    if ($resultado->num_rows > 0) {
+                                        while ($fila = $resultado->fetch_assoc()) {
+
+                                            echo '<option value="' . $fila['Id_ubicacion'] . '">' . $fila['nombre_lugar'] . '</option>';
+                                        }
+                                    } ?>
+                                    </optgroup>
+                                </select>
+                                <div class="valid-feedback">
+                                    Correcto!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Porfavor rellena el campo.
+                                </div>
+                            </div>
+                            <!--          <div class="col-md-6 col-lg-3 mb-4">
+                                <label for="validationCustom02">Regresar a</label>
+                                <select id="regresara" name="regresara" class="form-control" required>
+                                    <option value="">Seleccione</option>
+                                    <?php
+
+                                    /* $query = "SELECT * FROM ubicaciones_resguardo";
+
+                                    $resultado = $conexion->query($query);
+                                    if ($resultado->num_rows > 0) {
+                                        while ($fila = $resultado->fetch_assoc()) { ?>
+                                            <option value="<?php echo $fila['Id_resguardo']; ?>">
+                                                <?php echo $fila['nombre_lugar']; ?></option>
+                                    <?php }
+                                    } */ ?>
+                                </select>
+                                <div class="valid-feedback">
+                                    Correcto!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Porfavor rellena el campo.
+                                </div>
+                            </div>-->
+                            <div class="col-md-3 col-lg-3 mb-3">
+                                <label for="testigo">Testigo</label>
+                                <input type="text" class="form-control" id="testigo" name="testigo" required>
+                                <div class="valid-feedback">
+                                    Correcto!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Porfavor rellena el campo.
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <div class="form-row envios">
+                        </div>
+
+                    </div>
+                    <button class="btn btn-warning text-white" type="submit" name="registrar">Registrar</button>
+                </form>
+            </div>
+            <br>
+        </div>
+
+        <script>
+            // agregar evento change a los elementos de radio
+            /*$(document).on('change', 'input[name^="recibio_completo"]', function() {
+                console.log('entra aqui recibio completo');
+                // obtener el valor seleccionado
+                var valor = $(this).val();
+                // si el valor es "no", mostrar el div de mensaje correspondiente
+                if (valor === "no") {
+                    console.log('NO entra aqui recibio completo');
+                    $(this).closest(".envios").next(".incidencia").show();
+                } else {
+                    console.log('SI entra aqui recibio completo');
+                    $(this).closest(".envios").next(".incidencia").hide();
+                }
+            });*/
+
+            var contador = 0;
+            $(document).on('change', 'input[name^="recibio_completo"]', function() {
+                var valor = $(this).val();
+                var mensaje = $(".incidencia");
+                if (valor === "no") {
+                    console.log('1');
+                    contador++;
+                    if (contador === 1) {
+                        console.log('2');
+                        console.log(mensaje);
+                        mensaje.show();
+                        mensaje.attr("data-visible", "true");
+                    }
+                } else {
+                    contador--;
+                    if (contador === 0) {
+                        mensaje.hide();
+                        mensaje.attr("data-visible", "false");
+                    }
+                }
+            });
+
+            //selecciono el tipo
+            $(document).ready(function() {
+                $("#ordenes").empty();
+                $("#tipo").change(function() {
+                    console.log('tipo');
+                    var opcion = $(this).val();
+                    //console.log(opcion);
+                    $.ajax({
+                        type: "GET",
+                        url: "datos.php",
+                        data: {
+                            opcion: opcion
+                        },
+                        success: function(data) {
+                            try {
+                                var datos = JSON.parse(data);
+
+                                $("#ordenes").empty();
+                                $("#ordenes").append('<option value="">Seleccione</option>');
+                                for (var i = 0; i < datos.length; i++) {
+                                    $("#ordenes").append("<option value=" + datos[i].Id + ">" + "De " + datos[i].ubicacion + " a " + datos[i].envioa + " - " + datos[i].fecha + "</option>");
+                                }
+
+                            } catch (error) {
+                                $("#ordenes").empty();
+                                console.error("Error al parsear la cadena JSON: " + error.message);
+                            }
+
+                        }
+                    });
+                });
+
+                $("#ordenes").change(function() {
+
+                    var orden = $(this).val();
+
+                    $(".linea").empty();
+                    $.ajax({
+                        type: "GET",
+                        url: "datos.php",
+                        data: {
+                            orden: orden,
+                            tipo: $("#tipo").val()
+
+                        },
+                        success: function(data) {
+                            var datos = JSON.parse(data);
+
+                            $(".envios").empty();
+
+                            $(".envios").append('<div class="col-md-12 col-lg-12 mb-2 text-right incidencia" id="incidencia" name="incidencia" style="display:none">Si los modulos y sus cantidades no concuerdan con lo recibido fisicamente favor de<p onclick="registraIncidencia()"> <label style="font-weight:bold;" for="incidencias">Registrar una incidencia</label></p>.</div><div class="col-md-6 col-lg-6 mb-2"><label for="modulos">Módulo</label></div><div class="col-md-6 col-lg-3 mb-2"><label for="cantidad">Cantidad</label></div><div class="col-md-6 col-lg-3 mb-2"><label for="cantidad">¿Recibió completo?</label></div></div>');
+
+                            for (var i = 0; i <= datos.length; i++) {
+                                $(".envios").append('<div class="linea col-md-12 col-lg-12 mb-1"><div class="form-row"><div class="col-md-6 col-lg-6 mb-1">' + datos[i].titulo + '<input type="hidden" id="modulos[]" name="modulos[]" class="modulos" value="' + datos[i].id + '"></div><div class="col-md-6 col-lg-3 mb-1">' + datos[i].cantidad + '<input type="hidden" name="cantidad[]" id="cantidad[]" class="cantidad" value="' + datos[i].cantidad + '"></div><div class="col-md-6 col-lg-3 mb-1"><div class="form-row"><div class="col-md-6 col-lg-3 mb-1" style="margin-left:30px"><input type="radio" class="form-check-input" name="recibio_completo' + i + '" value="si" checked><label for="recibio_completo' + i + '">Si</label></div><div class="col-md-6 col-lg-3 mb-1"><input type="radio" class="form-check-input" name="recibio_completo' + i + '" value="no"><label for="recibio_completo' + i + '">No</label></div></div></div></div></div>');
+                            }
+                        }
+                    });
+                });
+                //para cambiar el valor del campo ubicacion actual
+                $("#ordenes").change(function() {
+                    //console.log('ordenes2');
+                    var orden = $(this).val();
+                    //console.log(opcion);
+                    $.ajax({
+                        type: "GET",
+                        url: "datos_ubicacion.php",
+                        data: {
+                            // ubic_actual: true,
+                            orden: orden,
+                            tipo: $("#tipo").val()
+                        },
+                        success: function(data) {
+                            var dato = JSON.parse(data);
+                            console.log('aqui cambia selecciona la ubicacion actual');
+                            $("#ubicacion_actual").val(dato[0].envioa);
+                            $("#fechaorden").val(dato[0].fecha);
+                            $("#usuarioenvia").val(dato[0].usuarioenvia);
+                            $("#usuariorecibe").val(dato[0].usuariorecibe);
+                            $("#ubicacion_envio").val(dato[0].ubicacion);
+                            $("#envioa").val(dato[0].envioa);
+                        }
+
+                    });
+
+                });
+                //--------------------
+
+                $("#ordenes").change(function() {
+                    var orden = $(this).val();
+                    $.ajax({
+                        type: "GET",
+                        url: "datos.php",
+                        data: {
+                            orden: orden,
+                            tipo: $("#tipo").val()
+                        },
+                        success: function(data) {
+                            var datos = JSON.parse(data);
+                            $(".envios").empty();
+                            $(".envios").append('<div class="col-md-12 col-lg-12 mb-2 text-right incidencia" id="incidencia" name="incidencia" style="display:none">Si los módulos y sus cantidades no concuerdan con lo recibido físicamente favor de<p onclick="registraIncidencia()"> <label style="font-weight:bold;" for="incidencias">Registrar una incidencia</label></p>.</div><div class="col-md-6 col-lg-6 mb-2"><label for="modulos">Módulo</label></div><div class="col-md-6 col-lg-3 mb-2"><label for="cantidad">Cantidad</label></div><div class="col-md-6 col-lg-3 mb-2"><label for="cantidad">¿Recibió completo?</label></div></div>');
+
+                            for (var i = 0; i <= datos.length; i++) {
+                                $(".envios").append('<div class="col-md-12 col-lg-12 mb-1"><div class="form-row"><div class="col-md-6 col-lg-6 mb-1">' + datos[i].titulo + '<input type="hidden"  id="modulos[]" name="modulos[]" class="modulos" value="' + datos[i].id + '"></div><div class="col-md-6 col-lg-3 mb-1">' + datos[i].cantidad + '<input type="hidden"  id="cantidad[]" name="cantidad[]" class="cantidad" value="' + datos[i].cantidad + '"></div><div class="col-md-6 col-lg-3 mb-1"><div class="form-row"><div class="col-md-6 col-lg-3 mb-1" style="margin-left:30px"><input type="radio" class="form-check-input" name="recibio_completo' + i + '" value="si" checked><label for="recibio_completo' + i + '">Si</label></div><div class="col-md-6 col-lg-3 mb-1"><input type="radio" class="form-check-input" name="recibio_completo' + i + '" value="no"><label for="recibio_completo' + i + '">No</label></div></div></div></div></div>');
+                            }
+                            $("#envioa").val(datos[0].envioa);
+                            console.log(datos[0].envioa);
+                        }
+                    });
+                });
+
+                //--------------------
+
+            });
+            // Example starter JavaScript for disabling form submissions if there are invalid fields
+            (function() {
+                'use strict';
+                window.addEventListener('load', function() {
+                    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                    var forms = document.getElementsByClassName('needs-validation');
+                    // Loop over them and prevent submission
+                    var validation = Array.prototype.filter.call(forms, function(form) {
+                        form.addEventListener('submit', function(event) {
+                            if (form.checkValidity() === false) {
+                                event.preventDefault();
+                                event.stopPropagation();
+                            }
+                            form.classList.add('was-validated');
+                        }, false);
+                    });
+                }, false);
+            })();
         </script>
     </div>
-     <?php 
-            if (isset($_POST['registrar'])) {
-                require_once ("../conexion/conexion.php");
-                $titulo = $_POST['titulo'];
-                $copias = $_POST['copias'];
-                $editorial = $_POST['editorial'];
-                $fecha = $_POST['fecha'];
-                $cate = $_POST['cate'];
-                $estante = $_POST['estante'];
+    <?php
+    if (isset($_POST['registrar'])) {
+        //require_once("../conexion/conexion.php");
+        // $ubicacion = $_POST['ubicacion_actual'];
+        if (isset($_POST['ubicacion_actual'])) {
+            // hacer algo con $array['ubicacion_envio']
+            $ubicacion = $_POST['ubicacion_actual'];
+        } else {
+            // asignar un valor predeterminado
+            $ubicacion = '';
+        }
+        //$regresara = $_POST['regresara'];
+        // $recibe = $_POST['recibe'];
+        $testigo = $_POST['testigo'];
+        $fecha_actual = $_POST['fecha'];
+        $modulos = $_POST['modulos'];
+        $cantidad = $_POST['cantidad'];
+        $orden = $_POST['ordenes'];
+        //$ubicacion_envio = $_POST['envioa'];
+        //$recibecompleto = $_POST['recibio_completo'];
+        $tipo = $_POST['tipo'];
+        if (isset($_POST['ubicacion_envio'])) {
+            // hacer algo con $array['ubicacion_envio']
+            $ubicacion_envio = $_POST['ubicacion_envio'];
+        } else {
+            // asignar un valor predeterminado
+            $ubicacion_envio = '';
+        }
 
-                $query = "INSERT INTO libros (Titulo,Copias,Editorial,Fecha_edicion,Categoria,Estante) values('$titulo',$copias,'$editorial','$fecha','$cate',$estante)";
-                $verificar=$conexion->query($query);
-                if ($verificar) {
-                    echo '<script>
+        echo 'envioa' . $ubicacion_envio . '<br>';
+
+
+        $fecha = date("Y-m-d H:i:s");
+        //$ubicacion_bodega = 7; //bodega grande
+
+        if (isset($modulos) and is_array($modulos)) {
+            //header de envio inserto el registro
+
+            $query = "INSERT INTO header_recibido_modulos (fecha,usuario,ubicacion_actual,fechaenvio,orden,tipo,testigo) values('$fecha',$usuario,'$ubicacion','$fecha_actual','$orden','$tipo','$testigo')";
+            //echo 'querydetalle3 ' . $query . '<br>';
+            $verificar = $conexion->query($query);
+            if (!$verificar) {
+                echo "Error en la consulta 1: " . $conexion->$error;
+            }
+            $last_id = $conexion->insert_id;
+            $Id_recibido = $last_id;
+            foreach ($modulos as $key => $value) {
+
+                $recibecompleto_valor = isset($_POST['recibio_completo' . $key]) ? ($_POST['recibio_completo' . $key] == 'si' ? 1 : 0) : 0;
+                //inserta los modulos que se recibieron
+                $querydetalle = "INSERT INTO recibido_modulos (Id_hrecibido,titulo,cantidad,recibecompleto) values($Id_recibido,$value,$cantidad[$key],$recibecompleto_valor)";
+                //echo  $querydetalle . "<br/>";
+                $verificar3 = $conexion->query($querydetalle);
+            
+                if ($recibecompleto_valor == 1) {
+                    //checar si existe en la ubicacion
+                    $query = "SELECT cantidad, ubicacion_Id FROM ubicaciones_modulos WHERE ubicacion_Id IN ($ubicacion, $ubicacion_envio) AND modulo_Id = $value AND cantidad > 0";
+                    echo $query . "</br>";
+                    $resultado = $conexion->query($query);
+            
+                    if ($resultado->num_rows > 0) {
+                        while ($fila = $resultado->fetch_assoc()) {
+            
+                            $cantidad_actualizada = $fila['cantidad'] - $cantidad[$key];
+                            if ($fila['ubicacion_Id'] == $ubicacion_envio) {
+                                //aqui checa si hay registro de la ubicacionactual
+                                $querydetalle4 = "UPDATE ubicaciones_modulos SET cantidad = $cantidad_actualizada, fecha='$fecha_actual' WHERE ubicacion_Id = $ubicacion AND modulo_Id = $value ";
+                                $verificar4 = $conexion->query($querydetalle4);
+                                echo 'querydetalle4 ' . $querydetalle4 . '<br>';
+                                if (!$verificar4) {
+                                    echo "Error en la consulta: " . $conexion->error;
+                                }
+                            } else {
+                                $querydetalle3 = "INSERT INTO ubicaciones_modulos (modulo_Id, ubicacion_Id, cantidad, fecha) VALUES ($value, $ubicacion_envio, $cantidad[$key], '$fecha_actual')";
+                                $verificar3 = $conexion->query($querydetalle3);
+                                echo 'querydetalle3 ' . $querydetalle3 . '<br>';
+                            }
+            
+                            if ($fila['ubicacion_Id'] == $ubicacion) {
+                                //aqui encuentra -  $regresara 
+                                $cantidad_nueva = $fila['cantidad'] + $cantidad[$key];
+                                $querydetalle3 = "UPDATE ubicaciones_modulos SET cantidad = $cantidad_nueva, fecha='$fecha_actual' WHERE ubicacion_Id = $ubicacion AND modulo_Id = $value";
+                                $verificar3 = $conexion->query($querydetalle3);
+                                echo 'querydetalle3 ' . $querydetalle3 . '<br>';
+                                if (!$verificar3) {
+                                    echo "Error en la consulta: " . $conexion->error;
+                                }
+                            } else {
+                                $querydetalle3 = "INSERT INTO ubicaciones_modulos (modulo_Id, ubicacion_Id, cantidad, fecha) VALUES ($value, $ubicacion, $cantidad[$key], '$fecha_actual')";
+                                $verificar3 = $conexion->query($querydetalle3);
+                                echo 'querydetalle3 ' . $querydetalle3 . '<br>';
+                            }
+                        }
+                    }
+                }
+            }
+            
+          /*  foreach ($modulos as $key => $value) {
+
+                $recibecompleto_valor = isset($_POST['recibio_completo' . $key]) ? ($_POST['recibio_completo' . $key] == 'si' ? 1 : 0) : 0;
+                //inserta los modulos que se recibieron
+                $querydetalle = "INSERT INTO recibido_modulos (Id_hrecibido,titulo,cantidad,recibecompleto) values($Id_recibido,$value,$cantidad[$key],$recibecompleto_valor)";
+                //echo  $querydetalle . "<br/>";
+                $verificar3 = $conexion->query($querydetalle);
+
+                //checar si existe en la ubicacion
+                $query = "SELECT cantidad, ubicacion_Id FROM ubicaciones_modulos WHERE ubicacion_Id IN ($ubicacion, $ubicacion_envio) AND modulo_Id = $value AND cantidad > 0";
+                echo $query . "</br>";
+                $resultado = $conexion->query($query);
+
+                if ($resultado->num_rows > 0) {
+                    while ($fila = $resultado->fetch_assoc()) {
+
+                        $cantidad_actualizada = $fila['cantidad'] - $cantidad[$key];
+                        if ($fila['ubicacion_Id'] == $ubicacion_envio) {
+                            //aqui checa si hay registro de la ubicacionactual
+                            $querydetalle4 = "UPDATE ubicaciones_modulos SET cantidad = $cantidad_actualizada, fecha='$fecha_actual' WHERE ubicacion_Id = $ubicacion AND modulo_Id = $value ";
+                            $verificar4 = $conexion->query($querydetalle4);
+                            echo 'querydetalle4 ' . $querydetalle4 . '<br>';
+                            if (!$verificar4) {
+                                echo "Error en la consulta: " . $conexion->error;
+                            }
+                        } else {
+                            $querydetalle3 = "INSERT INTO ubicaciones_modulos (modulo_Id, ubicacion_Id, cantidad, fecha) VALUES ($value, $ubicacion_envio, $cantidad[$key], '$fecha_actual')";
+                            $verificar3 = $conexion->query($querydetalle3);
+                            echo 'querydetalle3 ' . $querydetalle3 . '<br>';
+                        }
+
+                        if ($fila['ubicacion_Id'] == $ubicacion) {
+                            //aqui encuentra -  $regresara 
+                            $cantidad_nueva = $fila['cantidad'] + $cantidad[$key];
+                            $querydetalle3 = "UPDATE ubicaciones_modulos SET cantidad = $cantidad_nueva, fecha='$fecha_actual' WHERE ubicacion_Id = $ubicacion AND modulo_Id = $value";
+                            $verificar3 = $conexion->query($querydetalle3);
+                            echo 'querydetalle3 ' . $querydetalle3 . '<br>';
+                            if (!$verificar3) {
+                                echo "Error en la consulta: " . $conexion->error;
+                            }
+                        } else {
+                            $querydetalle3 = "INSERT INTO ubicaciones_modulos (modulo_Id, ubicacion_Id, cantidad, fecha) VALUES ($value, $ubicacion, $cantidad[$key], '$fecha_actual')";
+                            $verificar3 = $conexion->query($querydetalle3);
+                            echo 'querydetalle3 ' . $querydetalle3 . '<br>';
+                        }
+                    }
+                }
+            }*/
+
+            //se debe actualizar la tabla de envio ya que fue recibido para que no se reciba 2 veces?
+            $querydetalle4 = "UPDATE header_envio_modulos set activo=0 where Id_henvio=$orden";
+            $verificar4 = $conexion->query($querydetalle4);
+            echo  $querydetalle4 . "<br/>";
+        } else {
+            echo 'no es: ' . $_POST['modulos'];
+        }
+        if ($verificar && $verificar3 && $verificar4) {
+            echo '<script>
                     swal({
                     title: "Operación exitosa",
-                    text: "El libro fue registrado correctamente!",
+                    text: "El envio de módulos fue registrado correctamente!",
                     type: "success",
                     showCancelButton: true,
                     cancelButtonClass: "btn-warning",
                     cancelButtonText: "Registrar",
                     confirmButtonClass: "btn-success",
-                    confirmButtonText: "Ver libros",
+                    confirmButtonText: "Ver Recibos",
                     closeOnConfirm: false
                   },
                   function(isConfirm) {
                       if (isConfirm) {
-                        window.location="libros.php";
+                        window.location="/biblioteca/reportes/recibidos.php";
                       } else {
-                        window.location="registrar_libros.php";
+                        window.location="registro.php";
                       }
                     });
                     </script>';
-                }else{
-                    echo '<script>
+        } else {
+
+            echo '<script>
                     swal({
                     title: "Operación fallida",
-                    text: "Ocurrio un error al registrar el libro!",
+                    text: "Ocurrio un error al registrar el envio de módulos!",
                     type: "error",
                     showCancelButton: true,
                     cancelButtonClass: "btn-warning",
                     cancelButtonText: "Intentar de nuevo",
                     confirmButtonClass: "btn-success",
-                    confirmButtonText: "Ver libros",
+                    confirmButtonText: "ok",
                     closeOnConfirm: false
                   },
                   function(isConfirm) {
                       if (isConfirm) {
-                        window.location="libros.php";
+                        window.location="registro.php";
                       } else {
-                        window.location="registrar_libros.php";
+                        window.location="registro.php";
                       }
                     });
                     </script>';
-                }
-            }
-        ?> 
-    <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-scrollable" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalScrollableTitle">Contáctanos</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body bg-light">
-            <div class="row">
-              <div class="col-sm-6">
-                <div class="card">
-                  <div class="card-body">
-                    <span class="text-info icofont-map h1"></span>
-                    <br>
-                    <small>Barrio: Bonampack</small>
-                    <br>
-                    <small>Calle: Yaxchilan</small>
-                    <br>
-                    <small>Número: 18</small>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="card">
-                  <div class="card-body">
-                    <span class="text-info icofont-envelope h1"></span>
-                    <br>
-                    <small>Email: winalllpz@gmail.com</small>
-                    <br>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <br>
-            <div class="row">
-              <div class="col-sm-6">
-                <div class="card">
-                  <div class="card-body">
-                    <span class="text-info icofont-brand-whatsapp h1"></span>
-                    <br>
-                    <small>Tel: 9191936817</small>
-                    <br>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="card">
-                  <div class="card-body">
-                    <span class="text-info icofont-facebook h1"></span>
-                    <br>
-                    <small>@GoldenLibrary</small>
-                    <br>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="modal fade" id="exampleModalScrollable1" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-scrollable" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalScrollableTitle">Quiénes somos</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body bg-light">
-            <div class="row">
-              <div class="col-sm-12">
-                <div class="card">
-                  <div class="card-body">
-                    <span class="text-info icofont-hat h1"></span>
-                    <p class="card-title">Misión</p>
-                    <small>Nuestra misión es poder dar a conocer toda la sabiduría a través de nuestros libros. Tener un repertorio digno para todas las personas; clases sociales, edades, grados y campos de estudio. Que nuestros libros sean del mayor agrado de nuestros visitadores, contando la mejor calidad de servicio en préstamos de títulos. Siempre con el cello de la casa.</small>
-                    <br>
-                  </div>
-                </div>
-              </div>
-              <br>
-                <div class="col-sm-12">
-                    <div class="card">
-                      <div class="card-body">
-                        <span class="text-info icofont-eye h1"></span>
-                        <p class="card-title">Visión</p>
-                        <small>Nuestra visión es tener siempre tener una atención del público a pesar del tiempo en la que estamos, ser una de las instituciones de títulos literarios más conocidos del mundo. Tener instalaciones de calidad para preservar el buen espacio para leer, contar con el mejor trato de visitador-empleado, ya que nuestro público lo merece.</small>
-                        <br>
-                      </div>
-                    </div>
-                </div>
-                <br>
-            </div>
-            <div class="row">
-              <div class="col-sm-12">
-                <div class="card">
-                  <div class="card-body">
-                    <span class="text-info icofont-chart-histogram-alt h1"></span>
-                    <p class="card-title">Objetivo General</p>
-                    <small>Tener un sistema para poder llevar a cabo la administración de los registros que se generan día con día y hacer más fácil la búsqueda de visitantes, las personas que tienen préstamos y los adeudos de libros. También llevar un registro de los libros que puedan estar dañados y así hacer una petición de cambios.</small>
-                    <br>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+        }
+    }
+    ?>
+
+
     <!-- Footer -->
     <footer class=" ">
         <div class="container-fluid text-center">
             <div class="row">
-                <div class="col-md-4">
-                    <p class="text-white pt-3"><small><b>Copyright &copy; 2022 </b>ISEJA Control de libros todos los derechos reservados</small></p>
-                </div>  
                 <div class="col-md-4 text-white mt-3 mb-2">
-                    <div class="contaiter">
-                        <a href="../conexion/desarolladores.php">Desarolladores</a>
-                        <br>
-                        <small>Version 3.0</small>
-                    </div>
+
+                </div>
+                <div class="col-md-4">
+                    <p class="text-white pt-3"><small><b>Copyright &copy; 2023 </b>ISEJA Control de libros todos los
+                            derechos reservados</small></p>
                 </div>
                 <div class="col-md-4 text-white mt-3 mb-2">
-                    <div class="container">
-                        <div class="d-inline">
-                            <a href="" class="rounded-lg border border-info pt-2 p-2"><span class="icofont-facebook text-white h6"></span></a>
-                        </div>
-                        <div class="d-inline">
-                            <a href="" class="rounded-lg border border-info pt-2 p-2"><span class="icofont-brand-whatsapp text-white h6"></span></a>
-                        </div>
-                        <div class="d-inline">
-                            <a href="" class="rounded-lg border border-info pt-2 p-2"><span class="icofont-instagram text-white h6"></span></a>
-                        </div>
+                    <div class="contaiter">
+
+                        <small>Version 1.0</small>
                     </div>
-                </div>     
+                </div>
             </div>
         </div>
-      <!-- /.container -->
-    </footer> 
+        <!-- /.container -->
+    </footer>
     <!-- jQuery CDN - Slim version (=without AJAX) -->
     <script src="../vendor/jquery/jquery.min.js" type="text/javascript"></script>
     <!-- Bootstrap JS -->
     <script src="../vendor/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
     <script>
-         $(document).ready(function(){
+        $(document).ready(function() {
             $('.toast').toast('show');
-         });
-     </script>
+        });
+    </script>
     <script type="text/javascript">
-        $(document).ready(function () {
-            $('#sidebarCollapse').on('click', function () {
+        $(document).ready(function() {
+            $('#sidebarCollapse').on('click', function() {
                 $('#sidebar').toggleClass('active');
             });
         });
-         function launchFullScreen(element) {
-      if(element.requestFullScreen) {
-        element.requestFullScreen();
-      } else if(element.mozRequestFullScreen) {
-        element.mozRequestFullScreen();
-      } else if(element.webkitRequestFullScreen) {
-        element.webkitRequestFullScreen();
-      }
-    }
-    // Lanza en pantalla completa en navegadores que lo soporten
-     function cancelFullScreen() {
-         if(document.cancelFullScreen) {
-             document.cancelFullScreen();
-         } else if(document.mozCancelFullScreen) {
-             document.mozCancelFullScreen();
-         } else if(document.webkitCancelFullScreen) {
-             document.webkitCancelFullScreen();
-         }
-     }
+
+        function launchFullScreen(element) {
+            if (element.requestFullScreen) {
+                element.requestFullScreen();
+            } else if (element.mozRequestFullScreen) {
+                element.mozRequestFullScreen();
+            } else if (element.webkitRequestFullScreen) {
+                element.webkitRequestFullScreen();
+            }
+        }
+        // Lanza en pantalla completa en navegadores que lo soporten
+        function cancelFullScreen() {
+            if (document.cancelFullScreen) {
+                document.cancelFullScreen();
+            } else if (document.mozCancelFullScreen) {
+                document.mozCancelFullScreen();
+            } else if (document.webkitCancelFullScreen) {
+                document.webkitCancelFullScreen();
+            }
+        }
     </script>
-    <script>
-       function abrirReporte() {
-       window.open("../reporte_libros/index.php","Reporte de libros","directories=no location=no");
-       }
-       function abrirReporte1() {   
-       window.open("../reporte_personas/index.php","Reporte de personas","directories=no location=no");
-       }
-       function abrirReporte2() {
-       window.open("../reporte_autores/index.php","Reporte de autores","directories=no location=no");
-       }
-       function abrirReporte3() {
-       window.open("../reporte_empleados/index.php","Reporte de empleados","directories=no location=no");
-       }
-       function abrirReporte4() {
-       window.open("../reporte_consultas/index.php","Reporte de consultas","directories=no location=no");
-       }
-       function abrirReporte5() {
-       window.open("../reporte_prestamos/index.php","Reporte de prestamos","directories=no location=no");
-       }
+    <script language="javascript">
+        function contarCampos() {
+            var $c = $('.envios').length;
+            console.log($c);
+        }
+
+        function registraIncidencia() {
+            // href="../incidencias/registrar_incidencias.php" target="_blank"
+            $testigo = $('#testigo').val();
+            $orden = $('#ordenes').val();
+            $tipo = $('#tipo').val();
+            $ubicacion_actual = $('#envioa').val();
+            $regresara = $('#regresara').val();
+            $fecha = $('#fechaorden').val();
+            $usuarioenvia = $('#usuarioenvia').val();
+            $usuariorecibe = $('#usuariorecibe').val();
+            /*$nivel=$('#nivel').val();
+            $material=$('#material').val();
+            $estado=$('#estado').val();*/
+
+            $filtros = "?testigo=" + $testigo + "&orden=" + $orden + "&tipo=" + $tipo + "&ubicacion_actual=" + $ubicacion_actual + "&regresara=" + $regresara + "&fechaorden=" + $fecha + "&usuarioenvia=" + $usuarioenvia + "&usuariorecibe=" + $usuariorecibe;
+            window.open("../incidencias/registrar_incidencias.php" + $filtros, "Registro de Incidencia", "directories=no location=no");
+        }
     </script>
+
 </body>
 
 </html>

@@ -8,9 +8,10 @@ if ($id == null || $id = '') {
 }
 
 $niveles = array(
-    'administrador' => 'Administrador',
+    /*'administrador' => 'Administrador',
     'responsable_estatal' => 'Responsable Estatal',
-    'coordinadorzona' => 'Coordinador de Zona',
+    'coordinadorzona' => 'Coordinador de Zona',*/
+    'tecnicodocente' => 'Tecnico Docente',
 );
 
 ?>
@@ -84,20 +85,20 @@ $niveles = array(
                 <div class="form-row container">
                     <div class="col-md-6 col-lg-5">
                         <div class="input-group" style="z-index: 0;">
-                            <input type="search" name="dato" id="dato" placeholder="Nombre de empleado" class="form-control shadow-sm border-0" autocomplete="off" value="<?php echo $_POST['dato'] ?>">
+                            <input type="search" name="dato" id="dato" placeholder="Nombre" class="form-control shadow-sm border-0" autocomplete="off" value="<?php echo $_POST['dato'] ?>">
                             <div class="input-group-prepend bg-white p-0">
                                 <button name="buscar" type="submit" class="input-group-text btn btn-danger border-0 shadow-sm icofont-search-1"></button>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4 col-lg-3 mb-4">
+                   <!-- <div class="col-md-4 col-lg-3 mb-4">
                         <select id="nivel" name="nivel" class="form-control" onchange="this.form.submit()">
                             <option value="">Nivel de usuario</option>
-                            <?php foreach ($niveles as $var => $nivel) : ?>
+                            <?php /*foreach ($niveles as $var => $nivel) : ?>
                                 <option value="<?php echo $var ?>" <?php if ($var == $_POST['nivel']) : ?> selected="selected" <?php endif; ?>><?php echo $nivel ?></option>
-                            <?php endforeach; ?>
+                            <?php endforeach;*/ ?>
                         </select>
-                    </div>
+                    </div>-->
                 </div>
                 <div class="form-row container mt-3">
                     <div class="col-md-4 col-lg-3 mb-4">
@@ -113,7 +114,7 @@ $niveles = array(
                                 <th class='text-center'><small>Usuario</small></th>
                                 <th class='text-center'><small>Nombre</small></th>
                                 <th class='text-center'><small>Fecha alta</small></th>
-                                <th class='text-center'><small>Nivel de usuario</small></th>
+                               <!-- <th class='text-center'><small>Nivel de usuario</small></th>-->
                                 <th class='text-center'><small>Correo</small></th>
 
                                 <th colspan='2' class='text-center'><small>Acciones</small></th>
@@ -130,13 +131,13 @@ $niveles = array(
                                     $filtro .= "AND Nombre_empleado LIKE '%$dato%'";
                                 }
                             }
-                            if (isset($_POST['nivel']) && ($_POST['nivel']) != "") {
+                        /*    if (isset($_POST['nivel']) && ($_POST['nivel']) != "") {
                                 $nivel = $_POST['nivel'];
                                 $filtro .= "AND nivel='$nivel' ";
-                            }
+                            }*/
 
 
-                            $query = "SELECT * FROM usuarios WHERE Activo=1 " . $filtro;
+                            $query = "SELECT * FROM usuarios WHERE Activo=1 and nivel='tecnicodocente' " . $filtro;
                             $resultado = $conexion->query($query);
                             while ($fila = $resultado->fetch_assoc()) {
                                 $id = $fila['Id_usuario'];
@@ -146,10 +147,10 @@ $niveles = array(
                                     <td><small><?php echo $fila['Nombre_usuario']; ?></small></td>
                                     <td><small><?php echo $fila['nombre_empleado']; ?></small></td>
                                     <td><small><?php echo $fila['fecha']; ?></small></td>
-                                    <td><small><?php echo $fila['nivel']; ?></small></td>
+                                    <!--<td><small><?php //echo $fila['nivel']; ?></small></td>-->
                                     <td><small><?php echo $fila['correo']; ?></small></td>
 
-                                    <td class="text-right"><a class="bg-primary py-1 rounded-lg" href="modificar_usuarios.php?id=<?php echo $fila['Id_usuario'] ?>"><span class='h6 text-white icofont-ui-edit px-1'></small></a></td>
+                                    <td class="text-right"><a class="bg-primary py-1 rounded-lg" href="modificar_tecnicod.php?id=<?php echo $fila['Id_usuario'] ?>"><span class='h6 text-white icofont-ui-edit px-1'></small></a></td>
 
                                     <td class="text-left"> <?php if ($_SESSION['Id_usuario'] == 1) { ?><a class="bg-danger py-1 rounded-lg" href="#" onclick="confirmar(<?php echo $id; ?>)"><span class='h6 text-white icofont-ui-delete px-1'></span></a><?php   } ?></td>
                                 </tr>
@@ -175,7 +176,7 @@ $niveles = array(
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <p class="text-white pt-3"><small><b>Copyright &copy; 2022 </b>ISEJA Control de libros todos los
+                    <p class="text-white pt-3"><small><b>Copyright &copy; 2023 </b>ISEJA Control de libros todos los
                             derechos reservados</small></p>
                 </div>
                 <div class="col-md-4 text-white mt-3 mb-2">
@@ -223,7 +224,7 @@ $niveles = array(
         function confirmar(id) {
             swal({
                     title: "Advertecia!",
-                    text: "¿Esta seguro de eliminar este usuario",
+                    text: "¿Esta seguro de eliminar al tecnico docente?",
                     type: "warning",
                     showCancelButton: true,
                     confirmButtonClass: "btn-primary ",
@@ -239,7 +240,7 @@ $niveles = array(
                     } else {
                         swal({
                             title: "Operación cancelada!",
-                            text: "El usuario no fue eliminado",
+                            text: "El tecnico docente no fue eliminado",
                             type: "error",
                             confirmButtonClass: "btn-primary",
                             confirmButtonText: "Volver",
@@ -253,7 +254,7 @@ $niveles = array(
     <script>
         function abrirReporteUsuarios() {
             $dato = $('#dato').val();
-            $nivel = $('#nivel').val();
+            $nivel = "tecnicodocente";
             $material = $('#material').val();
             $estado = $('#estado').val();
 

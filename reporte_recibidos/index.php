@@ -29,7 +29,7 @@ $pdf->Image('../images/logo1.png', 10, 8, 20);
 // Movernos a la derecha
 $pdf->Cell(80);
 // Título
-$pdf->Cell(110, 10, 'ISEJA Control de libros', 1, 0, 'C');
+$pdf->Cell(110, 10, 'ISEJA Control de módulos', 1, 0, 'C');
 // Salto de línea
 $pdf->Ln(20);
 $pdf->Cell(80, 10, 'Registro de Recibidos ' . date("d/m/Y, g:i a"), 0, 0, 'C');

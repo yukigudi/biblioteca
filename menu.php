@@ -48,19 +48,19 @@
                 class="icofont-rounded-down text-white"></i></a>
         <ul class="collapse list-unstyled" id="plazaSubmenu">
             <li>
-                <a href="/biblioteca/ubicaciones/registrar_plazas.php">Registrar Coordinación de Zona</a>
+                <a href="/biblioteca/ubicaciones/registrar_cordzona.php">Registrar Coordinación de Zona</a>
             </li>
             <li>
-                <a href="/biblioteca/ubicaciones/registrar_municipios.php">Registrar Delegación</a>
+                <a href="/biblioteca/ubicaciones/registrar_delegacion.php">Registrar Delegación</a>
             </li>
             <li>
                 <a href="/biblioteca/ubicaciones/registrar_ubicacionresguardo.php">Registrar ubicación de resguardo</a>
             </li>
             <li>
-                <a href="/biblioteca/ubicaciones/plazas.php">Consultar Coordinación de Zona</a>
+                <a href="/biblioteca/ubicaciones/cordzona.php">Consultar Coordinación de Zona</a>
             </li>
             <li>
-                <a href="/biblioteca/ubicaciones/municipios.php">Consultar Delegaciones</a>
+                <a href="/biblioteca/ubicaciones/delegacion.php">Consultar Delegaciones</a>
             </li>
             <li>
                 <a href="/biblioteca/ubicaciones/ubicaciones_resguardo.php">Consultar ubicación de resguardo</a>

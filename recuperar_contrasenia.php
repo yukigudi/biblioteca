@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>ISEJA Control de libros</title>
+	<title>ISEJA Control de módulos</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
@@ -16,7 +16,7 @@
 		<!--	<div class="d-none d-sm-none d-md-block d-lg-block  col-md-7 col-lg-8 p-0">
 				<img src="images/fondo.jpg" class="w-100 vh-100" alt="">
 				<div class="carousel-caption d-none d-md-block">
-			        <h5>ISEJA Control de libros</h5>
+			        <h5>ISEJA Control de módulos</h5>
 			        <p class="text-white"></p>
 			     </div>
 			</div> -->

@@ -1,6 +1,6 @@
   <?php
   session_start();
-  include('menu.php');
+  include('../menu.php');
   $id = $_SESSION['Id_usuario'];
   $usuario = $id;
   if ($id == null || $id = '') {
@@ -24,26 +24,23 @@
 
     <?php
     require_once("../conexion/conexion.php");
-    $id = $_REQUEST['id'];
+    $id_libro = $_POST['id_libro'];
     $titulo = $_POST['titulo'];
     $copias = $_POST['copias'];
     $estado = $_POST['estado'];
     $nivel = $_POST['nivel'];
     $material = $_POST['material'];
-    $editorial = $_POST['editorial'];
-    $fecha = $_POST['fecha'];
-    $cate = $_POST['cate'];
-    $estante = $_POST['estante'];
+    $codigo = $_POST['codigo'];
 
-    $query = "UPDATE libros SET Titulo='$titulo',Copias=$copias,estado='$estado',nivel='$nivel',material='$material' WHERE Id_libro=$id ";
+    $query = "UPDATE libros SET Titulo='$titulo', Copias=$copias, estado='$estado', nivel='$nivel', material='$material', codigo='$codigo' WHERE Id_libro=$id_libro ";
     $verificar = $conexion->query($query);
-    //echo $query."<br>";
+    echo $query . "<br>";
 
-    $querydetalle2 = "UPDATE ubicaciones_modulos SET cantidad=$copias WHERE Id_libro=$id and ubicacion_Id=7";
+    $querydetalle2 = "UPDATE ubicaciones_modulos SET cantidad=$copias WHERE Id_libro=$id_libro and ubicacion_Id=7";
     $verificar2 = $conexion->query($querydetalle2);
-    //echo $querydetalle2."<br>";
+    echo $querydetalle2 . "<br>";
 
-    if ($verificar) {
+    if ($verificar && $verificar2) {
       echo '<script>
                     swal({
                     title: "Operación exitosa",

@@ -3,7 +3,7 @@ include('../menu.php');
 session_start();
 $id = $_SESSION['Id_usuario'];
 $usuario = $id;
-if ($id == null || $id = '') {
+if ($id == null || $id == '') {
     header("location:../index.php");
 }
 require_once("../conexion/conexion.php");
@@ -108,16 +108,17 @@ require_once("../conexion/conexion.php");
                                 <label for="validationCustom02">Ubicación Actual</label>
                                 <select id="ubicacion_actual" name="ubicacion_actual" class="form-control" required>
                                     <?php
-                                    $query = "SELECT * FROM ubicaciones order by tipo, Id_ubicacion";
+
+                                    $query = "SELECT * FROM ubicaciones order by tipo desc, Id_ubicacion desc";
+
                                     $resultado = $conexion->query($query);
                                     $p_open = false;
-                                    echo '<option value="">Seleccione</option>
-                                    <optgroup label="Delegación">';
+                                    echo '<optgroup label="Delegación">';
                                     if ($resultado->num_rows > 0) {
                                         while ($fila = $resultado->fetch_assoc()) {
-                                            if ($fila['tipo'] == 'm') {
+                                            if ($fila['tipo'] == 'd') {
                                                 echo '<option value="' . $fila['Id_ubicacion'] . '">' . $fila['nombre_lugar'] . '</option>';
-                                            } else if ($fila['tipo'] == 'p') {
+                                            } else if ($fila['tipo'] == 'cz') {
                                                 if (!$p_open) { // si no se ha abierto el optgroup de plazas
                                                     echo '</optgroup>';
                                                     echo '<optgroup label="Coordinación de Zona">';
@@ -548,7 +549,7 @@ require_once("../conexion/conexion.php");
                 });
             });
         });
- 
+
         //para cambiar el valor del campo ubicacion actual
         $("#ordenes").change(function() {
 
@@ -561,7 +562,7 @@ require_once("../conexion/conexion.php");
                 data: {
                     // ubic_actual: true,
                     orden: orden,
-                   // tipo: $("#tipo").val()
+                    // tipo: $("#tipo").val()
                 },
                 success: function(data) {
                     var dato = JSON.parse(data);

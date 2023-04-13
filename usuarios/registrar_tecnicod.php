@@ -4,7 +4,7 @@
   require_once("../conexion/conexion.php");
   $id = $_SESSION['Id_usuario'];
   $usuario = $id;
-  if ($id == null || $id = '') {
+  if ($id == null || $id == '') {
     header("location:index.php");
   }
 
@@ -237,7 +237,7 @@
                       echo '<option value="' . $fila['Id_ubicacion'] . '"' . ($fila['Id_ubicacion'] == $_POST['ubicacion'] ? 'selected="selected"' : '') . '>' . $fila['nombre_lugar'] . '</option>';
                     }
                   } ?>
-                  </optgroup>
+
                 </select>
               </div>
             </div>

@@ -240,7 +240,7 @@
                   },
                   function(isConfirm) {
                       if (isConfirm) {
-                          window.location = "eliminar.php?id=" + id;
+                          window.location = "eliminar_delegacion.php?id=" + id;
                       } else {
                           swal({
                               title: "Operación cancelada!",

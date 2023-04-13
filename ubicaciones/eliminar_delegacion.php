@@ -29,14 +29,14 @@
                 <script>
                 swal({
                   title: "Operación exitosa",
-                  text: "El libro fue eliminado correctamente!",
+                  text: "La Delegación fue eliminada correctamente!",
                   type: "success",
                   confirmButtonClass: "btn-success",
                   confirmButtonText: "Aceptar",
                   closeOnConfirm: false
                 },
                 function(){
-                 window.location="libros.php";
+                 window.location="delegacion.php";
                 });
                 </script>
                 ';
@@ -46,7 +46,7 @@
                 <script
                 swal({
                   title: "Operación fallida",
-                  text: "Ocurrio un error al eliminar el libro!",
+                  text: "Ocurrio un error al eliminar la Delegación!",
                   type: "error",
                   confirmButtonClass: "btn-danger",
                   confirmButtonText: "Regresar",

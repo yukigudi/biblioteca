@@ -260,7 +260,7 @@
               $tipo = "r";
               $filtros = "?dato=" + $dato + "&tipo=" + $tipo ;
               console.log($filtros);
-              window.open("../reporte_ubicaciones/index.php" + $filtros, "Reporte de ubicaciones", "directories=no location=no");
+              window.open("../reporte_ubicacionesresguardo/index.php" + $filtros, "Reporte de ubicaciones", "directories=no location=no");
 
           }
       </script>

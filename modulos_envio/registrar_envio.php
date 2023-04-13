@@ -16,7 +16,7 @@ require_once("../conexion/conexion.php");
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>ISEJA Control de libros</title>
+    <title>ISEJA Control de módulos</title>
 
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" type="text/css" href="../vendor/bootstrap/css/bootstrap.min.css">
@@ -35,7 +35,7 @@ require_once("../conexion/conexion.php");
         <nav id="sidebar">
             <div class="sidebar-header">
                 <img width="45" height="45" src="../images/logo.png" alt="">
-                <small><b class="ml-2">ISEJA</b> Control de libros</small>
+                <small><b class="ml-2">ISEJA</b> Control de módulos</small>
             </div>
             <?php menu(); ?>
         </nav>
@@ -116,16 +116,16 @@ require_once("../conexion/conexion.php");
 
                                     <?php
 
-                                    $query = "SELECT * FROM ubicaciones order by tipo, Id_ubicacion";
+                                    $query = "SELECT * FROM ubicaciones order by tipo desc, Id_ubicacion desc";
 
                                     $resultado = $conexion->query($query);
                                     $p_open = false;
                                     echo '<optgroup label="Delegación">';
                                     if ($resultado->num_rows > 0) {
                                         while ($fila = $resultado->fetch_assoc()) {
-                                            if ($fila['tipo'] == 'm') {
+                                            if ($fila['tipo'] == 'd') {
                                                 echo '<option value="' . $fila['Id_ubicacion'] . '">' . $fila['nombre_lugar'] . '</option>';
-                                            } else if ($fila['tipo'] == 'p') {
+                                            } else if ($fila['tipo'] == 'cz') {
                                                 if (!$p_open) { // si no se ha abierto el optgroup de plazas
                                                     echo '</optgroup>';
                                                     echo '<optgroup label="Coordinación de Zona">';
@@ -370,7 +370,7 @@ require_once("../conexion/conexion.php");
 
                 </div>
                 <div class="col-md-4">
-                    <p class="text-white pt-3"><small><b>Copyright &copy; 2023 </b>ISEJA Control de libros todos los
+                    <p class="text-white pt-3"><small><b>Copyright &copy; 2023 </b>ISEJA Control de módulos todos los
                             derechos reservados</small></p>
                 </div>
                 <div class="col-md-4 text-white mt-3 mb-2">

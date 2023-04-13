@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>ISEJA Control de libros</title>
+	<title>ISEJA Control de módulos</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
@@ -16,14 +16,14 @@
 		<!--	<div class="d-none d-sm-none d-md-block d-lg-block  col-md-7 col-lg-8 p-0">
 				<img src="images/fondo.jpg" class="w-100 vh-100" alt="">
 				<div class="carousel-caption d-none d-md-block">
-			        <h5>ISEJA Control de libros</h5>
+			        <h5>ISEJA Control de módulos</h5>
 			        <p class="text-white"></p>
 			     </div>
 			</div> -->
 			<div class="bg-white col-sm-6 col-md-6 col-lg-6 p-0" style="margin-left: 25%;">
 				<form class="login100-form validate-form p-5" method="POST" action="index.php">
 					<span class="login100-form-title p-b-26">
-					<b>Control de libros ISEJA<br/><br/>
+					<b>Control de módulos ISEJA<br/><br/>
 						Inicio de sesión</b>
 					</span>
 					<div class="d-flex justify-content-center">

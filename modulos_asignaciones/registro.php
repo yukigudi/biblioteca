@@ -5,7 +5,7 @@ include('../menu.php');
 //session_start();
 $id = $_SESSION['Id_usuario'];
 $usuario = $id;
-if ($id == null || $id = '') {
+if ($id == null || $id == '') {
     header("location:../index.php");
 }
 require_once("../conexion/conexion.php");

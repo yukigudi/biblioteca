@@ -5,7 +5,7 @@ include('../menu.php');
 //session_start();
 $id = $_SESSION['Id_usuario'];
 $usuario = $id;
-if ($id == null || $id = '') {
+if ($id == null || $id == '') {
     header("location:../index.php");
 }
 require_once("../conexion/conexion.php");
@@ -142,7 +142,7 @@ require_once("../conexion/conexion.php");
                                             echo '<option value="' . $fila['Id_ubicacion'] . '">' . $fila['nombre_lugar'] . '</option>';
                                         }
                                     } ?>
-                                    </optgroup>
+
                                 </select>
                                 <div class="valid-feedback">
                                     Correcto!
@@ -422,16 +422,16 @@ require_once("../conexion/conexion.php");
                 $querydetalle = "INSERT INTO recibido_modulos (Id_hrecibido,titulo,cantidad,recibecompleto) values($Id_recibido,$value,$cantidad[$key],$recibecompleto_valor)";
                 //echo  $querydetalle . "<br/>";
                 $verificar3 = $conexion->query($querydetalle);
-            
+
                 if ($recibecompleto_valor == 1) {
                     //checar si existe en la ubicacion
                     $query = "SELECT cantidad, ubicacion_Id FROM ubicaciones_modulos WHERE ubicacion_Id IN ($ubicacion, $ubicacion_envio) AND modulo_Id = $value AND cantidad > 0";
                     echo $query . "</br>";
                     $resultado = $conexion->query($query);
-            
+
                     if ($resultado->num_rows > 0) {
                         while ($fila = $resultado->fetch_assoc()) {
-            
+
                             $cantidad_actualizada = $fila['cantidad'] - $cantidad[$key];
                             if ($fila['ubicacion_Id'] == $ubicacion_envio) {
                                 //aqui checa si hay registro de la ubicacionactual
@@ -446,7 +446,7 @@ require_once("../conexion/conexion.php");
                                 $verificar3 = $conexion->query($querydetalle3);
                                 echo 'querydetalle3 ' . $querydetalle3 . '<br>';
                             }
-            
+
                             if ($fila['ubicacion_Id'] == $ubicacion) {
                                 //aqui encuentra -  $regresara 
                                 $cantidad_nueva = $fila['cantidad'] + $cantidad[$key];
@@ -465,8 +465,8 @@ require_once("../conexion/conexion.php");
                     }
                 }
             }
-            
-          /*  foreach ($modulos as $key => $value) {
+
+            /*  foreach ($modulos as $key => $value) {
 
                 $recibecompleto_valor = isset($_POST['recibio_completo' . $key]) ? ($_POST['recibio_completo' . $key] == 'si' ? 1 : 0) : 0;
                 //inserta los modulos que se recibieron

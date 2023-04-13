@@ -3,7 +3,7 @@ session_start();
 include('menu.php');
 $id = $_SESSION['Id_usuario'];
 $usuario = $id;
-if ($id == null || $id = '') {
+if ($id == null || $id == '') {
     header("location:index.php");
 }
 require_once("conexion/conexion.php");

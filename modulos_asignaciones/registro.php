@@ -303,6 +303,7 @@ require_once("../conexion/conexion.php");
 
                 $("#ordenes").change(function() {
                     var orden = $(this).val();
+                    // console.log('ubicacion: '+$("#ubicacion_actual").val());
                     $.ajax({
                         type: "GET",
                         url: "datos.php",
@@ -318,6 +319,7 @@ require_once("../conexion/conexion.php");
                             for (var i = 0; i <= datos.length; i++) {
                                 $(".envios").append('<div class="col-md-12 col-lg-12 mb-1"><div class="form-row"><div class="col-md-6 col-lg-5 mb-1">' + datos[i].titulo + '<input type="hidden"  id="modulos[]" name="modulos[]" class="modulos" value="' + datos[i].id + '"></div><div class="col-md-6 col-lg-2 mb-1"><input type="number"  id="cantidad[]" name="cantidad[]" class="cantidad form-control" value="' + datos[i].cantidad + '"></div><div class="col-md-6 col-lg-5 mb-1"><div class="form-row"><div class="col-md-6 col-lg-10 mb-1" style="margin-left:30px"><select id="tecnico_docente[]" name="tecnico_docente[]" class="form-control"><option>seleccione</option></select></div></div></div></div></div>');
                                 // consulta para obtener los técnicos docentes
+
                                 $.ajax({
                                     type: "GET",
                                     url: "datos_tecnico_docente.php",
@@ -368,6 +370,7 @@ require_once("../conexion/conexion.php");
 
     <?php
     if (isset($_POST['registrar'])) {
+
         if (isset($_POST['ubicacion_actual'])) {
             // hacer algo con $array['ubicacion_envio']
             $ubicacion = $_POST['ubicacion_actual'];
@@ -375,14 +378,6 @@ require_once("../conexion/conexion.php");
             // asignar un valor predeterminado
             $ubicacion = '';
         }
-
-        $testigo = $_POST['testigo'];
-        $fecha_actual = $_POST['fecha'];
-        $modulos = $_POST['modulos'];
-        $cantidad = $_POST['cantidad'];
-        $orden = $_POST['ordenes'];
-        $tecnico = $_POST['tecnico_docente'];
-        $tipo = $_POST['tipo'];
         if (isset($_POST['ubicacion_envio'])) {
             // hacer algo con $array['ubicacion_envio']
             $ubicacion_envio = $_POST['ubicacion_envio'];
@@ -390,19 +385,34 @@ require_once("../conexion/conexion.php");
             // asignar un valor predeterminado
             $ubicacion_envio = '';
         }
+        $fecha_actual = $_POST['fecha'];
+        $tipo = $_POST['tipo'];
+        $orden = $_POST['ordenes'];
+        $ubicacion = $_POST['ubicacion_actual'];
+        $testigo = $_POST['testigo'];
 
-        echo 'envioa' . $ubicacion_envio . '<br>';
+        $modulos = $_POST['modulos'];
+        $cantidad = $_POST['cantidad'];
+        $tecnico = $_POST['tecnico_docente'];
+
+
+
+        // echo 'envioa' . $ubicacion_envio . '<br>';
 
 
         $fecha = date("Y-m-d H:i:s");
         //$ubicacion_bodega = 7; //bodega grande
 
-        if (isset($modulos) && is_array($modulos) && isset($tecnico) && is_array($tecnico) && isset($cantidad) && is_array($cantidad) && count($modulos) === count($tecnico) && count($modulos) === count($cantidad)) {
+        /* var_dump($modulos);
+        var_dump($tecnico);
+        var_dump($cantidad);*/
+
+        if (isset($modulos) && is_array($modulos) && isset($tecnico) && is_array($tecnico) && isset($cantidad) && is_array($cantidad)) {
 
             //if (isset($modulos) and is_array($modulos)) {
             //header de envio inserto el registro
-            $query = "INSERT INTO header_asignacion_modulo (fecha,usuario,ubicacion_actual,fechaenvio,orden,tipo,testigo) values('$fecha',$usuario,'$ubicacion','$fecha_actual','$orden','$tipo','$testigo')";
-            //echo 'querydetalle3 ' . $query . '<br>';
+            $query = "INSERT INTO header_asignacion_modulos (fecha,usuario,ubicacion,fechaasignacion,orden,tipo,testigo) values('$fecha',$usuario,'$ubicacion','$fecha_actual','$orden','$tipo','$testigo')";
+            //echo 'query insert ' . $query . '<br>';
             $verificar = $conexion->query($query);
             if (!$verificar) {
                 echo "Error en la consulta 1: " . $conexion->$error;
@@ -414,11 +424,11 @@ require_once("../conexion/conexion.php");
                 //asignar los modulos que se recibieron
                 $tec = $tecnico[$key];
                 $cant = $cantidad[$key];
-                if ($tecnico > 0) {
-                    $querydetalle = "INSERT INTO asignacion_modulos (Id_hrecibido,titulo,cantidad,tecnico) values($Id_asig,$value,$cantidad[$key],$tecnico[$key])";
-                    //echo  $querydetalle . "<br/>";
-                    $verificar3 = $conexion->query($querydetalle);
-                }
+                // if ($tecnico > 0) {
+                $querydetalle = "INSERT INTO asignacion_modulos (Id_hasignacion,titulo,cantidad,tecnico) values($Id_asig,$value,$cantidad[$key],$tecnico[$key])";
+                echo  $querydetalle . "<br/>";
+                $verificar3 = $conexion->query($querydetalle);
+                //}
             }
         } else {
             echo '<script>alert("Por favor ingrese un valor válido en todos los campos");</script>';
@@ -433,7 +443,7 @@ require_once("../conexion/conexion.php");
                     cancelButtonClass: "btn-warning",
                     cancelButtonText: "Registrar",
                     confirmButtonClass: "btn-success",
-                    confirmButtonText: "Ver Recibos",
+                    confirmButtonText: "Ver asignaciones",
                     closeOnConfirm: false
                   },
                   function(isConfirm) {

@@ -11,7 +11,7 @@ $niveles = array(
     /*'administrador' => 'Administrador',
     'responsable_estatal' => 'Responsable Estatal',
     'coordinadorzona' => 'Coordinador de Zona',*/
-    'tecnicodocente' => 'Tecnico Docente',
+    'tecnicodocente' => 'Técnico docente',
 );
 
 ?>
@@ -224,7 +224,7 @@ $niveles = array(
         function confirmar(id) {
             swal({
                     title: "Advertecia!",
-                    text: "¿Esta seguro de eliminar al tecnico docente?",
+                    text: "¿Esta seguro de eliminar al Técnico docente?",
                     type: "warning",
                     showCancelButton: true,
                     confirmButtonClass: "btn-primary ",
@@ -240,7 +240,7 @@ $niveles = array(
                     } else {
                         swal({
                             title: "Operación cancelada!",
-                            text: "El tecnico docente no fue eliminado",
+                            text: "El Técnico docente no fue eliminado",
                             type: "error",
                             confirmButtonClass: "btn-primary",
                             confirmButtonText: "Volver",

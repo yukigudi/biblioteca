@@ -293,7 +293,7 @@
             </div>
           <br>
           </div>
-        <script src="../push/push.min.js" type="text/javascript"></script> 
+       
         <script>
         // Example starter JavaScript for disabling form submissions if there are invalid fields
         (function() {

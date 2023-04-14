@@ -153,7 +153,7 @@
                                 }
                                 //------------
                                 //--------------envioa tipo m o tipo p
-                                $query = "SELECT * FROM ubicaciones where tipo in ('m','p') ";
+                                $query = "SELECT * FROM ubicaciones where tipo in ('cz','d') ";
 
                                 $resultado = $conexion->query($query);
 

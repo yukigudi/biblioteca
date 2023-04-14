@@ -136,7 +136,7 @@ $niveles = array(
                             }
 
 
-                            $query = "SELECT * FROM usuarios WHERE Activo=1 " . $filtro;
+                            $query = "SELECT * FROM usuarios WHERE Activo=1 and nivel not in('tecnicodocente') " . $filtro;
                             $resultado = $conexion->query($query);
                             while ($fila = $resultado->fetch_assoc()) {
                                 $id = $fila['Id_usuario'];

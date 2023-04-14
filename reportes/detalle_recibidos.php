@@ -51,7 +51,8 @@
                   <img width="45" height="45" src="../images/logo.png" alt="">
                   <small><b class="ml-2">ISEJA</b> Control de módulos</small>
               </div>
-              <?php //menu(); ?>
+              <?php //menu(); 
+                ?>
           </nav>
           <!-- Page Content  -->
           <div class="menu">
@@ -91,15 +92,15 @@
           <div class="container table-responsive">
               <br><br><br><br>
               <center><label for="">
-                                <h4>DETALLE DE ENVIO NUMERO <?Php echo $_GET['id'] ?></h4>
-                            </label></center>
+                      <h4>DETALLE DE RECIBO NUMERO <?Php echo $_GET['id'] ?></h4>
+                  </label></center>
               <form action="#" class="form" method="POST">
 
 
                   <div class="form-row container">
                       <div class="col-md-6 col-lg-5">
                           <div class="input-group" style="z-index: 0;">
-                          <!---aqui iban filtros --->
+                              <!---aqui iban filtros --->
                           </div>
                       </div>
                       <div class="col-md-4 col-lg-3 mb-4">
@@ -127,11 +128,11 @@
                                 if (isset($_GET['id'])) {
                                     if (isset($_GET['id'])) {
                                         $dato = $_GET['id'];
-                                        $filtro .= " Id_henvio='$dato'";
+                                        $filtro .= " Id_hrecibido='$dato'";
                                     }
                                 }
                                 if ($filtro) {
-                                   // $filtro = substr($filtro, 4);
+                                    // $filtro = substr($filtro, 4);
                                     $filtro = "Where" . $filtro;
                                 }
 
@@ -147,20 +148,21 @@
                                     }
                                 }
                                 //------------
-                                
 
-                                $query = "SELECT * FROM `envio_modulos` INNER join libros on envio_modulos.titulo=libros.Id_libro " . $filtro;
+
+                                $query = "SELECT * FROM `recibido_modulos` INNER join libros on recibido_modulos.titulo=libros.Id_libro " . $filtro;
+                                //echo $query;
                                 //$query = "SELECT * FROM envio_modulos " . $filtro;
-                                
+
                                 $resultado = $conexion->query($query);
                                 while ($fila = $resultado->fetch_assoc()) {
-                                  
+
                                     //$fila['titulo'] = $libro[$fila['titulo']];
 
 
                                 ?>
                                   <tr class='text-center'>
-                                  <td><small><?php echo $fila['Id_envio']; ?></small></td>
+                                      <td><small><?php echo $fila['Id_recibido']; ?></small></td>
                                       <td><small><?php echo $fila['Titulo']; ?></small></td>
                                       <td><small><?php echo $fila['cantidad']; ?></small></td>
                                       <td><small><?php echo $fila['nivel']; ?></small></td>
@@ -169,7 +171,7 @@
                                   </tr>
                               <?php
                                 }
-                        
+
                                 ?>
                           </tbody>
                       </table>
@@ -235,16 +237,16 @@
           }
       </script>
       <script language="javascript">
-         function detalleEnvios(id) {
-            $filtros = "?id=" + id;
-            window.open("/biblioteca/reportes/detalle_envios.php" + $filtros, "Detalle de envios", "directories=no location=no");
-        }
+          function detalleEnvios(id) {
+              $filtros = "?id=" + id;
+              window.open("/biblioteca/reportes/detalle_envios.php" + $filtros, "Detalle de envios", "directories=no location=no");
+          }
       </script>
 
       <script>
           function abrirDetalleEnvios(id) {
-             // $dato = $('#dato').val();
-              $filtros = "?dato=" + id ;
+              // $dato = $('#dato').val();
+              $filtros = "?dato=" + id;
               console.log($filtros);
               window.open("/biblioteca/reporte_detalleEnvios/index.php" + $filtros, "Reporte de envios", "directories=no location=no");
 

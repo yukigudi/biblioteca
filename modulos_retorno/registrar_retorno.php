@@ -294,11 +294,12 @@ require_once("../conexion/conexion.php");
         $cantidad = $_POST['cantidad'];
         $fecha = date("Y-m-d H:i:s");
         $fechaactual = date("Y-m-d");
+        $orden =  $_POST['ordenes'];
 
         if (isset($modulos) and is_array($modulos)) {
             //header de retorno
 
-            $query = "INSERT INTO header_retorno_modulos (fecha,usuario,ubicacion,envioa,fechaenvio,recibe,testigo) values('$fecha',$usuario,'$ubicacion','$regresara','$fecha_actual',$recibe,'$testigo')";
+            $query = "INSERT INTO header_retorno_modulos (fecha,usuario,ubicacion,envioa,fechaenvio,recibe,testigo,orden) values('$fecha',$usuario,'$ubicacion','$regresara','$fecha_actual',$recibe,'$testigo','$orden')";
             // echo  $query . "<br/>";
 
             $verificar = $conexion->query($query);

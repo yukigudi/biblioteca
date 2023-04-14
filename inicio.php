@@ -75,29 +75,7 @@ require_once("conexion/conexion.php");
             <div class="container-fluid p-0">
                 <div class="row">
 
-                    <div class="col-md-5 col-lg-3 p-0 p-1">
-                        <div class="row no-gutters bg-white shadow-sm">
-                            <div class="col-md-3 bg-danger p-3">
-                                <span class="icofont-library h1 text-white"></span>
-                            </div>
-                            <div class="col-md-9 pt-2">
-                                <small class="ml-3 h3 text-secondary border-danger"><b class="count">
-                                        <?php
-
-                                        $query = "SELECT COUNT(Id_libro) AS Total FROM libros WHERE Activo=1";
-                                        $resultado = $conexion->query($query);
-
-                                        if (mysqli_num_rows($resultado) > 0) {
-                                            $fila = $resultado->fetch_assoc();
-                                            echo $fila['Total'];
-                                        }
-                                        ?>
-                                    </b></small>
-                                <br>
-                                <small class="ml-3 h6 text-secondary">Total de libros</small>
-                            </div>
-                        </div>
-                    </div>
+                   
                     <div class="col-md-5 col-lg-3 p-0 p-1">
                         <div class="row no-gutters bg-white shadow-sm">
                             <div class="col-md-3 bg-success p-3">
@@ -144,31 +122,7 @@ require_once("conexion/conexion.php");
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-5 col-lg-3 p-0 p-1">
-                        <div class="row no-gutters bg-white shadow-sm">
-                            <div class="col-md-3 bg-success p-3">
-                                <span class="icofont-listing-box h1 text-white"></span>
-                            </div>
-
-                            <div class="col-md-9 pt-2">
-                                <small class="ml-3 h3 text-secondary border-success"><b class="count">
-                                        <?php
-
-                                        $query = "SELECT sum(Copias) AS Total FROM libros WHERE Activo=1";
-                                        $resultado = $conexion->query($query);
-
-                                        if (mysqli_num_rows($resultado) > 0) {
-                                            $fila = $resultado->fetch_assoc();
-                                            echo $fila['Total'];
-                                        }
-                                        ?>
-                                    </b></small>
-                                <br>
-                                <small class="ml-3 h6 text-secondary">Total Módulos</small>
-                            </div>
-                        </div>
-                    </div>
-
+                   
                 </div>
             </div>
         </div>

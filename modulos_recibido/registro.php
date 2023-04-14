@@ -638,8 +638,8 @@ require_once("../conexion/conexion.php");
             $testigo = $('#testigo').val();
             $orden = $('#ordenes').val();
             $tipo = $('#tipo').val();
-            $ubicacion_actual = $('#envioa').val();
-            $regresara = $('#regresara').val();
+            $ubicacion_actual = $('#ubicacion_envio').val();
+            $envioa = $('#envioa').val();
             $fecha = $('#fechaorden').val();
             $usuarioenvia = $('#usuarioenvia').val();
             $usuariorecibe = $('#usuariorecibe').val();
@@ -647,7 +647,7 @@ require_once("../conexion/conexion.php");
             $material=$('#material').val();
             $estado=$('#estado').val();*/
 
-            $filtros = "?testigo=" + $testigo + "&orden=" + $orden + "&tipo=" + $tipo + "&ubicacion_actual=" + $ubicacion_actual + "&regresara=" + $regresara + "&fechaorden=" + $fecha + "&usuarioenvia=" + $usuarioenvia + "&usuariorecibe=" + $usuariorecibe;
+            $filtros = "?testigo=" + $testigo + "&orden=" + $orden + "&tipo=" + $tipo + "&ubicacion_actual=" + $ubicacion_actual + "&envioa=" + $envioa + "&fechaorden=" + $fecha + "&usuarioenvia=" + $usuarioenvia + "&usuariorecibe=" + $usuariorecibe;
             window.open("../incidencias/registrar_incidencias.php" + $filtros, "Registro de Incidencia", "directories=no location=no");
         }
     </script>

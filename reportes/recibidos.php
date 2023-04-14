@@ -91,15 +91,15 @@
           <div class="container table-responsive">
               <br><br><br><br>
               <center><label for="">
-                                <h4>REPORTE DE ENVIOS</h4>
-                            </label></center>
+                      <h4>REPORTE DE MODULOS RECIBIDOS</h4>
+                  </label></center>
               <form action="#" class="form" method="POST">
 
 
                   <div class="form-row container">
                       <div class="col-md-6 col-lg-5">
                           <div class="input-group" style="z-index: 0;">
-                          <input type="date" class="form-control shadow-sm border-0" autocomplete="off" value="<?php echo $_POST['dato'] ?>" name="dato" id="dato" placeholder="busqueda por fecha" value="">
+                              <input type="date" class="form-control shadow-sm border-0" autocomplete="off" value="<?php echo $_POST['dato'] ?>" name="dato" id="dato" placeholder="busqueda por fecha" value="">
                               <div class="input-group-prepend bg-white p-0">
                                   <button name="buscar" type="submit" class="input-group-text btn btn-danger border-0 shadow-sm icofont-search-1"></button>
                               </div>
@@ -136,12 +136,12 @@
                                     }
                                 }
                                 if ($filtro) {
-                                   // $filtro = substr($filtro, 4);
+                                    // $filtro = substr($filtro, 4);
                                     $filtro = "Where" . $filtro;
                                 }
 
                                 //------ubicacion actual de envios
-                                $query = "SELECT * FROM ubicaciones where tipo='r'";
+                                $query = "SELECT * FROM ubicaciones";
 
                                 $resultado = $conexion->query($query);
                                 $ubicacion_actual = array();
@@ -153,7 +153,7 @@
                                 }
                                 //------------
                                 //--------------envioa tipo m o tipo p
-                                $query = "SELECT * FROM ubicaciones where tipo in ('m','p') ";
+                                $query = "SELECT * FROM ubicaciones where tipo in ('cz','d') ";
 
                                 $resultado = $conexion->query($query);
 
@@ -189,30 +189,30 @@
                                     }
                                 }
                                 //-----------
+                                $query = "SELECT header_recibido_modulos.Id_hrecibido,header_envio_modulos.ubicacion as ubicacion_actual,header_envio_modulos.envioa,header_envio_modulos.fechaenvio,header_recibido_modulos.fechaenvio,header_envio_modulos.usuario as envia,header_recibido_modulos.usuario as recibe,header_recibido_modulos.testigo FROM header_recibido_modulos LEFT JOIN header_envio_modulos ON header_envio_modulos.Id_henvio=header_recibido_modulos.orden " . $filtro . " order by header_recibido_modulos.fechaenvio desc,header_recibido_modulos.Id_hrecibido desc;";
 
-
-                                $query = "SELECT * FROM header_envio_modulos " . $filtro." order by fechaenvio desc,Id_henvio desc";
+                                //$query = "SELECT * FROM header_recibido_modulos " . $filtro." order by fechaenvio desc,Id_hrecibido desc";
                                 //$query = "SELECT ubicaciones_modulos.Id_ubic_mod,libros.Titulo,libros.estado,ubicaciones.nombre_lugar as ubicacion_actual,ubicaciones_modulos.cantidad as Copias,libros.nivel,libros.material FROM ubicaciones_modulos left join ubicaciones on ubicaciones.Id_ubicacion=ubicaciones_modulos.ubicacion_Id left join libros on libros.Id_libro=ubicaciones_modulos.modulo_Id " . $filtro;
 
                                 //la ubicacion actual es municipios o plazas tipo "m" o "p"
                                 //echo $query;
                                 $resultado = $conexion->query($query);
                                 while ($fila = $resultado->fetch_assoc()) {
-                                    $id = $fila['Id_henvio'];
+                                    $id = $fila['Id_hrecibido'];
 
-                                    $fila['ubicacion_actual'] = $ubicacion_actual[$fila['ubicacion']];
+                                    $fila['ubicacion_actual'] = $ubicacion_actual[$fila['ubicacion_actual']];
                                     $fila['envioa'] = $envioa[$fila['envioa']];
-                                    $fila['usuario'] = $remitente[$fila['usuario']];
+                                    $fila['envia'] = $remitente[$fila['envia']];
                                     $fila['recibe'] = $destinatario[$fila['recibe']];
 
 
                                 ?>
                                   <tr class='text-center'>
-                                      <td><small><?php echo $fila['Id_henvio']; ?></small></td>
+                                      <td><small><?php echo $fila['Id_hrecibido']; ?></small></td>
                                       <td><small><?php echo $fila['ubicacion_actual']; ?></small></td>
                                       <td><small><?php echo $fila['envioa']; ?></small></td>
                                       <td><small><?php echo $fila['fechaenvio']; ?></small></td>
-                                      <td><small><?php echo $fila['usuario']; ?></small></td>
+                                      <td><small><?php echo $fila['envia']; ?></small></td>
                                       <td><small><?php echo $fila['recibe']; ?></small></td>
                                       <td><small><?php echo $fila['testigo']; ?></small></td>
                                       <td class="text-center"><a class="rounded-lg" href="#" onclick="detalleEnvios(<?php echo $id; ?>)"><span class='h6 icofont-look px-1'></span></a></td>
@@ -285,22 +285,22 @@
           }
       </script>
       <script language="javascript">
-         function detalleEnvios(id) {
-            $filtros = "?id=" + id;
-            window.open("/biblioteca/reportes/detalle_envios.php" + $filtros, "Detalle de envios", "directories=no location=no");
-        }
+          function detalleEnvios(id) {
+              $filtros = "?id=" + id;
+              window.open("/biblioteca/reportes/detalle_recibidos.php" + $filtros, "Detalle de Recibidos", "directories=no location=no");
+          }
       </script>
 
       <script>
           function abrirReporteEnvios() {
               $dato = $('#dato').val();
               $filtros = "";
-              if($dato!=""){
-                $filtros = "?dato=" + $dato ;
+              if ($dato != "") {
+                  $filtros = "?dato=" + $dato;
               }
-              
+
               console.log($filtros);
-              window.open("/biblioteca/reporte_envios/index.php" + $filtros, "Reporte de envios", "directories=no location=no");
+              window.open("/biblioteca/reporte_recibidos/index.php" + $filtros, "Reporte de Recibidos", "directories=no location=no");
 
           }
       </script>

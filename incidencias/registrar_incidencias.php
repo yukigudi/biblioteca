@@ -52,7 +52,7 @@ $tipos = array(
     <input type="hidden" name="orden" value="<?php echo $_GET['orden']; ?>">
     <input type="hidden" name="tipo" value="<?php echo $_GET['tipo']; ?>">
     <input type="hidden" name="ubicacion_actual" value="<?php echo $_GET['ubicacion_actual']; ?>">
-    <input type="hidden" name="regresara" value="<?php echo $_GET['regresara']; ?>">
+    <input type="hidden" name="envioa" value="<?php echo $_GET['envioa']; ?>">
     <input type="hidden" name="fechaorden" value="<?php echo $_GET['fechaorden']; ?>">
     <input type="hidden" name="usuarioenvia" value="<?php echo $_GET['usuarioenvia']; ?>">
     <input type="hidden" name="usuariorecibe" value="<?php echo $_GET['usuariorecibe']; ?>">
@@ -267,11 +267,13 @@ $tipos = array(
         $incidencia = $_POST['incidenciaen'];
         $orden = $_POST['ordenes'];
         $detalle = $_POST['incidencia'];
+        $deubicacion = $_POST['deubicacion'];
+        $aubicacion = $_POST['aubicacion'];
         $fecha = date("Y-m-d H:i:s");
         /* $modulos = $_POST['modulos'];
                 $cantidad = $_POST['cantidad'];*/
 
-        $query = "INSERT INTO incidencias (fecha,usuario,fechaenvio,fecharecibido,usuarioenvio,usuariorecibio,testigo,incidencia,orden,detalle) values('$fecha',$usuario,'$fechaenvio','$fecharecibido',$usuarioenvio,$usuariorecibio,'$testigo','$incidencia','$orden','$detalle')";
+        $query = "INSERT INTO incidencias (fecha,usuario,fechaenvio,fecharecibido,usuarioenvio,usuariorecibio,testigo,incidencia,orden,detalle,deubicacion,aubicacion) values('$fecha',$usuario,'$fechaenvio','$fecharecibido',$usuarioenvio,$usuariorecibio,'$testigo','$incidencia','$orden','$detalle','$deubicacion','$aubicacion')";
 
         //echo  $query . "<br/>";
         $verificar = $conexion->query($query);

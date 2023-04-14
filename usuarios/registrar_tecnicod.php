@@ -15,7 +15,7 @@
     /* 'administrador' => 'Administrador',
       'responsable_estatal' => 'Responsable Estatal',
       'coordinadorzona' => 'Coordinador de Zona',*/
-    'tecnicodocente' => 'Tecnico Docente',
+    'tecnicodocente' => 'Técnico docente',
   );
   ?>
   <!DOCTYPE html>
@@ -85,13 +85,13 @@
         <div class="bg-white rounded-lg formulario">
           <form class="p-4 needs-validation" action="registrar_tecnicod.php" method="POST" novalidate>
             <center><label for="">
-                <h4>REGISTRAR TECNICO DOCENTE</h4>
+                <h4>REGISTRAR Técnico docente</h4>
               </label></center>
             <div class="form-row">
 
               <div class="col-sm-12 col-md-4 col-lg-6 mb-4">
                 <label for="nombre">Nombre</label>
-                <input type="text" class="form-control" id="nombre" required name="nombre" placeholder="Nombre completo" pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+" maxlength="40">
+                <input type="text" class="form-control" id="nombre" required name="nombre" placeholder="Nombre completo" pattern="[a-zA-Z0-9àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+" maxlength="40">
                 <div class="valid-feedback">
                   Correcto!
                 </div>
@@ -286,13 +286,13 @@
       $telefono = $_POST['telefono'];
       $correo = $_POST['correo'];
       $nivel = $_POST['nivel'];
-      $ubicacion = $_POST['ubicacion'];
+      $ubicacion = $_POST['ubicaciones'];
       $fecha = date("Y-m-d");
 
 
       $query = "INSERT INTO usuarios (nombre_empleado,Nombre_usuario,Password,calle,numeroi,numeroe,ciudad,estado,genero,fecha_nac,telefono,correo,nivel,fecha,ubicacion) values('$nombre_empleado','$usuario','$pass','$calle','$numeroi','$numeroe','$ciudad','$estado','$genero','$fecha_nac','$telefono','$correo','$nivel','$fecha','$ubicacion')";
 
-      echo $query;
+      //echo $query;
       $verificar = $conexion->query($query);
       if ($verificar) {
         echo '<script>
@@ -309,7 +309,7 @@
                   },
                   function(isConfirm) {
                       if (isConfirm) {
-                        window.location="usuarios.php";
+                        window.location="tecnicod.php";
                       } else {
                         window.location="registrar_tecnicod.php";
                       }
@@ -319,7 +319,7 @@
         echo '<script>
                     swal({
                     title: "Operación fallida",
-                    text: "Ocurrio un error al registrar tecnico docente",
+                    text: "Ocurrio un error al registrar Técnico docente",
                     type: "error",
                     showCancelButton: true,
                     cancelButtonClass: "btn-warning",
@@ -330,7 +330,7 @@
                   },
                   function(isConfirm) {
                       if (isConfirm) {
-                        window.location="usuarios.php";
+                        window.location="tecnicod.php";
                       } else {
                         window.location="registrar_tecnicod.php";
                       }
@@ -391,8 +391,7 @@
     <script src="../vendor/jquery/jquery.min.js" type="text/javascript"></script>
     <!-- Bootstrap JS -->
     <script src="../vendor/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="../vendor/bootstrap/js/buscar_empleado.js" type="text/javascript"></script>
-    <script src="../vendor/bootstrap/js/buscar_empleado1.js" type="text/javascript"></script>
+
     <script>
       $(document).ready(function() {
         $('.toast').toast('show');

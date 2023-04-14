@@ -11,7 +11,7 @@ if (isset($_GET['ubicacion'])) {
         if ($resultado->num_rows > 0) {
         while ($fila = $resultado->fetch_assoc()) {
            
-            $dataTecnico[] = array('d' => $fila['Id_usuario'], 'nombre' => $fila['nombre_empleado']);
+            $dataTecnico[] = array('id' => $fila['Id_usuario'], 'nombre' => $fila['nombre_empleado']);
            
         }
 

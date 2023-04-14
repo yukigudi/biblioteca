@@ -372,8 +372,7 @@
     <script src="../vendor/jquery/jquery.min.js" type="text/javascript"></script>
     <!-- Bootstrap JS -->
     <script src="../vendor/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="../vendor/bootstrap/js/buscar_empleado.js" type="text/javascript"></script>
-    <script src="../vendor/bootstrap/js/buscar_empleado1.js" type="text/javascript"></script>
+    
     <script>
          $(document).ready(function(){
             $('.toast').toast('show');

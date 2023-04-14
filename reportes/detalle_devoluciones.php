@@ -91,7 +91,7 @@
           <div class="container table-responsive">
               <br><br><br><br>
               <center><label for="">
-                                <h4>DETALLE DE ENVIO NUMERO <?Php echo $_GET['id'] ?></h4>
+                                <h4>DETALLE DE RETORNO NUMERO <?Php echo $_GET['id'] ?></h4>
                             </label></center>
               <form action="#" class="form" method="POST">
 
@@ -237,7 +237,7 @@
       <script language="javascript">
          function detalleEnvios(id) {
             $filtros = "?id=" + id;
-            window.open("/biblioteca/reportes/detalle_envios.php" + $filtros, "Detalle de envios", "directories=no location=no");
+            window.open("/biblioteca/reportes/detalle_devoluciones.php" + $filtros, "Detalle de Devolución", "directories=no location=no");
         }
       </script>
 

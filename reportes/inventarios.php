@@ -91,15 +91,15 @@
           <div class="container table-responsive">
               <br><br><br><br>
               <center><label for="">
-                                <h4>REPORTE DE ENVIOS</h4>
-                            </label></center>
+                      <h4>REPORTE DE INVENTARIOS</h4>
+                  </label></center>
               <form action="#" class="form" method="POST">
 
 
                   <div class="form-row container">
                       <div class="col-md-6 col-lg-5">
                           <div class="input-group" style="z-index: 0;">
-                          <input type="date" class="form-control shadow-sm border-0" autocomplete="off" value="<?php echo $_POST['dato'] ?>" name="dato" id="dato" placeholder="busqueda por fecha" value="">
+                              <input type="date" class="form-control shadow-sm border-0" autocomplete="off" value="<?php echo $_POST['dato'] ?>" name="dato" id="dato" placeholder="busqueda por fecha" value="">
                               <div class="input-group-prepend bg-white p-0">
                                   <button name="buscar" type="submit" class="input-group-text btn btn-danger border-0 shadow-sm icofont-search-1"></button>
                               </div>
@@ -114,14 +114,13 @@
                       <table class='table table-sm table-hover gb-white shadow-sm'>
                           <thead>
                               <tr style="background-color:#952F57;" class='text-white font-weight-bold'>
-                                  <th class='text-center'><small>ID</small></th>
-                                  <th class='text-center'><small>Ubicación de envio</small></th>
-                                  <th class='text-center'><small>Destino</small></th>
+                                  <th class='text-center'><small>Módulo</small></th>
+                                  <th class='text-center'><small>Ubicación</small></th>
+                                  <th class='text-center'><small>Cantidad</small></th>
+                                  <th class='text-center'><small>Nivel</small></th>
+                                  <th class='text-center'><small>Material</small></th>
+                                  <th class='text-center'><small>Estado</small></th>
                                   <th class='text-center'><small>Fecha</small></th>
-                                  <th class='text-center'><small>Remitente</small></th>
-                                  <th class='text-center'><small>Destinatario</small></th>
-                                  <th class='text-center'><small>Testigo</small></th>
-                                  <th class='text-center'><small>Detalle</small></th>
                               </tr>
                           </thead>
                           <tbody>
@@ -132,90 +131,30 @@
                                 if (isset($_POST['buscar'])) {
                                     if (isset($_POST['dato'])) {
                                         $dato = $_POST['dato'];
-                                        $filtro .= " fechaenvio='$dato'";
+                                        $filtro .= " fecha='$dato'";
                                     }
                                 }
                                 if ($filtro) {
-                                   // $filtro = substr($filtro, 4);
+                                    // $filtro = substr($filtro, 4);
                                     $filtro = "Where" . $filtro;
                                 }
 
-                                //------ubicacion actual de envios
-                                $query = "SELECT * FROM ubicaciones where tipo='r'";
 
-                                $resultado = $conexion->query($query);
-                                $ubicacion_actual = array();
-                                if ($resultado->num_rows > 0) {
-                                    while ($row = $resultado->fetch_assoc()) {
-                                        $ubicacion_actual[$row['Id_ubicacion']] = $row['nombre_lugar'];
-                                        // echo $fila['nombre_lugar'];
-                                    }
-                                }
-                                //------------
-                                //--------------envioa tipo m o tipo p
-                                $query = "SELECT * FROM ubicaciones where tipo in ('m','p') ";
-
-                                $resultado = $conexion->query($query);
-
-                                $envioa = array();
-                                if ($resultado->num_rows > 0) {
-                                    while ($row = $resultado->fetch_assoc()) {
-                                        $envioa[$row['Id_ubicacion']] = $row['nombre_lugar'];
-                                    }
-                                }
-
-                                //-----------
-                                //-------destinatario--------
-                                $query = "SELECT * FROM usuarios";
-
-                                $resultado = $conexion->query($query);
-                                $destinatario = array();
-                                if ($resultado->num_rows > 0) {
-                                    while ($row = $resultado->fetch_assoc()) {
-                                        $destinatario[$row['Id_usuario']] = $row['Nombre_usuario'];
-                                        //echo $fila['Id_usuario']. $fila['Nombre_usuario']; 
-                                    }
-                                }
-                                //-----------
-                                //-------remitente--------
-                                $query = "SELECT * FROM usuarios";
-
-                                $resultado = $conexion->query($query);
-                                $remitente = array();
-                                if ($resultado->num_rows > 0) {
-                                    while ($row = $resultado->fetch_assoc()) {
-                                        $remitente[$row['Id_usuario']] = $row['Nombre_usuario'];
-                                        //echo $fila['Id_usuario']. $fila['Nombre_usuario']; 
-                                    }
-                                }
-                                //-----------
+                                $query = "SELECT ubicaciones_modulos.Id_ubic_mod,ubicaciones_modulos.fecha,libros.Titulo,libros.estado,ubicaciones.nombre_lugar as ubicacion_actual,ubicaciones_modulos.cantidad as Copias,libros.nivel,libros.material FROM ubicaciones_modulos left join ubicaciones on ubicaciones.Id_ubicacion=ubicaciones_modulos.ubicacion_Id left join libros on libros.Id_libro=ubicaciones_modulos.modulo_Id " . $filtro;
 
 
-                                $query = "SELECT * FROM header_envio_modulos " . $filtro." order by fechaenvio desc,Id_henvio desc";
-                                //$query = "SELECT ubicaciones_modulos.Id_ubic_mod,libros.Titulo,libros.estado,ubicaciones.nombre_lugar as ubicacion_actual,ubicaciones_modulos.cantidad as Copias,libros.nivel,libros.material FROM ubicaciones_modulos left join ubicaciones on ubicaciones.Id_ubicacion=ubicaciones_modulos.ubicacion_Id left join libros on libros.Id_libro=ubicaciones_modulos.modulo_Id " . $filtro;
-
-                                //la ubicacion actual es municipios o plazas tipo "m" o "p"
-                                //echo $query;
                                 $resultado = $conexion->query($query);
                                 while ($fila = $resultado->fetch_assoc()) {
-                                    $id = $fila['Id_henvio'];
-
-                                    $fila['ubicacion_actual'] = $ubicacion_actual[$fila['ubicacion']];
-                                    $fila['envioa'] = $envioa[$fila['envioa']];
-                                    $fila['usuario'] = $remitente[$fila['usuario']];
-                                    $fila['recibe'] = $destinatario[$fila['recibe']];
-
-
                                 ?>
                                   <tr class='text-center'>
-                                      <td><small><?php echo $fila['Id_henvio']; ?></small></td>
+                                      <td><small><?php echo $fila['Titulo']; ?></small></td>
                                       <td><small><?php echo $fila['ubicacion_actual']; ?></small></td>
-                                      <td><small><?php echo $fila['envioa']; ?></small></td>
-                                      <td><small><?php echo $fila['fechaenvio']; ?></small></td>
-                                      <td><small><?php echo $fila['usuario']; ?></small></td>
-                                      <td><small><?php echo $fila['recibe']; ?></small></td>
-                                      <td><small><?php echo $fila['testigo']; ?></small></td>
-                                      <td class="text-center"><a class="rounded-lg" href="#" onclick="detalleEnvios(<?php echo $id; ?>)"><span class='h6 icofont-look px-1'></span></a></td>
+                                      <td><small><?php echo $fila['Copias']; ?></small></td>
+                                      <td><small><?php echo $fila['nivel']; ?></small></td>
+                                      <td><small><?php echo $fila['material']; ?></small></td>
+                                      <td><small><?php echo $fila['estado']; ?></small></td>
+                                      <td><small><?php echo $fila['fecha']; ?></small></td>
+
                                   </tr>
                               <?php
                                 }
@@ -285,22 +224,22 @@
           }
       </script>
       <script language="javascript">
-         function detalleEnvios(id) {
-            $filtros = "?id=" + id;
-            window.open("/biblioteca/reportes/detalle_envios.php" + $filtros, "Detalle de envios", "directories=no location=no");
-        }
+          function detalleEnvios(id) {
+              $filtros = "?id=" + id;
+              window.open("/biblioteca/reportes/detalle_envios.php" + $filtros, "Detalle de envios", "directories=no location=no");
+          }
       </script>
 
       <script>
           function abrirReporteEnvios() {
               $dato = $('#dato').val();
               $filtros = "";
-              if($dato!=""){
-                $filtros = "?dato=" + $dato ;
+              if ($dato != "") {
+                  $filtros = "?dato=" + $dato;
               }
-              
+
               console.log($filtros);
-              window.open("/biblioteca/reporte_envios/index.php" + $filtros, "Reporte de envios", "directories=no location=no");
+              window.open("/biblioteca/reporte_inventarios/index.php" + $filtros, "Reporte de Inventarios", "directories=no location=no");
 
           }
       </script>

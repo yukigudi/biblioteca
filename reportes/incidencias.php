@@ -204,7 +204,7 @@
                                       <td><small><?php echo $fila['detalle']; ?></small></td>
                                       <td><small><?php echo $status[$fila['status']]; ?></small></td>
                                       <td><small><?php echo $fila['fecha_solucion']; ?></small></td>
-                                      <td class="text-center"><a class="rounded-lg" href="#" onclick="resolverIncidencia(<?php echo $id; ?>,<?php echo $orden; ?>,<?php echo $tipo; ?>)"><span class='h6 icofont-exclamation-circle px-1'></span></a></td>
+                                      <td class="text-center"><a class="rounded-lg" href="#" onclick="resolverIncidencia(<?php echo $id; ?>,<?php echo $orden; ?>,'<?php echo $tipo; ?>')"><span class='h6 icofont-ui-edit px-1'></span></a></td>
                                   </tr>
                               <?php
                                 }
@@ -279,39 +279,84 @@
               window.open("/biblioteca/reportes/detalle_envios.php" + $filtros, "Detalle de envios", "directories=no location=no");
           }
 
+          /*        function resolverIncidencia(id, orden, tipo) {
+
+                      swal({
+                          title: 'Al dar click en Aceptar resolverá la incidencia, ¿Estás seguro de realizar la acción?',
+                          icon: 'warning',
+                          showCancelButton: true,
+                          confirmButtonText: 'Aceptar',
+                          cancelButtonText: 'Cancelar'
+                      }).then((result) => {
+                          if (result.isConfirmed) {
+                              $.ajax({
+                                  type: 'POST',
+                                  url: 'actualizar_estatus_incidencia.php',
+                                  data: {
+                                      id: id,
+                                      orden: orden,
+                                      tipo: tipo
+                                  },
+                                  success: function(response) {
+                                      Swal.fire({
+                                          title: 'La acción se realizó con éxito',
+                                          icon: 'success'
+                                      });
+                                  },
+                                  error: function(xhr, status, error) {
+                                      Swal.fire({
+                                          title: 'Error al realizar la acción',
+                                          text: xhr.responseText,
+                                          icon: 'error'
+                                      });
+                                  }
+                              });
+                          }
+                      });
+
+                  }*/
           function resolverIncidencia(id, orden, tipo) {
               swal({
-                  title: '¿Estás seguro de realizar la acción?',
-                  icon: 'warning',
+                  title: 'Al dar click en Aceptar resolverá la incidencia, ¿Estás seguro de realizar la acción?',
+                  type: 'warning',
                   showCancelButton: true,
-                  confirmButtonText: 'Sí',
-                  cancelButtonText: 'No'
-              }).then((result) => {
-                  if (result.isConfirmed) {
+                  confirmButtonColor: '#3085d6',
+                  cancelButtonColor: '#d33',
+                  confirmButtonText: 'Aceptar',
+                  cancelButtonText: 'Cancelar'
+              }, function(isConfirm) {
+                  if (isConfirm) {
+                    console.log('entro');
                       $.ajax({
                           type: 'POST',
                           url: 'actualizar_estatus_incidencia.php',
                           data: {
                               id: id,
-                              orden: orden
+                              orden: orden,
+                              tipo: tipo
                           },
                           success: function(response) {
-                              Swal.fire({
+                            console.log(response);
+                              swal({
                                   title: 'La acción se realizó con éxito',
-                                  icon: 'success'
+                                  type: 'success',
+                                  confirmButtonColor: '#3085d6',
+                                  confirmButtonText: 'Ok'
                               });
                           },
                           error: function(xhr, status, error) {
-                              Swal.fire({
+                            console.log(xhr.responseText);
+                              swal({
                                   title: 'Error al realizar la acción',
                                   text: xhr.responseText,
-                                  icon: 'error'
+                                  type: 'error',
+                                  confirmButtonColor: '#3085d6',
+                                  confirmButtonText: 'Ok'
                               });
                           }
                       });
                   }
               });
-
           }
       </script>
 

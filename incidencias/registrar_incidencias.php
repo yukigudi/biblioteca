@@ -33,7 +33,8 @@ $tipos = array(
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <title>ISEJA Control de módulos</title>
@@ -48,14 +49,7 @@ $tipos = array(
 </head>
 
 <body>
-    <input type="hidden" name="testigo" value="<?php echo $_GET['testigo']; ?>">
-    <input type="hidden" name="orden" value="<?php echo $_GET['orden']; ?>">
-    <input type="hidden" name="tipo" value="<?php echo $_GET['tipo']; ?>">
-    <input type="hidden" name="ubicacion_actual" value="<?php echo $_GET['ubicacion_actual']; ?>">
-    <input type="hidden" name="envioa" value="<?php echo $_GET['envioa']; ?>">
-    <input type="hidden" name="fechaorden" value="<?php echo $_GET['fechaorden']; ?>">
-    <input type="hidden" name="usuarioenvia" value="<?php echo $_GET['usuarioenvia']; ?>">
-    <input type="hidden" name="usuariorecibe" value="<?php echo $_GET['usuariorecibe']; ?>">
+
     <div class="wrapper">
         <!-- Sidebar  -->
         <nav id="sidebar">
@@ -74,7 +68,9 @@ $tipos = array(
                     <a href="#"><span id="sidebarCollapse" class="text-white h3 icofont-navigation-menu"></span></a>
                     <div class="ml-3 text-center text-white">
                     </div>
-                    <button class="btn d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <button class="btn d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
                         <i class="fas fa-align-justify"></i>
                         <span class="text-white h3 icofont-circled-down"></span>
                     </button>
@@ -83,14 +79,18 @@ $tipos = array(
                             <!-- Example single danger button -->
                             <li class="nav-item">
                                 <div class="btn-group">
-                                    <button type="button" id="perfil" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <button type="button" id="perfil" class="btn dropdown-toggle" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
                                         <img width="43" height="43" src="../images/user.png" alt="">
                                     </button>
                                     <div class="dropdown-menu dropdown-menu-right">
-                                        <a href="../usuarios/perfil.php"><button class="dropdown-item" type="button">Actualizar perfil</button></a>
-                                        <a href="../usuarios/modificar_contrasena.php"><button class="dropdown-item" type="button">Cambiar contraseña</button></a>
+                                        <a href="../usuarios/perfil.php"><button class="dropdown-item"
+                                                type="button">Actualizar perfil</button></a>
+                                        <a href="../usuarios/modificar_contrasena.php"><button class="dropdown-item"
+                                                type="button">Cambiar contraseña</button></a>
                                         <div class="dropdown-divider"></div>
-                                        <a href="../conexion/cerrar_sesion.php"><button class="dropdown-item" type="button">Cerrar sesión</button></a>
+                                        <a href="../conexion/cerrar_sesion.php"><button class="dropdown-item"
+                                                type="button">Cerrar sesión</button></a>
                                     </div>
                                 </div>
                             </li>
@@ -103,7 +103,7 @@ $tipos = array(
             <br><br><br><br>
             <br>
             <div class="bg-white rounded-lg formulario">
-                <form class="p-4 needs-validation" action="registrar_incidencias.php" method="POST" novalidate>
+                <form class="p-4 needs-validation" action="registrar_incidencias.php" method="post" novalidate>
                     <div id="lineas">
                         <center><label for="">
                                 <h4>REGISTRAR INCIDENCIA</h4>
@@ -114,7 +114,8 @@ $tipos = array(
                                 <select id="incidenciaen" name="incidenciaen" class="form-control" required>
                                     <option value=""></option>
                                     <?php foreach ($tipos as $var => $tipo) : ?>
-                                        <option value="<?php echo $var ?>" <?php if ($var == $_GET['tipo']) : ?> selected="selected" <?php endif; ?>><?php echo $tipo ?></option>
+                                    <option value="<?php echo $var ?>" <?php if ($var == $_GET['tipo']) : ?>
+                                        selected="selected" <?php endif; ?>><?php echo $tipo ?></option>
                                     <?php endforeach; ?>
                                 </select>
                                 <div class="valid-feedback">
@@ -138,7 +139,8 @@ $tipos = array(
                             </div>
                             <div class="col-md-3 col-lg-3 mb-3">
                                 <label for="fecha_envio">Fecha Envío/Devolución</label>
-                                <input type="date" class="form-control" name="fecha_envio" value="<?php echo $_GET['fechaorden'] ?>">
+                                <input type="date" class="form-control" name="fecha_envio"
+                                    value="<?php echo $_GET['fechaorden'] ?>">
                                 <div class="valid-feedback">
                                     Correcto!
                                 </div>
@@ -162,8 +164,8 @@ $tipos = array(
                                             if (isset($_GET['usuarioenvia']) && $_GET['usuarioenvia'] == $fila['Id_usuario']) {
                                                 $selected = 'selected';
                                             } ?>
-                                            <option value="<?php echo $fila['Id_usuario']; ?>" <?php echo $selected; ?>>
-                                                <?php echo $fila['Nombre_usuario']; ?></option>
+                                    <option value="<?php echo $fila['Id_usuario']; ?>" <?php echo $selected; ?>>
+                                        <?php echo $fila['Nombre_usuario']; ?></option>
                                     <?php }
                                     } ?>
 
@@ -177,7 +179,8 @@ $tipos = array(
                             </div>
                             <div class="col-md-3 col-lg-3 mb-3">
                                 <label for="fecha_recibido">Fecha Recibido</label>
-                                <input type="date" class="form-control" name="fecha_recibido" value="<?php echo date("Y-m-d") ?>">
+                                <input type="date" class="form-control" name="fecha_recibido"
+                                    value="<?php echo date("Y-m-d") ?>">
                                 <div class="valid-feedback">
                                     Correcto!
                                 </div>
@@ -197,8 +200,10 @@ $tipos = array(
                                     if ($resultado->num_rows > 0) {
                                         while ($fila = $resultado->fetch_assoc()) {
                                     ?>
-                                            <option value="<?php echo $fila['Id_usuario']; ?>" <?php if ($fila['Id_usuario'] == $_GET['usuariorecibe']) : ?> selected="selected" <?php endif; ?>>
-                                                <?php echo $fila['Nombre_usuario']; ?></option>
+                                    <option value="<?php echo $fila['Id_usuario']; ?>"
+                                        <?php if ($fila['Id_usuario'] == $_GET['usuariorecibe']) : ?>
+                                        selected="selected" <?php endif; ?>>
+                                        <?php echo $fila['Nombre_usuario']; ?></option>
                                     <?php }
                                     } ?>
 
@@ -228,35 +233,46 @@ $tipos = array(
                             </div>
                         </div>
                     </div>
+                    <input type="hidden" name="testigo" value="<?php echo $_GET['testigo']; ?>">
+                    <input type="hidden" name="orden" value="<?php echo $_GET['orden']; ?>">
+                    <input type="hidden" name="tipo" value="<?php echo $_GET['tipo']; ?>">
+                    <input type="hidden" name="ubicacion_actual" value="<?php echo $_GET['ubicacion_actual']; ?>">
+                    <input type="hidden" name="envioa" value="<?php echo $_GET['envioa']; ?>">
+                    <input type="hidden" name="fechaorden" value="<?php echo $_GET['fechaorden']; ?>">
+                    <input type="hidden" name="usuarioenvia" value="<?php echo $_GET['usuarioenvia']; ?>">
+                    <input type="hidden" name="usuariorecibe" value="<?php echo $_GET['usuariorecibe']; ?>">
                     <button class="btn btn-warning text-white" type="submit" name="registrar">Registrar</button>
                 </form>
             </div>
             <br>
         </div>
-       
+
         <script>
-            // Example starter JavaScript for disabling form submissions if there are invalid fields
-            (function() {
-                'use strict';
-                window.addEventListener('load', function() {
-                    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                    var forms = document.getElementsByClassName('needs-validation');
-                    // Loop over them and prevent submission
-                    var validation = Array.prototype.filter.call(forms, function(form) {
-                        form.addEventListener('submit', function(event) {
-                            if (form.checkValidity() === false) {
-                                event.preventDefault();
-                                event.stopPropagation();
-                            }
-                            form.classList.add('was-validated');
-                        }, false);
-                    });
-                }, false);
-            })();
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function() {
+            'use strict';
+            window.addEventListener('load', function() {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
         </script>
     </div>
     <?php
     if (isset($_POST['registrar'])) {
+        var_dump($_GET);
+        echo'<br>';
+        var_dump($_POST);
         echo 'si registra';
         require_once("../conexion/conexion.php");
         $fechaenvio = $_POST['fecha_envio'];
@@ -267,15 +283,17 @@ $tipos = array(
         $incidencia = $_POST['incidenciaen'];
         $orden = $_POST['ordenes'];
         $detalle = $_POST['incidencia'];
-        $deubicacion = $_POST['deubicacion'];
-        $aubicacion = $_POST['aubicacion'];
+        $deubicacion = $_POST['ubicacion_actual'];
+        $aubicacion = $_POST['envioa'];
         $fecha = date("Y-m-d H:i:s");
+        echo 'deubicacion'.$_POST['ubicacion_actual'];
+        echo '<br>aubicacion:'.$_POST['envioa'];
         /* $modulos = $_POST['modulos'];
                 $cantidad = $_POST['cantidad'];*/
 
         $query = "INSERT INTO incidencias (fecha,usuario,fechaenvio,fecharecibido,usuarioenvio,usuariorecibio,testigo,incidencia,orden,detalle,deubicacion,aubicacion) values('$fecha',$usuario,'$fechaenvio','$fecharecibido',$usuarioenvio,$usuariorecibio,'$testigo','$incidencia','$orden','$detalle','$deubicacion','$aubicacion')";
 
-        //echo  $query . "<br/>";
+        echo  $query . "<br/>";
         $verificar = $conexion->query($query);
 
 
@@ -354,67 +372,25 @@ $tipos = array(
     <!-- Bootstrap JS -->
     <script src="../vendor/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
     <script>
-        $(document).ready(function() {
-            $('.toast').toast('show');
-        });
+    $(document).ready(function() {
+        $('.toast').toast('show');
+    });
     </script>
     <script type="text/javascript">
-        $(document).ready(function() {
-            $("#ordenes").empty();
-            $("#incidenciaen").change(function() {
-                console.log('incidenciaen');
-                var opcion = $(this).val();
-                //console.log(opcion);
-                $.ajax({
-                    type: "GET",
-                    url: "datos.php",
-                    data: {
-                        opcion: opcion
-                    },
-                    success: function(data) {
-                        try {
-                            // console.log('wiiiiii');
-                            var datos = JSON.parse(data);
-                            //var datosenvio = JSON.parse(datosenvio);
-                            // $("#ubicacion_actual").val(datos[i].ubicacion);
-
-                            $("#ordenes").empty();
-                            $("#ordenes").append('<option value="">Seleccione</option>');
-                            for (var i = 0; i < datos.length; i++) {
-                                $("#ordenes").append("<option value=" + datos[i].Id + ">" + "De " + datos[i].ubicacion + " a " + datos[i].envioa + " - " + datos[i].fecha + "</option>");
-                            }
-
-                            //var ubicacion=datos[$(this).val()].ubicacion;
-                            // console.log(datos[i].envioa);
-                        } catch (error) {
-                            $("#ordenes").empty();
-                            console.error("Error al parsear la cadena JSON: " + error.message);
-                        }
-
-
-
-                    }
-                });
-            });
-        });
-        //---------------------------------
-
-        $(document).ready(function() {
-            // Paso 3: Asignar una función al evento onchange del primer select para cargar los valores en el segundo select
-            $("#incidenciaen").on("change", function() {
-                var valor_select1 = $(this).val();
-                var texto_select1 = $(this).find(":selected").text();
-
-                $.ajax({
-                    url: "datos.php",
-                    data: {
-                        opcion: valor_select1
-                    },
-                    type: "GET",
-                    // dataType: "json",
-                    success: function(data) {
-                        try{
- // Paso 4: Construir las opciones del segundo select
+    $(document).ready(function() {
+        $("#ordenes").empty();
+        $("#incidenciaen").change(function() {
+            console.log('incidenciaen');
+            var opcion = $(this).val();
+            //console.log(opcion);
+            $.ajax({
+                type: "GET",
+                url: "datos.php",
+                data: {
+                    opcion: opcion
+                },
+                success: function(data) {
+                    try {
                         // console.log('wiiiiii');
                         var datos = JSON.parse(data);
                         //var datosenvio = JSON.parse(datosenvio);
@@ -423,58 +399,104 @@ $tipos = array(
                         $("#ordenes").empty();
                         $("#ordenes").append('<option value="">Seleccione</option>');
                         for (var i = 0; i < datos.length; i++) {
-                            $("#ordenes").append("<option value=" + datos[i].Id + ">" + "De " + datos[i].ubicacion + " a " + datos[i].envioa + " - " + datos[i].fecha + "</option>");
+                            $("#ordenes").append("<option value=" + datos[i].Id + ">" +
+                                "De " + datos[i].ubicacion + " a " + datos[i].envioa +
+                                " - " + datos[i].fecha + "</option>");
+                        }
+
+                        //var ubicacion=datos[$(this).val()].ubicacion;
+                        // console.log(datos[i].envioa);
+                    } catch (error) {
+                        $("#ordenes").empty();
+                        console.error("Error al parsear la cadena JSON: " + error.message);
+                    }
+
+
+
+                }
+            });
+        });
+    });
+    //---------------------------------
+
+    $(document).ready(function() {
+        // Paso 3: Asignar una función al evento onchange del primer select para cargar los valores en el segundo select
+        $("#incidenciaen").on("change", function() {
+            var valor_select1 = $(this).val();
+            var texto_select1 = $(this).find(":selected").text();
+
+            $.ajax({
+                url: "datos.php",
+                data: {
+                    opcion: valor_select1
+                },
+                type: "GET",
+                // dataType: "json",
+                success: function(data) {
+                    try {
+                        // Paso 4: Construir las opciones del segundo select
+                        // console.log('wiiiiii');
+                        var datos = JSON.parse(data);
+                        //var datosenvio = JSON.parse(datosenvio);
+                        // $("#ubicacion_actual").val(datos[i].ubicacion);
+
+                        $("#ordenes").empty();
+                        $("#ordenes").append('<option value="">Seleccione</option>');
+                        for (var i = 0; i < datos.length; i++) {
+                            $("#ordenes").append("<option value=" + datos[i].Id + ">" +
+                                "De " + datos[i].ubicacion + " a " + datos[i].envioa +
+                                " - " + datos[i].fecha + "</option>");
                         }
                         // Paso 5: Seleccionar la opción correspondiente en el segundo select
                         var valor_select2 = '<?php echo $_GET['orden']; ?>';
                         if (valor_select2) {
                             $("#ordenes").val(valor_select2);
                         }
-                        } catch (error) {
-                                $("#ordenes").empty();
-                                console.error("Error al parsear la cadena JSON: " + error.message);
-                            }
-                       
+                    } catch (error) {
+                        $("#ordenes").empty();
+                        console.error("Error al parsear la cadena JSON: " + error.message);
                     }
-                });
-            });
 
-            // Llamar a la función onchange del primer select para cargar los valores en el segundo select y seleccionar la opción correspondiente
-            $("#incidenciaen").trigger("change");
-        });
-
-        //---------------------------------
-
-
-
-
-
-
-        $(document).ready(function() {
-            $('#sidebarCollapse').on('click', function() {
-                $('#sidebar').toggleClass('active');
+                }
             });
         });
 
-        function launchFullScreen(element) {
-            if (element.requestFullScreen) {
-                element.requestFullScreen();
-            } else if (element.mozRequestFullScreen) {
-                element.mozRequestFullScreen();
-            } else if (element.webkitRequestFullScreen) {
-                element.webkitRequestFullScreen();
-            }
+        // Llamar a la función onchange del primer select para cargar los valores en el segundo select y seleccionar la opción correspondiente
+        $("#incidenciaen").trigger("change");
+    });
+
+    //---------------------------------
+
+
+
+
+
+
+    $(document).ready(function() {
+        $('#sidebarCollapse').on('click', function() {
+            $('#sidebar').toggleClass('active');
+        });
+    });
+
+    function launchFullScreen(element) {
+        if (element.requestFullScreen) {
+            element.requestFullScreen();
+        } else if (element.mozRequestFullScreen) {
+            element.mozRequestFullScreen();
+        } else if (element.webkitRequestFullScreen) {
+            element.webkitRequestFullScreen();
         }
-        // Lanza en pantalla completa en navegadores que lo soporten
-        function cancelFullScreen() {
-            if (document.cancelFullScreen) {
-                document.cancelFullScreen();
-            } else if (document.mozCancelFullScreen) {
-                document.mozCancelFullScreen();
-            } else if (document.webkitCancelFullScreen) {
-                document.webkitCancelFullScreen();
-            }
+    }
+    // Lanza en pantalla completa en navegadores que lo soporten
+    function cancelFullScreen() {
+        if (document.cancelFullScreen) {
+            document.cancelFullScreen();
+        } else if (document.mozCancelFullScreen) {
+            document.mozCancelFullScreen();
+        } else if (document.webkitCancelFullScreen) {
+            document.webkitCancelFullScreen();
         }
+    }
     </script>
 </body>
 

@@ -87,7 +87,7 @@ require_once("../conexion/conexion.php");
                             </label></center>
                         <div class="form-row">
                             <div class="col-md-6 col-lg-3 mb-4">
-                                <label for="validationCustom02">Ubicación actual</label>
+                                <label for="ubicacion_actual">Ubicación actual</label>
                                 <select id="ubicacion_actual" name="ubicacion_actual" class="form-control" required>
                                     <option value="">Seleccione</option>
                                     <?php
@@ -160,13 +160,13 @@ require_once("../conexion/conexion.php");
                                     <option value="">Selecciona</option>
                                     <?php
 
-                                    $query = "SELECT * FROM usuarios";
+                                    $query = "SELECT * FROM usuarios Where nivel not in ('tecnicodocente')";
 
                                     $resultado = $conexion->query($query);
                                     if ($resultado->num_rows > 0) {
                                         while ($fila = $resultado->fetch_assoc()) { ?>
                                             <option value="<?php echo $fila['Id_usuario']; ?>">
-                                                <?php echo $fila['Nombre_usuario']; ?></option>
+                                                <?php echo $fila['nombre_empleado']; ?></option>
                                     <?php }
                                     } ?>
                                 </select>

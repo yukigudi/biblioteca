@@ -124,7 +124,7 @@
                                   <th class='text-center'><small>Destinatario</small></th>
                                   <th class='text-center'><small>Testigo</small></th>
                                   <th class='text-center'><small>Ubicación de envio</small></th>
-                                  <th class='text-center'><small>Destino</small></th>
+                                  <th class='text-center'><small>Ubicación de Destino</small></th>
                                   <th class='text-center'><small>Detalle Incidencia</small></th>
                                   <th class='text-center'><small>Estatus</small></th>
                                   <th class='text-center'><small>Fecha resuelto</small></th>
@@ -176,9 +176,7 @@
 
 
                                 $query = "SELECT * FROM incidencias " . $filtro . " order by fecha desc";
-                                //$query = "SELECT ubicaciones_modulos.Id_ubic_mod,libros.Titulo,libros.estado,ubicaciones.nombre_lugar as ubicacion_actual,ubicaciones_modulos.cantidad as Copias,libros.nivel,libros.material FROM ubicaciones_modulos left join ubicaciones on ubicaciones.Id_ubicacion=ubicaciones_modulos.ubicacion_Id left join libros on libros.Id_libro=ubicaciones_modulos.modulo_Id " . $filtro;
 
-                                //la ubicacion actual es municipios o plazas tipo "m" o "p"
                                 //echo $query;
                                 $resultado = $conexion->query($query);
                                 while ($fila = $resultado->fetch_assoc()) {
@@ -193,7 +191,7 @@
 
 
                                 ?>
-                                  <tr class='text-center'>
+                                  <tr class='text-center' id="fila-<?php echo $fila['Id_incidencia']; ?>">
                                       <td><small><?php echo $fila['Id_incidencia']; ?></small></td>
                                       <td><small><?php echo $fila['fecha']; ?></small></td>
                                       <td><small><?php echo $fila['usuarioenvio']; ?></small></td>
@@ -202,13 +200,29 @@
                                       <td><small><?php echo $fila['deubicacion']; ?></small></td>
                                       <td><small><?php echo $fila['aubicacion']; ?></small></td>
                                       <td><small><?php echo $fila['detalle']; ?></small></td>
-                                      <td><small><?php echo $status[$fila['status']]; ?></small></td>
-                                      <td><small><?php echo $fila['fecha_solucion']; ?></small></td>
-                                      <td class="text-center"><a class="rounded-lg" href="#" onclick="resolverIncidencia(<?php echo $id; ?>,<?php echo $orden; ?>,'<?php echo $tipo; ?>')"><span class='h6 icofont-ui-edit px-1'></span></a></td>
+                                      <td id="status-<?php echo $fila['Id_incidencia']; ?>">
+                                          <?php if ($fila['status'] == 1) : ?>
+                                              <span class="badge badge-success"><small><?php echo $status[$fila['status']]; ?></small></span>
+                                          <?php else : ?>
+                                              <small><?php echo $status[$fila['status']]; ?></small>
+                                          <?php endif; ?>
+                                      </td>
+                                      <td id="fecha_solucion-<?php echo $fila['Id_incidencia']; ?>"><small><?php echo $fila['fecha_solucion']; ?></small></td>
+                                      <?php
+                                        if ($fila['status'] == 1) {
+                                        ?>
+                                          <td id="acciones-<?php echo $fila['Id_incidencia']; ?>" class="text-center"></td>
+                                      <?php
+                                        } else {
+                                        ?>
+                                          <td id="acciones-<?php echo $fila['Id_incidencia']; ?>" class="text-center"><a class="rounded-lg" href="#" onclick="resolverIncidencia(<?php echo $id; ?>,<?php echo $orden; ?>,'<?php echo $tipo; ?>')"><span class='h6 icofont-ui-edit px-1'></span></a></td>
+                                      <?php
+                                        }
+                                        ?>
                                   </tr>
                               <?php
                                 }
-                                // echo $query;
+
                                 ?>
                           </tbody>
                       </table>
@@ -279,42 +293,6 @@
               window.open("/biblioteca/reportes/detalle_envios.php" + $filtros, "Detalle de envios", "directories=no location=no");
           }
 
-          /*        function resolverIncidencia(id, orden, tipo) {
-
-                      swal({
-                          title: 'Al dar click en Aceptar resolverá la incidencia, ¿Estás seguro de realizar la acción?',
-                          icon: 'warning',
-                          showCancelButton: true,
-                          confirmButtonText: 'Aceptar',
-                          cancelButtonText: 'Cancelar'
-                      }).then((result) => {
-                          if (result.isConfirmed) {
-                              $.ajax({
-                                  type: 'POST',
-                                  url: 'actualizar_estatus_incidencia.php',
-                                  data: {
-                                      id: id,
-                                      orden: orden,
-                                      tipo: tipo
-                                  },
-                                  success: function(response) {
-                                      Swal.fire({
-                                          title: 'La acción se realizó con éxito',
-                                          icon: 'success'
-                                      });
-                                  },
-                                  error: function(xhr, status, error) {
-                                      Swal.fire({
-                                          title: 'Error al realizar la acción',
-                                          text: xhr.responseText,
-                                          icon: 'error'
-                                      });
-                                  }
-                              });
-                          }
-                      });
-
-                  }*/
           function resolverIncidencia(id, orden, tipo) {
               swal({
                   title: 'Al dar click en Aceptar resolverá la incidencia, ¿Estás seguro de realizar la acción?',
@@ -326,7 +304,7 @@
                   cancelButtonText: 'Cancelar'
               }, function(isConfirm) {
                   if (isConfirm) {
-                    console.log('entro');
+                      console.log('entro');
                       $.ajax({
                           type: 'POST',
                           url: 'actualizar_estatus_incidencia.php',
@@ -336,16 +314,24 @@
                               tipo: tipo
                           },
                           success: function(response) {
-                            console.log(response);
+                              console.log(response);
                               swal({
                                   title: 'La acción se realizó con éxito',
                                   type: 'success',
                                   confirmButtonColor: '#3085d6',
                                   confirmButtonText: 'Ok'
                               });
+                              // Actualizar los td correspondientes con los nuevos datos
+                              //$('#detalle-' + id).html(response.detalle);
+                              $('#status-' + id).html(response.status);
+                              $('#fecha_solucion-' + id).html(response.fecha_solucion);
+                              if (response.status == 1) {
+                                  $('#status-' + id).html('Resuelto');
+                                  $('#acciones-' + id).html(' ');
+                              }
                           },
                           error: function(xhr, status, error) {
-                            console.log(xhr.responseText);
+                              console.log(xhr.responseText);
                               swal({
                                   title: 'Error al realizar la acción',
                                   text: xhr.responseText,

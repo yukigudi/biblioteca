@@ -89,7 +89,9 @@
             <li>
             <a href="/biblioteca/reportes/incidencias.php">Incidencias</a>
             </li>
-
+            <li>
+            <a href="/biblioteca/reportes/asignaciones.php">Asignaciones</a>
+            </li>
         </ul>
     </li>
     <?php if ($_SESSION['Id_usuario'] == 1) {?>

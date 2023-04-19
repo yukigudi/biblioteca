@@ -45,12 +45,11 @@ $pdf->SetFont('Arial', 'I', 9);
 
 
 $filtro = "";
-if (isset($_POST['buscar'])) {
     if (isset($_POST['dato'])) {
         $dato = $_POST['dato'];
         $filtro .= " fecha='$dato'";
     }
-}
+
 if ($filtro) {
     // $filtro = substr($filtro, 4);
     $filtro = "Where" . $filtro;

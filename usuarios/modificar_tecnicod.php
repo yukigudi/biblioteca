@@ -44,7 +44,7 @@ $generos = array(
     <nav id="sidebar">
       <div class="sidebar-header">
         <img width="45" height="45" src="../images/logo.png" alt="">
-        <small><b class="ml-2">ISEJA</b> Control de módulos</small>
+        <small><b class="ml-2">ISEJA</b> <br><p class="text-center">Control de módulos</p></small><hr style="border-color: white;">
       </div>
       <?php menu(); ?>
     </nav>

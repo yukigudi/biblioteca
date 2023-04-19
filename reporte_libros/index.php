@@ -26,12 +26,12 @@ require_once("../conexion/conexion.php");
 $filtro = "";
 
 $filtro = " AND Activo=1 ";
-if (isset($_POST['buscar'])) {
+
     if (isset($_POST['dato']) && ($_POST['dato']) != "") {
         $dato = $_POST['dato'];
         $filtro .= " AND Titulo LIKE '$dato%'";
     }
-}
+
 if (isset($_POST['codigo']) && ($_POST['codigo']) != "") {
     $codigo = $_POST['codigo'];
     $filtro .= " AND codigo LIKE '$codigo%'";

@@ -49,7 +49,7 @@
           <nav id="sidebar">
               <div class="sidebar-header">
                   <img width="45" height="45" src="../images/logo.png" alt="">
-                  <small><b class="ml-2">ISEJA</b> Control de módulos</small>
+                  <small><b class="ml-2">ISEJA</b> <br><p class="text-center">Control de módulos</p></small><hr style="border-color: white;">
               </div>
               <?php menu(); ?>
           </nav>
@@ -126,9 +126,10 @@
                                   <th class='text-center'><small>ID</small></th>
                                   <th class='text-center'><small>Usuario</small></th>
                                   <th class='text-center'><small>Ubicación</small></th>
-                                  <th class='text-center'><small>tipo</small></th>
+                                  <th class='text-center'><small>Tipo</small></th>
                                   <th class='text-center'><small>Orden</small></th>
                                   <th class='text-center'><small>Testigo</small></th>
+                                  <th class='text-center'><small>Fecha asignación</small></th>
                                   <th class='text-center'><small>Detalle</small></th>
                               </tr>
                           </thead>
@@ -140,7 +141,7 @@
                                 if (isset($_POST['buscar'])) {
                                     if (isset($_POST['dato'])) {
                                         $dato = $_POST['dato'];
-                                        $filtro .= " fechaenvio='$dato'";
+                                        $filtro .= " fechaasignacion='$dato'";
                                     }
                                 }
                                 if ($filtro) {
@@ -223,6 +224,7 @@
                                       <td><small><?php echo $fila['tipo']; ?></small></td>
                                       <td><small><?php echo $fila['orden']; ?></small></td>
                                       <td><small><?php echo $fila['testigo']; ?></small></td>
+                                      <td><small><?php echo $fila['fechaasignacion']; ?></small></td>
                                       <td class="text-center"><a class="rounded-lg" href="#" onclick="detalleEnvios(<?php echo $id; ?>)"><span class='h6 icofont-look px-1'></span></a></td>
                                   </tr>
                               <?php
@@ -270,6 +272,26 @@
               $('#sidebarCollapse').on('click', function() {
                   $('#sidebar').toggleClass('active');
               });
+              $("#btnDescargarxls").click(function() {
+                  console.log('entra aqui');
+                  $dato = $('#dato').val();
+                  $filtros = "";
+                  if ($dato != "") {
+                      $filtros = "?dato=" + $dato;
+                  }
+
+                  // var filtros = "?dato=" + dato;
+                  var url = "/biblioteca/phpxsls/ReportesXls/PhpOffice/reporte_asignaciones.php" + $filtros;
+
+                  // var url = "/biblioteca/phpxsls/ReportesXls/PhpOffice/reporte_ubicaciones_cordzona.php";
+                  // Creamos un enlace con el atributo download y lo hacemos clic para iniciar la descarga
+
+                  $('<a>').attr({
+                      href: url,
+                      download: 'reporte_asignaciones.xlsx'
+                  })[0].click();
+
+              });
           });
 
           function launchFullScreen(element) {
@@ -308,7 +330,7 @@
               }
 
               console.log($filtros);
-              window.open("/biblioteca/reporte_asigaciones/index.php" + $filtros, "Reporte de Asignaciones", "directories=no location=no");
+              window.open("/biblioteca/reporte_asignaciones/index.php" + $filtros, "Reporte de Asignaciones", "directories=no location=no");
 
           }
       </script>

@@ -80,7 +80,7 @@ $resultado = $conexion->query($query);
 $usuario = array();
 if ($resultado->num_rows > 0) {
     while ($row = $resultado->fetch_assoc()) {
-        $usuario[$row['Id_usuario']] = $row['Nombre_usuario'];
+        $usuario[$row['Id_usuario']] = $row['nombre_empleado'];
         //echo $fila['Id_usuario']. $fila['Nombre_usuario']; 
     }
 }

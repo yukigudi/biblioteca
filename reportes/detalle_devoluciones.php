@@ -127,7 +127,7 @@
                                 if (isset($_GET['id'])) {
                                     if (isset($_GET['id'])) {
                                         $dato = $_GET['id'];
-                                        $filtro .= " Id_henvio='$dato'";
+                                        $filtro .= " Id_hretorno='$dato'";
                                     }
                                 }
                                 if ($filtro) {
@@ -149,7 +149,7 @@
                                 //------------
                                 
 
-                                $query = "SELECT * FROM `envio_modulos` INNER join libros on envio_modulos.titulo=libros.Id_libro " . $filtro;
+                                $query = "SELECT * FROM `retorno_modulos` INNER join libros on retorno_modulos.titulo=libros.Id_libro " . $filtro;
                                 //$query = "SELECT * FROM envio_modulos " . $filtro;
                                 
                                 $resultado = $conexion->query($query);
@@ -160,7 +160,7 @@
 
                                 ?>
                                   <tr class='text-center'>
-                                  <td><small><?php echo $fila['Id_envio']; ?></small></td>
+                                  <td><small><?php echo $fila['Id_retorno']; ?></small></td>
                                       <td><small><?php echo $fila['Titulo']; ?></small></td>
                                       <td><small><?php echo $fila['cantidad']; ?></small></td>
                                       <td><small><?php echo $fila['nivel']; ?></small></td>
@@ -246,7 +246,7 @@
              // $dato = $('#dato').val();
               $filtros = "?dato=" + id ;
               console.log($filtros);
-              window.open("/biblioteca/reporte_detalleEnvios/index.php" + $filtros, "Reporte de envios", "directories=no location=no");
+              window.open("/biblioteca/reporte_detalleRetornos/index.php" + $filtros, "Reporte de devoluciones", "directories=no location=no");
 
           }
       </script>

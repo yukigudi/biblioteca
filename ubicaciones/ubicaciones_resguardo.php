@@ -104,9 +104,16 @@
                       </div>
                      
                   
-                      <div class="col-md-4 col-lg-3 mb-4">
-                          <button class="btn btn-warning text-white" onclick="abrirReportelibros()" name="imprimir_reporte">Imprimir</button>
-                      </div>
+                      <div class="col-md-4 col-lg-3 mb-4 text-right">
+                        <button onclick="abrirReportelibros()" style="background-color: #dc3545; color: white; border: none; padding: 8px 12px; border-radius: 5px;">
+                            <i class="icofont-file-pdf"></i> Descargar en PDF
+                        </button>
+                    </div>
+                    <div class="col-md-4 col-lg-3 mb-4">
+                        <button id="btnDescargarxls" name="btnDescargarxls" style="background-color: #28a745; color: white; border: none; padding: 8px 12px; border-radius: 5px;">
+                            <i class="icofont-file-excel"></i> Descargar en Excel
+                        </button>
+                    </div>
                   </div>
                   <br>
                   <div class="container-fluid" id="datos">
@@ -201,6 +208,22 @@
               $('#sidebarCollapse').on('click', function() {
                   $('#sidebar').toggleClass('active');
               });
+
+              $("#btnDescargarxls").click(function() {
+                console.log('entra aqui');
+                var dato = "<?php echo $_POST['dato']; ?>";
+                var filtros = "?dato=" + dato;
+                var url = "/biblioteca/phpxsls/ReportesXls/PhpOffice/reporte_ubicaciones_resguardo.php" + filtros;
+
+                // var url = "/biblioteca/phpxsls/ReportesXls/PhpOffice/reporte_ubicaciones_cordzona.php";
+                // Creamos un enlace con el atributo download y lo hacemos clic para iniciar la descarga
+
+                $('<a>').attr({
+                    href: url,
+                    download: 'reporte_ubicaciones_resguardo.xlsx'
+                })[0].click();
+
+            });
           });
 
           function launchFullScreen(element) {

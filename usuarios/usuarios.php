@@ -100,8 +100,15 @@ $niveles = array(
                     </div>
                 </div>
                 <div class="form-row container mt-3">
+                <div class="col-md-4 col-lg-3 mb-4 text-right">
+                        <button onclick="abrirReporteUsuarios()" style="background-color: #dc3545; color: white; border: none; padding: 8px 12px; border-radius: 5px;">
+                            <i class="icofont-file-pdf"></i> Descargar en PDF
+                        </button>
+                    </div>
                     <div class="col-md-4 col-lg-3 mb-4">
-                        <button class="btn btn-warning text-white" onclick="abrirReporteUsuarios()" name="imprimir_reporte">Imprimir</button>
+                        <button id="btnDescargarxls" name="btnDescargarxls" style="background-color: #28a745; color: white; border: none; padding: 8px 12px; border-radius: 5px;">
+                            <i class="icofont-file-excel"></i> Descargar en Excel
+                        </button>
                     </div>
                 </div>
                 <br>
@@ -196,6 +203,22 @@ $niveles = array(
         $(document).ready(function() {
             $('#sidebarCollapse').on('click', function() {
                 $('#sidebar').toggleClass('active');
+            });
+            $("#btnDescargarxls").click(function() {
+                console.log('entra aqui');
+                var dato = "<?php echo $_POST['dato']; ?>";
+                var nivel = "<?php echo $_POST['nivel']; ?>";
+                var filtros = "?dato=" + dato+"&nivel=" + nivel;
+                var url = "/biblioteca/phpxsls/ReportesXls/PhpOffice/reporte_usuarios.php" + filtros;
+
+                // var url = "/biblioteca/phpxsls/ReportesXls/PhpOffice/reporte_ubicaciones_cordzona.php";
+                // Creamos un enlace con el atributo download y lo hacemos clic para iniciar la descarga
+
+                $('<a>').attr({
+                    href: url,
+                    download: 'reporte_ubicaciones_cordzona.xlsx'
+                })[0].click();
+
             });
         });
 

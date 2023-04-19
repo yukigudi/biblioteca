@@ -35,7 +35,7 @@ $pdf->Ln(20);
 $pdf->Cell(80, 10, 'Registro de Recibidos ' . date("d/m/Y, g:i a"), 0, 0, 'C');
 $pdf->Ln(20);
 $pdf->cell(15, 10, 'ID', 1, 0, 'C', 0);
-$pdf->cell(15, 10, 'Orden', 1, 0, 'C', 0);
+//$pdf->cell(15, 10, 'Orden', 1, 0, 'C', 0);
 $pdf->cell(30, 10, 'Fecha', 1, 0, 'C', 0);
 $pdf->cell(50, 10, 'Envia', 1, 0, 'C', 0);
 $pdf->cell(50, 10, 'Recibe', 1, 0, 'C', 0);
@@ -80,7 +80,7 @@ $resultado = $conexion->query($query);
 $usuario = array();
 if ($resultado->num_rows > 0) {
     while ($row = $resultado->fetch_assoc()) {
-        $usuario[$row['Id_usuario']] = $row['Nombre_usuario'];
+        $usuario[$row['Id_usuario']] = $row['nombre_empleado'];
         //echo $fila['Id_usuario']. $fila['Nombre_usuario']; 
     }
 }
@@ -96,7 +96,7 @@ while ($row = $resultado->fetch_assoc()) {
 
     $pdf->Ln(10);
     $pdf->cell(15, 10, $row['Id_hrecibido'], 1, 0, 'C', 0);
-    $pdf->cell(15, 10, $row['orden'], 1, 0, 'C', 0);
+   // $pdf->cell(15, 10, $row['orden'], 1, 0, 'C', 0);
     $pdf->cell(30, 10, $row['fecha'], 1, 0, 'C', 0);
     $pdf->cell(50, 10, $usuario[$row['envia']], 1, 0, 'C', 0);
     $pdf->cell(50, 10, $usuario[$row['recibe']], 1, 0, 'C', 0);
@@ -104,16 +104,6 @@ while ($row = $resultado->fetch_assoc()) {
     $pdf->cell(38, 10, $ubicaciones[$row['ubicacion']], 1, 0, 'C', 0);
     $pdf->cell(38, 10, $ubicaciones[$row['ubicacion_actual']], 1, 0, 'C', 0);
   
- 
- 
-   
-
-    /*$pdf->cell(65,10,mb_convert_encoding($row['Titulo']),1,0,'C',0);
-	$pdf->cell(17,10,$row['Copias'],1,0,'C',0);
-    $pdf->cell(38,10,mb_convert_encoding($row['Editorial']),1,0,'C',0);
-    $pdf->cell(45,10,$row['Fecha_edicion'],1,0,'C',0);
-    $pdf->cell(45,10,mb_convert_encoding($row['Categoria']),1,0,'C',0);
-    $pdf->cell(17,10,$row['Estante'],1,1,'C',0);*/
 }
 $pdf->Output();
 ?>

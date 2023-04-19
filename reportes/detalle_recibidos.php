@@ -248,7 +248,7 @@
               // $dato = $('#dato').val();
               $filtros = "?dato=" + id;
               console.log($filtros);
-              window.open("/biblioteca/reporte_detalleEnvios/index.php" + $filtros, "Reporte de envios", "directories=no location=no");
+              window.open("/biblioteca/reporte_detalleRecibidos/index.php" + $filtros, "Reporte de envios", "directories=no location=no");
 
           }
       </script>

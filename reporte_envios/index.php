@@ -88,7 +88,7 @@ $resultado = $conexion->query($query);
 $destinatario = array();
 if ($resultado->num_rows > 0) {
     while ($row = $resultado->fetch_assoc()) {
-        $destinatario[$row['Id_usuario']] = $row['Nombre_usuario'];
+        $destinatario[$row['Id_usuario']] = $row['nombre_empleado'];
         //echo $fila['Id_usuario']. $fila['Nombre_usuario']; 
     }
 }
@@ -100,7 +100,7 @@ $resultado = $conexion->query($query);
 $remitente = array();
 if ($resultado->num_rows > 0) {
     while ($row = $resultado->fetch_assoc()) {
-        $remitente[$row['Id_usuario']] = $row['Nombre_usuario'];
+        $remitente[$row['Id_usuario']] = $row['nombre_empleado'];
         //echo $fila['Id_usuario']. $fila['Nombre_usuario']; 
     }
 }
@@ -125,11 +125,11 @@ while ($fila = $resultado->fetch_assoc()) {
 
 
     $pdf->cell(15, 10, $fila['Id_henvio'], 1, 0, 'C', 0);
-    $pdf->cell(50, 10, $fila['ubicacion_actual'], 1, 0, 'C', 0);
-    $pdf->cell(50, 10, $fila['envioa'], 1, 0, 'C', 0);
+    $pdf->cell(50, 10, mb_convert_encoding($fila['ubicacion_actual'], 'ISO-8859-1', 'UTF-8'), 1, 0, 'C', 0);
+    $pdf->cell(50, 10, mb_convert_encoding($fila['envioa'], 'ISO-8859-1', 'UTF-8'), 1, 0, 'C', 0);
     $pdf->cell(38, 10, $fila['fechaenvio'], 1, 0, 'C', 0);
-    $pdf->cell(38, 10, $fila['usuario'], 1, 0, 'C', 0);
-    $pdf->cell(38, 10, $fila['recibe'], 1, 0, 'C', 0);
-    $pdf->cell(38, 10, $fila['testigo'], 1, 0, 'C', 0);
+    $pdf->cell(38, 10, mb_convert_encoding($fila['usuario'], 'ISO-8859-1', 'UTF-8'), 1, 0, 'C', 0);
+    $pdf->cell(38, 10, mb_convert_encoding($fila['recibe'], 'ISO-8859-1', 'UTF-8'), 1, 0, 'C', 0);
+    $pdf->cell(38, 10, mb_convert_encoding($fila['testigo'], 'ISO-8859-1', 'UTF-8'), 1, 0, 'C', 0);
 }
 $pdf->Output();

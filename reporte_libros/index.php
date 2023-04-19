@@ -25,30 +25,34 @@ function Footer()
 require_once("../conexion/conexion.php");
 $filtro = "";
 
-if (isset($_GET['dato'])&& ($_GET['dato'])!="") {
-    $dato = $_GET['dato'];
-    $filtro .= "AND Titulo LIKE '$dato%'";
+$filtro = " AND Activo=1 ";
+if (isset($_POST['buscar'])) {
+    if (isset($_POST['dato']) && ($_POST['dato']) != "") {
+        $dato = $_POST['dato'];
+        $filtro .= " AND Titulo LIKE '$dato%'";
+    }
 }
-if (isset($_GET['codigo'])&& ($_GET['codigo'])!="") {
-    $codigo = $_GET['codigo'];
-    $filtro .= "AND codigo LIKE '$codigo%'";
+if (isset($_POST['codigo']) && ($_POST['codigo']) != "") {
+    $codigo = $_POST['codigo'];
+    $filtro .= " AND codigo LIKE '$codigo%'";
 }
-   
-if (isset($_GET['nivel']) && ($_GET['nivel'])!="") {
-    $nivel = $_GET['nivel'];
-    $filtro .= "AND nivel='$nivel' ";
+if (isset($_POST['nivel']) && ($_POST['nivel']) != "") {
+    $nivel = $_POST['nivel'];
+    $filtro .= " AND nivel='$nivel' ";
 }
-if (isset($_GET['material']) && ($_GET['material'])!="") {
-    $material = $_GET['material'];
-    $filtro .= "AND material='$material' ";
+if (isset($_POST['material']) && ($_POST['material']) != "") {
+    $material = $_POST['material'];
+    $filtro .= " AND material='$material' ";
 }
-if (isset($_GET['estado']) && ($_GET['estado'])!="") {
-    $estado = $_GET['estado'];
-    $filtro .= "AND estado='$estado' ";
+if (isset($_POST['estado']) && ($_POST['estado']) != "") {
+    $estado = $_POST['estado'];
+    $filtro .= " AND estado='$estado' ";
 }
-if (!empty($filtro)) {
-    $filtro = "WHERE Activo=1 " . substr($filtro, 4);
+if ($filtro) {
+    $filtro = substr($filtro, 4);
+    $filtro = "Where" . $filtro;
 }
+
 $query = "SELECT * FROM libros " . $filtro;
 //$query="SELECT ubicaciones_modulos.Id_ubic_mod,libros.Titulo,libros.estado,ubicaciones.nombre_lugar as ubicacion_actual,ubicaciones_modulos.cantidad as Copias,libros.nivel,libros.material FROM ubicaciones_modulos left join ubicaciones on ubicaciones.Id_ubicacion=ubicaciones_modulos.ubicacion_Id left join libros on libros.Id_libro=ubicaciones_modulos.modulo_Id " . $filtro;
 $resultado=$conexion->query($query);

@@ -91,22 +91,31 @@
           <div class="container table-responsive">
               <br><br><br><br>
               <center><label for="">
-                                <h4>REPORTE DE ENVIOS</h4>
-                            </label></center>
+                      <h4>REPORTE DE ENVIOS</h4>
+                  </label></center>
               <form action="#" class="form" method="POST">
 
 
                   <div class="form-row container">
                       <div class="col-md-6 col-lg-5">
                           <div class="input-group" style="z-index: 0;">
-                          <input type="date" class="form-control shadow-sm border-0" autocomplete="off" value="<?php echo $_POST['dato'] ?>" name="dato" id="dato" placeholder="busqueda por fecha" value="">
+                              <input type="date" class="form-control shadow-sm border-0" autocomplete="off" value="<?php echo $_POST['dato'] ?>" name="dato" id="dato" placeholder="busqueda por fecha" value="">
                               <div class="input-group-prepend bg-white p-0">
                                   <button name="buscar" type="submit" class="input-group-text btn btn-danger border-0 shadow-sm icofont-search-1"></button>
                               </div>
                           </div>
                       </div>
-                      <div class="col-md-4 col-lg-3 mb-4">
-                          <button class="btn btn-warning text-white" onclick="abrirReporteEnvios()" name="imprimir_reporte">Imprimir</button>
+                      <div class="form-row container mt-3">
+                          <div class="col-md-4 col-lg-3 mb-4 text-right">
+                              <button onclick="abrirReporteEnvios()" style="background-color: #dc3545; color: white; border: none; padding: 8px 12px; border-radius: 5px;">
+                                  <i class="icofont-file-pdf"></i> Descargar en PDF
+                              </button>
+                          </div>
+                          <div class="col-md-4 col-lg-3 mb-4">
+                              <button id="btnDescargarxls" name="btnDescargarxls" style="background-color: #28a745; color: white; border: none; padding: 8px 12px; border-radius: 5px;">
+                                  <i class="icofont-file-excel"></i> Descargar en Excel
+                              </button>
+                          </div>
                       </div>
                   </div>
                   <br>
@@ -136,7 +145,7 @@
                                     }
                                 }
                                 if ($filtro) {
-                                   // $filtro = substr($filtro, 4);
+                                    // $filtro = substr($filtro, 4);
                                     $filtro = "Where" . $filtro;
                                 }
 
@@ -172,7 +181,7 @@
                                 $destinatario = array();
                                 if ($resultado->num_rows > 0) {
                                     while ($row = $resultado->fetch_assoc()) {
-                                        $destinatario[$row['Id_usuario']] = $row['Nombre_usuario'];
+                                        $destinatario[$row['Id_usuario']] = $row['nombre_empleado'];
                                         //echo $fila['Id_usuario']. $fila['Nombre_usuario']; 
                                     }
                                 }
@@ -184,14 +193,14 @@
                                 $remitente = array();
                                 if ($resultado->num_rows > 0) {
                                     while ($row = $resultado->fetch_assoc()) {
-                                        $remitente[$row['Id_usuario']] = $row['Nombre_usuario'];
+                                        $remitente[$row['Id_usuario']] = $row['nombre_empleado'];
                                         //echo $fila['Id_usuario']. $fila['Nombre_usuario']; 
                                     }
                                 }
                                 //-----------
 
 
-                                $query = "SELECT * FROM header_envio_modulos " . $filtro." order by fechaenvio desc,Id_henvio desc";
+                                $query = "SELECT * FROM header_envio_modulos " . $filtro . " order by fechaenvio desc,Id_henvio desc";
                                 //$query = "SELECT ubicaciones_modulos.Id_ubic_mod,libros.Titulo,libros.estado,ubicaciones.nombre_lugar as ubicacion_actual,ubicaciones_modulos.cantidad as Copias,libros.nivel,libros.material FROM ubicaciones_modulos left join ubicaciones on ubicaciones.Id_ubicacion=ubicaciones_modulos.ubicacion_Id left join libros on libros.Id_libro=ubicaciones_modulos.modulo_Id " . $filtro;
 
                                 //la ubicacion actual es municipios o plazas tipo "m" o "p"
@@ -262,6 +271,27 @@
               $('#sidebarCollapse').on('click', function() {
                   $('#sidebar').toggleClass('active');
               });
+
+              $("#btnDescargarxls").click(function() {
+                  console.log('entra aqui');
+                  $dato = $('#dato').val();
+                  $filtros = "";
+                  if ($dato != "") {
+                      $filtros = "?dato=" + $dato;
+                  }
+
+                  // var filtros = "?dato=" + dato;
+                  var url = "/biblioteca/phpxsls/ReportesXls/PhpOffice/reporte_envios.php" + $filtros;
+
+                  // var url = "/biblioteca/phpxsls/ReportesXls/PhpOffice/reporte_ubicaciones_cordzona.php";
+                  // Creamos un enlace con el atributo download y lo hacemos clic para iniciar la descarga
+
+                  $('<a>').attr({
+                      href: url,
+                      download: 'reporte_envios.xlsx'
+                  })[0].click();
+
+              });
           });
 
           function launchFullScreen(element) {
@@ -285,20 +315,20 @@
           }
       </script>
       <script language="javascript">
-         function detalleEnvios(id) {
-            $filtros = "?id=" + id;
-            window.open("/biblioteca/reportes/detalle_envios.php" + $filtros, "Detalle de envios", "directories=no location=no");
-        }
+          function detalleEnvios(id) {
+              $filtros = "?id=" + id;
+              window.open("/biblioteca/reportes/detalle_envios.php" + $filtros, "Detalle de envios", "directories=no location=no");
+          }
       </script>
 
       <script>
           function abrirReporteEnvios() {
               $dato = $('#dato').val();
               $filtros = "";
-              if($dato!=""){
-                $filtros = "?dato=" + $dato ;
+              if ($dato != "") {
+                  $filtros = "?dato=" + $dato;
               }
-              
+
               console.log($filtros);
               window.open("/biblioteca/reporte_envios/index.php" + $filtros, "Reporte de envios", "directories=no location=no");
 

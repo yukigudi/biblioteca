@@ -28,12 +28,12 @@ $status = array(
     1 => 'Resuelto'
 );
 $filtro = "";
-if (isset($_POST['buscar'])) {
-    if (isset($_POST['dato'])) {
-        $dato = $_POST['dato'];
+
+    if (isset($_GET['dato'])) {
+        $dato = $_GET['dato'];
         $filtro .= " fecha='$dato'";
     }
-}
+
 if ($filtro) {
     // $filtro = substr($filtro, 4);
     $filtro = "Where" . $filtro;

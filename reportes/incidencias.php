@@ -334,7 +334,7 @@
                   cancelButtonText: 'Cancelar'
               }, function(isConfirm) {
                   if (isConfirm) {
-                      console.log('entro');
+                      //console.log('entro');
                       $.ajax({
                           type: 'POST',
                           url: 'actualizar_estatus_incidencia.php',
@@ -344,7 +344,10 @@
                               tipo: tipo
                           },
                           success: function(response) {
-                              console.log(response);
+                            response = JSON.parse(response);
+                             // console.log("aqui el response"+response);
+                             // console.log(response['status']);
+                           //console.log(response['fecha_solucion']);
                               swal({
                                   title: 'La acción se realizó con éxito',
                                   type: 'success',
@@ -353,10 +356,13 @@
                               });
                               // Actualizar los td correspondientes con los nuevos datos
                               //$('#detalle-' + id).html(response.detalle);
-                              $('#status-' + id).html(response.status);
-                              $('#fecha_solucion-' + id).html(response.fecha_solucion);
-                              if (response.status == 1) {
-                                  $('#status-' + id).html('Resuelto');
+                             // $('#status-' + id).html(response.status);
+                           //console.log(response['status']);
+                           //console.log(response['fecha_solucion']);
+                              if (response['status'] == 1) {
+                               // console.log("entra al if"+response.fecha_solucion);
+                                  $('#status-' + id).html('<span class="badge badge-success"><small>Resuelto</small></span>');
+                                  $('#fecha_solucion-' + id).html("<small>"+response.fecha_solucion+"</small>");
                                   $('#acciones-' + id).html(' ');
                               }
                           },

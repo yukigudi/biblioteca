@@ -44,7 +44,7 @@ $pdf->SetFont('Arial', 'I', 8);
 $pdf->SetFont('Arial', 'B', 9);
 // Movernos a la derecha
 $pdf->Cell(80);
-$pdf->Image('../images/logo1.png', 10, 8, 20);
+$pdf->Image('../images/logo2.png', 15, 8, 20);
 // Título
 $pdf->Cell(40, 10, 'ISEJA Control de libros', 1, 0, 'C');
 // Salto de línea

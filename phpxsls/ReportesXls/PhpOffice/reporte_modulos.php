@@ -26,26 +26,26 @@ header('Cache-Control: max-age=0');
 $filtro = "";
 
 $filtro = " AND Activo=1 ";
-if (isset($_POST['buscar'])) {
-    if (isset($_POST['dato']) && ($_POST['dato']) != "") {
-        $dato = $_POST['dato'];
+
+    if (isset($_GET['dato']) && ($_GET['dato']) != "") {
+        $dato = $_GET['dato'];
         $filtro .= " AND Titulo LIKE '$dato%'";
     }
-}
-if (isset($_POST['codigo']) && ($_POST['codigo']) != "") {
-    $codigo = $_POST['codigo'];
+
+if (isset($_GET['codigo']) && ($_GET['codigo']) != "") {
+    $codigo = $_GETT['codigo'];
     $filtro .= " AND codigo LIKE '$codigo%'";
 }
-if (isset($_POST['nivel']) && ($_POST['nivel']) != "") {
-    $nivel = $_POST['nivel'];
+if (isset($_GET['nivel']) && ($_GET['nivel']) != "") {
+    $nivel = $_GET['nivel'];
     $filtro .= " AND nivel='$nivel' ";
 }
-if (isset($_POST['material']) && ($_POST['material']) != "") {
-    $material = $_POST['material'];
+if (isset($_GET['material']) && ($_GET['material']) != "") {
+    $material = $_GET['material'];
     $filtro .= " AND material='$material' ";
 }
-if (isset($_POST['estado']) && ($_POST['estado']) != "") {
-    $estado = $_POST['estado'];
+if (isset($_GET['estado']) && ($_GET['estado']) != "") {
+    $estado = $_GET['estado'];
     $filtro .= " AND estado='$estado' ";
 }
 if ($filtro) {

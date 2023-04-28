@@ -12,8 +12,8 @@ require_once("../conexion/conexion.php");
 $id_incidencia = $_POST["id"];
 $orden = $_POST["orden"];
 $tipo = $_POST["tipo"];
-$fecha = date("y-m-d");
-$fecha_actual = date("y-m-d");
+$fecha = date("Y-m-d");
+$fecha_actual = date("Y-m-d");
 if ($_POST['tipo'] == 'envio') {
     $opcion = 'header_envio_modulos';
     //    $tipo="";
@@ -34,7 +34,7 @@ $ubicacion_envio = $fila['envioa'];
 
 //falta afinar consultas-------------
 $queryupdate = 'UPDATE recibido_modulos SET recibecompleto=1, fecha_actualizacion = NOW() WHERE Id_hrecibido=' . $orden_recibido . ' AND recibecompleto=0';
-echo $queryupdate;
+//echo $queryupdate;
 
 $res = $conexion->query($queryupdate);
 
@@ -42,7 +42,7 @@ if ($res === TRUE) {
     // Si la actualizacion fue exitosa, devolver una respuesta JSON con éxito = true y se ejecutaran mas consultas
 
     $querymodulos = "SELECT Id_hrecibido, titulo, cantidad FROM recibido_modulos WHERE recibecompleto = 1 AND Id_hrecibido=' . $orden_recibido . ' AND (fecha_actualizacion BETWEEN DATE_SUB(NOW(), INTERVAL 1 SECOND) AND NOW())";
-    echo $querymodulos . "</br>";
+    //echo $querymodulos . "</br>";
 
     $resultadomodulos = $conexion->query($querymodulos);
     /*APARTIR DE AQUI VA EL WHILE DE LOS MODULOS ACTUALIZADOS RECIENTEMENTE */
@@ -52,7 +52,7 @@ if ($res === TRUE) {
             $cantidad = $filamodulos['cantidad'];
             //-----------------------
             $query = "SELECT cantidad, ubicacion_Id FROM ubicaciones_modulos WHERE ubicacion_Id IN ($ubicacion, $ubicacion_envio) AND modulo_Id = $modulo AND cantidad > 0";
-            echo $query . "</br>";
+            //echo $query . "</br>";
 
             $resultado = $conexion->query($query);
             //-----------------------------
@@ -63,7 +63,7 @@ if ($res === TRUE) {
                     if ($fila['ubicacion_Id'] == $ubicacion_envio) {
                         //aqui checa si hay registro de la ubicacionactual
                         $querydetalle4 = "UPDATE ubicaciones_modulos SET cantidad = $cantidad_actualizada, fecha='$fecha_actual' WHERE ubicacion_Id = $ubicacion AND modulo_Id = $modulo ";
-                        echo 'querydetalle4 ' . $querydetalle4 . '<br>';
+                        //echo 'querydetalle4 ' . $querydetalle4 . '<br>';
                         $verificar4 = $conexion->query($querydetalle4);
 
                         if (!$verificar4) {
@@ -71,7 +71,7 @@ if ($res === TRUE) {
                         }
                     } else {
                         $querydetalle3 = "INSERT INTO ubicaciones_modulos (modulo_Id, ubicacion_Id, cantidad, fecha) VALUES ($modulo, $ubicacion_envio, $cantidad, '$fecha_actual')";
-                        echo 'querydetalle3 ' . $querydetalle3 . '<br>';
+                       // echo 'querydetalle3 ' . $querydetalle3 . '<br>';
                         $verificar3 = $conexion->query($querydetalle3);
                     }
 
@@ -79,7 +79,7 @@ if ($res === TRUE) {
                         //aqui encuentra -  $regresara 
                         $cantidad_nueva = $fila['cantidad'] + $cantidad;
                         $querydetalle3 = "UPDATE ubicaciones_modulos SET cantidad = $cantidad_nueva, fecha='$fecha_actual' WHERE ubicacion_Id = $ubicacion AND modulo_Id = $modulo";
-                        echo 'querydetalle3 ' . $querydetalle3 . '<br>';
+                        //echo 'querydetalle3 ' . $querydetalle3 . '<br>';
                         $verificar3 = $conexion->query($querydetalle3);
 
 
@@ -88,7 +88,7 @@ if ($res === TRUE) {
                         }
                     } else {
                         $querydetalle3 = "INSERT INTO ubicaciones_modulos (modulo_Id, ubicacion_Id, cantidad, fecha) VALUES ($modulo, $ubicacion, $cantidad, '$fecha_actual')";
-                        echo 'querydetalle3 ' . $querydetalle3 . '<br>';
+                       // echo 'querydetalle3 ' . $querydetalle3 . '<br>';
                         $verificar3 = $conexion->query($querydetalle3);
                     }
                 }
@@ -99,7 +99,7 @@ if ($res === TRUE) {
 
 
     $queryupdate = 'UPDATE incidencias SET status=1, fecha_solucion="' . $fecha . '" WHERE Id_incidencia=' . $id_incidencia;
-    echo $queryupdate;
+    //echo $queryupdate;
 
     $response = $conexion->query($queryupdate);
 

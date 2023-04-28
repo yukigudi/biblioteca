@@ -25,7 +25,8 @@ require_once("../conexion/conexion.php");
 $pdf = new FPDF('L', 'mm', 'A4');
 $pdf->AddPage();
 $pdf->SetFont('Arial', 'B', 10);
-$pdf->Image('../images/logo1.png', 10, 8, 20);
+$pdf->Image('../images/logo2.png', 15, 8, 20);
+//$pdf->Image('../LogoISEJA_Negro.png', 10, 10, 50, 50);
 // Movernos a la derecha
 $pdf->Cell(80);
 // Título

@@ -31,14 +31,14 @@ $niveles = array(
 );
 
 $filtro = "";
-if (isset($_POST['buscar'])) {
-    if (isset($_POST['dato'])) {
-        $dato = $_POST['dato'];
+
+    if (isset($_GET['dato'])) {
+        $dato = $_GET['dato'];
         $filtro .= "AND Nombre_empleado LIKE '%$dato%'";
     }
-}
-if (isset($_POST['nivel']) && ($_POST['nivel']) != "") {
-    $nivel = $_POST['nivel'];
+
+if (isset($_GET['nivel']) && ($_GET['nivel']) != "") {
+    $nivel = $_GET['nivel'];
     $filtro .= "AND nivel='$nivel' ";
 }
 

@@ -139,7 +139,7 @@
                                 if (isset($_POST['buscar'])) {
                                     if (isset($_POST['dato'])) {
                                         $dato = $_POST['dato'];
-                                        $filtro .= " AND Titulo LIKE '$dato%'";
+                                        $filtro .= " AND nombre_lugar LIKE '$dato%'";
                                     }
                                 }
                                /* if ($filtro) {

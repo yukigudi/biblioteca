@@ -142,7 +142,7 @@ require_once("../conexion/conexion.php");
                                             echo '<option value="' . $fila['Id_ubicacion'] . '">' . $fila['nombre_lugar'] . '</option>';
                                         }
                                     } ?>
-                                    </optgroup>
+                                  
                                 </select>
                                 <div class="valid-feedback">
                                     Correcto!

@@ -273,7 +273,7 @@
                   $estado = $('#estado').val();
 
                   $filtros = "?dato=" + $dato + "&codigo=" + $codigo + "&nivel=" + $nivel + "&material=" + $material + "&estado=" + $estado;
-
+console.log($filtros);
                   // var filtros = "?dato=" + dato;
                   var url = "/biblioteca/phpxsls/ReportesXls/PhpOffice/reporte_modulos.php" + $filtros;
 

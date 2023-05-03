@@ -10,14 +10,16 @@ include "autoload.php";
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\Style\Border;
-use PhpOffice\PhpSpreadsheet\Style\Color;
-//use PhpOffice\PhpSpreadsheet\Style\Font;
+//use PhpOffice\PhpSpreadsheet\Style\Color;
+use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
+//use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+
 
 //if(!empty($_POST)){
 //header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
 //Setting name
 $today = date("Ymd");
-$filename = "reporte_recibos.xls";
+$filename = "reporte_recibos";
 $CntDisposition = "Content-Disposition: attachment;filename=\"";
 $CntDisposition = $CntDisposition . $today . "\"_" . $filename . ".xlsx";
 header($CntDisposition);
@@ -98,18 +100,46 @@ if (!$resultado) {
 
 $spreadsheet = new Spreadsheet();
 $sheet = $spreadsheet->getActiveSheet();
+// Agrega la imagen a la hoja de trabajo activa
+$drawing = new Drawing();
+$drawing->setName('Logo');
+$drawing->setDescription('Logo');
+$drawing->setPath('logo2.png'); // put your path and image here
+$drawing->setCoordinates('A1');
+$drawing->setWidth(150);
+$drawing->setHeight(150);
+//$drawing->setOffsetX(110);
+//$drawing->setRotation(25);
+//$drawing->getShadow()->setVisible(true);
+$drawing->getShadow()->setDirection(45);
+$drawing->setWorksheet($spreadsheet->getActiveSheet());
+// Establecer el estilo de la celda que contiene el título
+$titulo='Recibidos';
+$sheet->getStyle('D5')->applyFromArray([
+    'font' => [
+        'bold' => true,
+        'size' => 16,
+    ],
+    'alignment' => [
+        'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+        'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+    ],
+]);
+
+// Escribir el título en la celda H2
+$sheet->setCellValue('D5', 'Reporte '.$titulo);
 
 // Escribir los encabezados en la primera fila
-$sheet->setCellValue('A1', 'ID');
-$sheet->setCellValue('B1', 'Ubicación de envio');
-$sheet->setCellValue('C1', 'Destino');
-$sheet->setCellValue('D1', 'Fecha');
-$sheet->setCellValue('E1', 'Remitente');
-$sheet->setCellValue('F1', 'Destinatario');
-$sheet->setCellValue('G1', 'Testigo');
+$sheet->setCellValue('A10', 'ID');
+$sheet->setCellValue('B10', 'Ubicación de envio');
+$sheet->setCellValue('C10', 'Destino');
+$sheet->setCellValue('D10', 'Fecha');
+$sheet->setCellValue('E10', 'Remitente');
+$sheet->setCellValue('F10', 'Destinatario');
+$sheet->setCellValue('G10', 'Testigo');
 
 // Escribir los datos en las filas siguientes
-$fila = 2;
+$fila = 11;
 while ($filaDatos = mysqli_fetch_array($resultado)) {
 
     $id = $filaDatos['Id_hrecibido'];
@@ -137,7 +167,7 @@ while ($filaDatos = mysqli_fetch_array($resultado)) {
     ->getOutline()
     ->setBorderStyle(Border::BORDER_THIN)
     ->setColor(new Color('00000000'));*/
-$spreadsheet->getActiveSheet()->getStyle('A1:G1')->applyFromArray([
+$spreadsheet->getActiveSheet()->getStyle('A10:G10')->applyFromArray([
     'font' => [
         'bold' => true,
     ],

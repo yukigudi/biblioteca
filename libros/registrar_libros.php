@@ -99,6 +99,7 @@
                 );
                 ?>
                <select id="estado" name="estado" class="form-control" required>
+                <option value="">Seleccione</option>
                  <?php foreach ($estados as $var => $estado) : ?>
                    <option value="<?php echo $var ?>" <?php if ($var == $fila['estado']) : ?> selected="selected" <?php endif; ?>><?php echo $estado ?></option>
                  <?php endforeach; ?>
@@ -146,6 +147,7 @@
              <div class="col-md-4 col-lg-3 mb-4">
                <label for="nivel">Nivel</label>
                <select id="nivel" name="nivel" class="form-control" required>
+               <option value="">Seleccione</option>
                  <?php foreach ($niveles as $var => $nivel) : ?>
                    <option value="<?php echo $var ?>" <?php if ($var == $fila['nivel']) : ?> selected="selected" <?php endif; ?>><?php echo $nivel ?></option>
                  <?php endforeach; ?>
@@ -160,6 +162,7 @@
              <div class="col-md-4 col-lg-3 mb-4">
                <label for="material">Material</label>
                <select id="material" name="material" class="form-control" required>
+               <option value="">Seleccione</option>
                  <?php foreach ($materiales as $var => $material) : ?>
                    <option value="<?php echo $var ?>" <?php if ($var == $fila['material']) : ?> selected="selected" <?php endif; ?>><?php echo $material ?></option>
                  <?php endforeach; ?>

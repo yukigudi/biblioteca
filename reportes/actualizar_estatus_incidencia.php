@@ -22,29 +22,33 @@ if ($_POST['tipo'] == 'envio') {
     //  $filtro = ' WHERE tipo IN ("p","m")';
 }
 
-$query = 'SELECT header_envio_modulos.ubicacion,header_envio_modulos.envioa,header_recibido_modulos.* FROM header_envio_modulos left join header_recibido_modulos on header_envio_modulos.Id_henvio=header_recibido_modulos.orden where header_recibido_modulos.orden=' . $orden;
+$query = "SELECT header_envio_modulos.ubicacion,header_envio_modulos.envioa,header_recibido_modulos.* FROM header_envio_modulos left join header_recibido_modulos on header_envio_modulos.Id_henvio=header_recibido_modulos.orden where header_recibido_modulos.orden=$orden";
 //echo $query;
 
 $resultado = $conexion->query($query);
+echo $query;
 $fila = $resultado->fetch_assoc();
 
 $orden_recibido = $fila['Id_hrecibido'];
 $ubicacion = $fila['ubicacion'];
 $ubicacion_envio = $fila['envioa'];
 
-//falta afinar consultas-------------
-$queryupdate = 'UPDATE recibido_modulos SET recibecompleto=1, fecha_actualizacion = NOW() WHERE Id_hrecibido=' . $orden_recibido . ' AND recibecompleto=0';
+//-------------
+$queryupdate = "UPDATE recibido_modulos SET recibecompleto=1, fecha_actualizacion = NOW() WHERE Id_hrecibido=$orden_recibido AND recibecompleto=0";
 //echo $queryupdate;
 
 $res = $conexion->query($queryupdate);
+//echo $queryupdate;
 
 if ($res === TRUE) {
     // Si la actualizacion fue exitosa, devolver una respuesta JSON con éxito = true y se ejecutaran mas consultas
 
-    $querymodulos = "SELECT Id_hrecibido, titulo, cantidad FROM recibido_modulos WHERE recibecompleto = 1 AND Id_hrecibido=' . $orden_recibido . ' AND (fecha_actualizacion BETWEEN DATE_SUB(NOW(), INTERVAL 1 SECOND) AND NOW())";
+    $querymodulos = "SELECT Id_hrecibido, titulo, cantidad FROM recibido_modulos WHERE recibecompleto = 1 AND Id_hrecibido= $orden_recibido AND (fecha_actualizacion BETWEEN DATE_SUB(NOW(), INTERVAL 1 SECOND) AND NOW())";
     //echo $querymodulos . "</br>";
 
     $resultadomodulos = $conexion->query($querymodulos);
+    //echo $querymodulos . "</br>";
+
     /*APARTIR DE AQUI VA EL WHILE DE LOS MODULOS ACTUALIZADOS RECIENTEMENTE */
     if ($resultadomodulos->num_rows > 0) {
         while ($filamodulos = $resultadomodulos->fetch_assoc()) {
@@ -55,6 +59,7 @@ if ($res === TRUE) {
             //echo $query . "</br>";
 
             $resultado = $conexion->query($query);
+            //echo $query . "</br>";
             //-----------------------------
             if ($resultado->num_rows > 0) {
                 while ($fila = $resultado->fetch_assoc()) {
@@ -65,6 +70,7 @@ if ($res === TRUE) {
                         $querydetalle4 = "UPDATE ubicaciones_modulos SET cantidad = $cantidad_actualizada, fecha='$fecha_actual' WHERE ubicacion_Id = $ubicacion AND modulo_Id = $modulo ";
                         //echo 'querydetalle4 ' . $querydetalle4 . '<br>';
                         $verificar4 = $conexion->query($querydetalle4);
+                        //echo 'querydetalle4 ' . $querydetalle4 . '<br>estenaaaaaaaaaa';
 
                         if (!$verificar4) {
                             echo "Error en la consulta: " . $conexion->error;
@@ -73,24 +79,9 @@ if ($res === TRUE) {
                         $querydetalle3 = "INSERT INTO ubicaciones_modulos (modulo_Id, ubicacion_Id, cantidad, fecha) VALUES ($modulo, $ubicacion_envio, $cantidad, '$fecha_actual')";
                        // echo 'querydetalle3 ' . $querydetalle3 . '<br>';
                         $verificar3 = $conexion->query($querydetalle3);
-                    }
-
-                    if ($fila['ubicacion_Id'] == $ubicacion) {
-                        //aqui encuentra -  $regresara 
-                        $cantidad_nueva = $fila['cantidad'] + $cantidad;
-                        $querydetalle3 = "UPDATE ubicaciones_modulos SET cantidad = $cantidad_nueva, fecha='$fecha_actual' WHERE ubicacion_Id = $ubicacion AND modulo_Id = $modulo";
                         //echo 'querydetalle3 ' . $querydetalle3 . '<br>';
-                        $verificar3 = $conexion->query($querydetalle3);
-
-
-                        if (!$verificar3) {
-                            echo "Error en la consulta: " . $conexion->error;
-                        }
-                    } else {
-                        $querydetalle3 = "INSERT INTO ubicaciones_modulos (modulo_Id, ubicacion_Id, cantidad, fecha) VALUES ($modulo, $ubicacion, $cantidad, '$fecha_actual')";
-                       // echo 'querydetalle3 ' . $querydetalle3 . '<br>';
-                        $verificar3 = $conexion->query($querydetalle3);
                     }
+
                 }
             }
         }
@@ -98,10 +89,11 @@ if ($res === TRUE) {
 
 
 
-    $queryupdate = 'UPDATE incidencias SET status=1, fecha_solucion="' . $fecha . '" WHERE Id_incidencia=' . $id_incidencia;
+    $queryupdate = "UPDATE incidencias SET status=1, fecha_solucion='$fecha' WHERE Id_incidencia=$id_incidencia";
     //echo $queryupdate;
 
     $response = $conexion->query($queryupdate);
+    //echo $queryupdate;
 
     if ($response === TRUE) {
         $response = array('success' => true, 'status' => 1, 'fecha_solucion' => $fecha);
@@ -116,8 +108,3 @@ if ($res === TRUE) {
     $response = array('success' => false, 'message' => "Error: " . $conn->error);
     echo json_encode($response);
 }
-
-/*"En progreso": Verde (#2ecc71)
-"Terminado": Amarillo (#f1c40f)
-"Agendado": Azul claro (#3498db)
-"Cancelado": Gris (#95a5a6)*/

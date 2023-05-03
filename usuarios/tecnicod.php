@@ -14,6 +14,7 @@ $niveles = array(
     'tecnicodocente' => 'Técnico docente',
 );
 
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -118,7 +119,7 @@ $niveles = array(
                         <thead>
                             <tr style="background-color:#952F57;" class='text-white font-weight-bold'>
                                 <th class='text-center'><small>ID</small></th>
-                                <th class='text-center'><small>Usuario</small></th>
+                                <th class='text-center'><small>Lugar de asignación</small></th>
                                 <th class='text-center'><small>Nombre</small></th>
                                 <th class='text-center'><small>Fecha alta</small></th>
                                <!-- <th class='text-center'><small>Nivel de usuario</small></th>-->
@@ -142,7 +143,17 @@ $niveles = array(
                                 $nivel = $_POST['nivel'];
                                 $filtro .= "AND nivel='$nivel' ";
                             }*/
-
+                            $queryubicacion = "SELECT Id_ubicacion, nombre_lugar FROM ubicaciones";
+                            //$resultPlazas = mysqli_query($conn, $queryPlazas);
+                            $resultubicacion = $conexion->query($queryubicacion);
+                        
+                            // Crea un array para almacenar los resultados de las plazas
+                            $ubicacion = array();
+                        
+                            // Almacena los resultados de las plazas en el array
+                            while ($row = mysqli_fetch_assoc($resultubicacion)) {
+                                $ubicacion[$row['Id_ubicacion']] = $row['nombre_lugar'];
+                            }
 
                             $query = "SELECT * FROM usuarios WHERE Activo=1 and nivel='tecnicodocente' " . $filtro;
                             $resultado = $conexion->query($query);
@@ -151,7 +162,7 @@ $niveles = array(
                             ?>
                                 <tr class='text-center'>
                                     <td><small><?php echo $fila['Id_usuario']; ?></small></td>
-                                    <td><small><?php echo $fila['Nombre_usuario']; ?></small></td>
+                                    <td><small><?php echo $ubicacion[$fila['ubicacion']]; ?></small></td>
                                     <td><small><?php echo $fila['nombre_empleado']; ?></small></td>
                                     <td><small><?php echo $fila['fecha']; ?></small></td>
                                     <!--<td><small><?php //echo $fila['nivel']; ?></small></td>-->

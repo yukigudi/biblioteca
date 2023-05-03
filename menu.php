@@ -30,9 +30,9 @@
             <li>
                 <a href="/biblioteca/modulos_retorno/registrar_retorno.php">Devolver</a>
             </li>
-            <li>
+           <!-- <li>
                 <a href="/biblioteca/incidencias/registrar_incidencias.php" target="_blank">Incidencias</a>
-            </li>
+            </li>-->
             <li>
                 <a href="/biblioteca/modulos_asignaciones/registro.php">Asignaciones</a>
             </li>

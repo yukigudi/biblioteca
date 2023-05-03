@@ -99,7 +99,7 @@ $niveles = array(
 
             <div class="col-sm-12 col-md-4 col-lg-6 mb-4">
               <label for="calle">Dirección</label>
-              <input type="text" class="form-control" id="direccion" required name="direccion" placeholder="Dirección" pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+" maxlength="30">
+              <input type="text" class="form-control" id="direccion" required name="direccion" placeholder="Dirección" pattern="^[a-zA-Z0-9À-ÿ\s]*$" maxlength="30">
               <div class="valid-feedback">
                 Correcto!
               </div>
@@ -110,7 +110,7 @@ $niveles = array(
 
             <div class="col-sm-6 col-md-6 col-lg-3 mb-3">
               <label for="localidad">Localidad</label>
-              <input type="text" class="form-control" id="localidad" required name="localidad" placeholder="Localidad" pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+" maxlength="30">
+              <input type="text" class="form-control" id="localidad" required name="localidad" placeholder="Localidad" pattern="^[a-zA-Z0-9À-ÿ\s]*$" maxlength="30">
               <div class="valid-feedback">
                 Correcto!
               </div>
@@ -120,7 +120,7 @@ $niveles = array(
             </div>
             <div class="col-sm-6 col-md-6 col-lg-3 mb-3">
               <label for="municipio">Municipio</label>
-              <input type="text" class="form-control" id="municipio" required name="municipio" placeholder="Municipio" pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+" maxlength="30">
+              <input type="text" class="form-control" id="municipio" required name="municipio" placeholder="Municipio" pattern="^[a-zA-Z0-9À-ÿ\s]*$" maxlength="30">
               <div class="valid-feedback">
                 Correcto!
               </div>

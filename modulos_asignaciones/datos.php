@@ -11,7 +11,7 @@ if (isset($_GET['opcion'])) {
         $opcion = 'header_retorno_modulos';
       //  $filtro = ' WHERE tipo IN ("p","m")';
     }
-    $query = "SELECT * FROM " . $opcion . " WHERE activo=1 order by fecha desc limit 20";
+    $query = "SELECT * FROM " . $opcion . " WHERE activo=0 order by fecha desc limit 20";
 
     $resultado = $conexion->query($query);
 

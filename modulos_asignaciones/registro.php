@@ -318,7 +318,6 @@ require_once("../conexion/conexion.php");
 
                             for (var i = 0; i <= datos.length; i++) {
                                 $(".envios").append('<div class="col-md-12 col-lg-12 mb-1"><div class="form-row"><div class="col-md-6 col-lg-5 mb-1">' + datos[i].titulo + '<input type="hidden"  id="modulos[]" name="modulos[]" class="modulos" value="' + datos[i].id + '"></div><div class="col-md-6 col-lg-2 mb-1"><input type="number"  id="cantidad[]" name="cantidad[]" class="cantidad form-control" value="' + datos[i].cantidad + '"></div><div class="col-md-6 col-lg-5 mb-1"><div class="form-row"><div class="col-md-6 col-lg-10 mb-1" style="margin-left:30px"><select id="tecnico_docente[]" name="tecnico_docente[]" class="form-control"><option>seleccione</option></select></div></div></div></div></div>');
-                                // consulta para obtener los técnicos docentes
 
                                 $.ajax({
                                     type: "GET",

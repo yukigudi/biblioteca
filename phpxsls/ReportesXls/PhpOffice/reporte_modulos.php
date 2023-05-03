@@ -10,14 +10,16 @@ include "autoload.php";
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\Style\Border;
-use PhpOffice\PhpSpreadsheet\Style\Color;
-//use PhpOffice\PhpSpreadsheet\Style\Font;
+//use PhpOffice\PhpSpreadsheet\Style\Color;
+use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
+//use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+
 
 //if(!empty($_POST)){
 //header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
 //Setting name
 $today = date("Ymd");
-$filename = "reporte_modulos.xls";
+$filename = "reporte_modulos";
 $CntDisposition = "Content-Disposition: attachment;filename=\"";
 $CntDisposition = $CntDisposition . $today . "\"_" . $filename . ".xlsx";
 header($CntDisposition);
@@ -65,17 +67,45 @@ if (!$resultado) {
 
 $spreadsheet = new Spreadsheet();
 $sheet = $spreadsheet->getActiveSheet();
+// Agrega la imagen a la hoja de trabajo activa
+$drawing = new Drawing();
+$drawing->setName('Logo');
+$drawing->setDescription('Logo');
+$drawing->setPath('logo2.png'); // put your path and image here
+$drawing->setCoordinates('A1');
+$drawing->setWidth(150);
+$drawing->setHeight(150);
+//$drawing->setOffsetX(110);
+//$drawing->setRotation(25);
+//$drawing->getShadow()->setVisible(true);
+$drawing->getShadow()->setDirection(45);
+$drawing->setWorksheet($spreadsheet->getActiveSheet());
+// Establecer el estilo de la celda que contiene el título
+$titulo='Módulos';
+$sheet->getStyle('D5')->applyFromArray([
+    'font' => [
+        'bold' => true,
+        'size' => 16,
+    ],
+    'alignment' => [
+        'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+        'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+    ],
+]);
+
+// Escribir el título en la celda H2
+$sheet->setCellValue('D5', 'Reporte '.$titulo);
 
 // Escribir los encabezados en la primera fila
-$sheet->setCellValue('A1', 'Código');
-$sheet->setCellValue('B1', 'Titulo');
-$sheet->setCellValue('C1', 'Cantidad');
-$sheet->setCellValue('D1', 'Nivel');
-$sheet->setCellValue('E1', 'Material');
-$sheet->setCellValue('F1', 'Estado');
+$sheet->setCellValue('A10', 'Código');
+$sheet->setCellValue('B10', 'Titulo');
+$sheet->setCellValue('C10', 'Cantidad');
+$sheet->setCellValue('D10', 'Nivel');
+$sheet->setCellValue('E10', 'Material');
+$sheet->setCellValue('F10', 'Estado');
 
 // Escribir los datos en las filas siguientes
-$fila = 2;
+$fila = 11;
 while ($filaDatos = mysqli_fetch_array($resultado)) {
     $sheet->setCellValue('A' . $fila, $filaDatos['codigo']);
     $sheet->setCellValue('B' . $fila, $filaDatos['Titulo']);
@@ -94,7 +124,7 @@ while ($filaDatos = mysqli_fetch_array($resultado)) {
     ->getOutline()
     ->setBorderStyle(Border::BORDER_THIN)
     ->setColor(new Color('00000000'));*/
-$spreadsheet->getActiveSheet()->getStyle('A1:F1')->applyFromArray([
+$spreadsheet->getActiveSheet()->getStyle('A10:F10')->applyFromArray([
     'font' => [
         'bold' => true,
     ],

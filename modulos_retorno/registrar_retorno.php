@@ -107,6 +107,7 @@ require_once("../conexion/conexion.php");
                             <div class="col-md-6 col-lg-3 mb-4">
                                 <label for="validationCustom02">Ubicación Actual</label>
                                 <select id="ubicacion_actual" name="ubicacion_actual" class="form-control" required>
+                                    <option value="">Seleccione</option>
                                     <?php
 
                                     $query = "SELECT * FROM ubicaciones order by tipo desc, Id_ubicacion desc";
@@ -180,7 +181,7 @@ require_once("../conexion/conexion.php");
                                     if ($resultado->num_rows > 0) {
                                         while ($fila = $resultado->fetch_assoc()) { ?>
                                             <option value="<?php echo $fila['Id_usuario']; ?>">
-                                                <?php echo $fila['Nombre_usuario']; ?></option>
+                                                <?php echo $fila['nombre_empleado']; ?></option>
                                     <?php }
                                     } ?>
 
@@ -569,7 +570,8 @@ require_once("../conexion/conexion.php");
                     var dato = JSON.parse(data);
                     console.log('aqui cambia selecciona la ubicacion actual');
                     $("#regresara").val(dato[0].envioa);
-                    console.log(dato[0].envioa);
+                    $("#regresara").val(dato[0].envioa);
+                    console.log("hay dato: "+dato[0].envioa);
                     /*$("#ubicacion_actual").val(dato[0].envioa);
                     $("#fechaorden").val(dato[0].fecha);
                     $("#usuarioenvia").val(dato[0].usuarioenvia);

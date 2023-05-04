@@ -22,7 +22,7 @@ require_once("../conexion/conexion.php");
 if (isset($_GET['orden'])) {
     $orden = $_GET['orden'];
     //$query = "SELECT * FROM header_recibido_modulos WHERE orden=$orden";
-    $query = "SELECT header_recibido_modulos.fecha,header_envio_modulos.ubicacion ,header_envio_modulos.envioa FROM header_recibido_modulos inner join header_envio_modulos on header_envio_modulos.Id_henvio=header_recibido_modulos.orden WHERE header_recibido_modulos.orden=$orden";
+    $query = "SELECT header_recibido_modulos.fecha,header_envio_modulos.ubicacion,header_envio_modulos.envioa FROM header_recibido_modulos inner join header_envio_modulos on header_envio_modulos.Id_henvio=header_recibido_modulos.orden WHERE header_recibido_modulos.Id_hrecibido=$orden";
 
     //$query = 'SELECT * FROM header_' . $opcion . ' WHERE Id_h' . $campo . '=' . $orden;
     //echo $query;

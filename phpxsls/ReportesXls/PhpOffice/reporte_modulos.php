@@ -104,6 +104,7 @@ $sheet->setCellValue('C10', 'Cantidad');
 $sheet->setCellValue('D10', 'Nivel');
 $sheet->setCellValue('E10', 'Material');
 $sheet->setCellValue('F10', 'Estado');
+$sheet->setCellValue('G10', 'Edición');
 
 // Escribir los datos en las filas siguientes
 $fila = 11;
@@ -114,6 +115,7 @@ while ($filaDatos = mysqli_fetch_array($resultado)) {
     $sheet->setCellValue('D' . $fila, $filaDatos['nivel']);
     $sheet->setCellValue('E' . $fila, $filaDatos['material']);
     $sheet->setCellValue('F' . $fila, $filaDatos['estado']);
+    $sheet->setCellValue('G' . $fila, $filaDatos['edicion']);
     $fila++;
 }
 
@@ -125,7 +127,7 @@ while ($filaDatos = mysqli_fetch_array($resultado)) {
     ->getOutline()
     ->setBorderStyle(Border::BORDER_THIN)
     ->setColor(new Color('00000000'));*/
-$spreadsheet->getActiveSheet()->getStyle('A10:F10')->applyFromArray([
+$spreadsheet->getActiveSheet()->getStyle('A10:G10')->applyFromArray([
     'font' => [
         'bold' => true,
     ],

@@ -59,7 +59,7 @@ $resultado=$conexion->query($query);
 
 $pdf=new FPDF('L','mm','A4');
 $pdf->AddPage();
-$pdf->SetFont('Arial','B',12);
+$pdf->SetFont('Arial','B',8);
 $pdf->Image('../images/logo2.png', 15, 8, 20);
     // Movernos a la derecha
     $pdf->Cell(80);
@@ -71,23 +71,25 @@ $pdf->Image('../images/logo2.png', 15, 8, 20);
     $pdf->Ln(20);
     $pdf->cell(15,10,mb_convert_encoding('Código', 'ISO-8859-1', 'UTF-8'),1,0,'C',0);
     $pdf->cell(65,10,'Titulo',1,0,'C',0);
-    $pdf->cell(38,10,'Cantidad',1,0,'C',0);
+    $pdf->cell(20,10,'Cantidad',1,0,'C',0);
     $pdf->cell(38,10,'Estado',1,0,'C',0);
     $pdf->cell(45,10,'Nivel',1,0,'C',0);
     $pdf->cell(45,10,'Material',1,0,'C',0);
+    $pdf->cell(45,10,mb_convert_encoding('Edición', 'ISO-8859-1', 'UTF-8'),1,0,'C',0);
     //$pdf->cell(17,10,'Estante',1,1,'C',0);
 
-$pdf->SetFont('Arial','I',9);
+$pdf->SetFont('Arial','I',8);
 $pdf->Ln(10);
 while ($row=$resultado->fetch_assoc()) {
 	//$pdf->cell(15,10,$row['Id_ubic_mod'],1,0,'C',0);
     $pdf->cell(15,10,$row['codigo'],1,0,'C',0);
     $pdf->cell(65, 10, mb_convert_encoding($row['Titulo'], 'ISO-8859-1', 'UTF-8'),1,0,'C',0);
 	//$pdf->cell(65,10,mb_convert_encoding($row['Titulo']),1,0,'C',0);
-	$pdf->cell(38,10,$row['Copias'],1,0,'C',0);
+	$pdf->cell(20,10,$row['Copias'],1,0,'C',0);
     $pdf->cell(38,10,$row['estado'],1,0,'C',0);
     $pdf->cell(45,10,$row['nivel'],1,0,'C',0);
     $pdf->cell(45,10,$row['material'],1,0,'C',0);
+    $pdf->cell(45,10,$row['edicion'],1,0,'C',0);
     //$pdf->cell(17,10,$row['Estante'],1,1,'C',0);
     $pdf->Ln(10);
 }

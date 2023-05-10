@@ -181,7 +181,7 @@
                                   <th class='text-center'><small>Nivel</small></th>
                                   <th class='text-center'><small>Material</small></th>
                                   <th class='text-center'><small>Estado</small></th>
-
+                                  <th class='text-center'><small>Edición</small></th>
                                   <th colspan='2' class='text-center'><small>Acciones</small></th>
                               </tr>
                           </thead>
@@ -232,6 +232,7 @@
                                       <td><small><?php echo $fila['nivel']; ?></small></td>
                                       <td><small><?php echo $fila['material']; ?></small></td>
                                       <td><small><?php echo $fila['estado']; ?></small></td>
+                                      <td><small><?php echo $fila['edicion']; ?></small></td>
                                       <td class="text-right"><a class="bg-primary py-1 rounded-lg" href="modificar_libros.php?id=<?php echo $fila['Id_libro'] ?>"><span class='h6 text-white icofont-ui-edit px-1'></small></a></td>
                                       <td class="text-left"><a class="bg-danger py-1 rounded-lg" href="#" onclick="confirmar(<?php echo $id; ?>)"><span class='h6 text-white icofont-ui-delete px-1'></span></a></td>
                                   </tr>

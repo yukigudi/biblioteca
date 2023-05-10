@@ -27,7 +27,7 @@
 						Inicio de sesión</b>
 					</span>
 					<div class="d-flex justify-content-center">
-						<img class="p-2 rounded-circle" height="75px" width="75px" src="images/logo.png" style="background: #952F57;">
+						<img class="p-2" height="175px" width="175px" src="images/logo2.png" >
 					</div>
 					<br>
 					<div class="wrap-input100 validate-input">

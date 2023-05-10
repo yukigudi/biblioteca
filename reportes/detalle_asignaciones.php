@@ -96,14 +96,21 @@
               <form action="#" class="form" method="POST">
 
 
-                  <div class="form-row container">
-                      <div class="col-md-6 col-lg-5">
+                  <div class="form-row container mt-3">
+                  <div class="col-md-3 col-lg-3">
                           <div class="input-group" style="z-index: 0;">
-                          <!---aqui iban filtros --->
+                              <!---aqui iban filtros --->
                           </div>
                       </div>
+                  <div class="col-md-4 col-lg-3 mb-4 text-right">
+                          <button onclick="abrirDetalleEnvios(<?Php echo $_GET['id'] ?>)" style="background-color: #dc3545; color: white; border: none; padding: 8px 12px; border-radius: 5px;">
+                              <i class="icofont-file-pdf"></i> Descargar en PDF
+                          </button>
+                      </div>
                       <div class="col-md-4 col-lg-3 mb-4">
-                          <button class="btn btn-warning text-white" onclick="abrirDetalleEnvios(<?Php echo $_GET['id'] ?>)" name="imprimir_reporte">Imprimir</button>
+                          <button id="btnDescargarxls" name="btnDescargarxls" style="background-color: #28a745; color: white; border: none; padding: 8px 12px; border-radius: 5px;">
+                              <i class="icofont-file-excel"></i> Descargar en Excel
+                          </button>
                       </div>
                   </div>
                   <br>
@@ -111,7 +118,7 @@
                       <table class='table table-sm table-hover gb-white shadow-sm'>
                           <thead>
                               <tr style="background-color:#952F57;" class='text-white font-weight-bold'>
-                                  <th class='text-center'><small>ID</small></th>
+                                  <th class='text-center'><small>Código</small></th>
                                   <th class='text-center'><small>Módulo</small></th>
                                   <th class='text-center'><small>Cantidad</small></th>
                                   <th class='text-center'><small>Nivel</small></th>
@@ -170,7 +177,7 @@
 
                                 ?>
                                   <tr class='text-center'>
-                                  <td><small><?php echo $fila['Id_asignacion']; ?></small></td>
+                                  <td><small><?php echo $fila['codigo']; ?></small></td>
                                       <td><small><?php echo $fila['Titulo']; ?></small></td>
                                       <td><small><?php echo $fila['cantidad']; ?></small></td>
                                       <td><small><?php echo $fila['nivel']; ?></small></td>
@@ -257,9 +264,31 @@
              // $dato = $('#dato').val();
               $filtros = "?dato=" + id ;
               console.log($filtros);
-              window.open("/biblioteca/reporte_detalleEnvios/index.php" + $filtros, "Reporte de envios", "directories=no location=no");
+              window.open("/biblioteca/reporte_detalleAsignaciones/index.php" + $filtros, "Reporte de Asignaciones", "directories=no location=no");
 
           }
+          $(document).ready(function() {
+              $("#btnDescargarxls").click(function() {
+                  console.log('entra aqui');
+                  $dato = <?php echo $_GET['id'];?>;
+                  $filtros = "";
+                  if ($dato != "") {
+                      $filtros = "?id=" + $dato;
+                  }
+
+                  // var filtros = "?dato=" + dato;
+                  var url = "/biblioteca/phpxsls/ReportesXls/PhpOffice/reporte_detalleasignaciones.php" + $filtros;
+
+                  // var url = "/biblioteca/phpxsls/ReportesXls/PhpOffice/reporte_ubicaciones_cordzona.php";
+                  // Creamos un enlace con el atributo download y lo hacemos clic para iniciar la descarga
+
+                  $('<a>').attr({
+                      href: url,
+                      download: 'reporte_detalleasignaciones.xlsx'
+                  })[0].click();
+
+              });
+          });
       </script>
   </body>
 

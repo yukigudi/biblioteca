@@ -22,7 +22,7 @@
         <?php 
               require_once ("../conexion/conexion.php");
               $id=$_REQUEST['id'];
-              $query = "DELETE * FROM UBICACIONES WHERE Id_ubicacion=$id ";
+              $query = "DELETE FROM ubicaciones WHERE Id_ubicacion=$id ";
               $verificar=$conexion->query($query);
               if ($verificar) {
                 echo '

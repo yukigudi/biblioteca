@@ -155,21 +155,8 @@ require_once("../conexion/conexion.php");
                                 </div>
                             </div>
                             <div class="col-md-6 col-lg-3 mb-3">
-                                <label for="usuario_recibe">Destinatario</label>
-                                <select id="usuario_recibe" name="recibe" class="form-control" required>
-                                    <option value="">Selecciona</option>
-                                    <?php
-
-                                    $query = "SELECT * FROM usuarios Where nivel not in ('tecnicodocente')";
-
-                                    $resultado = $conexion->query($query);
-                                    if ($resultado->num_rows > 0) {
-                                        while ($fila = $resultado->fetch_assoc()) { ?>
-                                            <option value="<?php echo $fila['Id_usuario']; ?>">
-                                                <?php echo $fila['nombre_empleado']; ?></option>
-                                    <?php }
-                                    } ?>
-                                </select>
+                                <label for="usuario_recibe">Coordinador de zona</label>
+                                <input type="text" class="form-control" id="usuario_recibe" name="recibe" required>
                                 <div class="valid-feedback">
                                     Correcto!
                                 </div>
@@ -178,7 +165,7 @@ require_once("../conexion/conexion.php");
                                 </div>
                             </div>
                             <div class="col-md-6 col-lg-3 mb-3">
-                                <label for="testigo">Testigo</label>
+                                <label for="testigo">Responsable de entrega</label>
                                 <input type="text" class="form-control" id="testigo" name="testigo" required>
                                 <div class="valid-feedback">
                                     Correcto!

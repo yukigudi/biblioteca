@@ -1,12 +1,21 @@
   <?php
     session_start();
+    /*$_SESSION['dato'] = $_POST['dato'];
+    $_SESSION['codigo'] = $_POST['codigo'];
+    $_SESSION['nivel'] = $_POST['nivel'];
+    $_SESSION['material'] = $_POST['material'];
+    $_SESSION['estado'] = $_POST['estado'];
+    $dato = isset($_SESSION['dato']) ? $_SESSION['dato'] : '';
+    $codigo = isset($_SESSION['codigo']) ? $_SESSION['codigo'] : '';
+    $nivel = isset($_SESSION['nivel']) ? $_SESSION['nivel'] : '';
+    $material = isset($_SESSION['material']) ? $_SESSION['material'] : '';
+    $estado = isset($_SESSION['estado']) ? $_SESSION['estado'] : '';*/
     include('../menu.php');
     $id = $_SESSION['Id_usuario'];
     $usuario = $id;
     if ($id == null || $id == '') {
         header("location:index.php");
     }
-
 
     $estados = array(
         'nuevo' => 'Nuevo',
@@ -49,7 +58,10 @@
           <nav id="sidebar">
               <div class="sidebar-header">
                   <img width="45" height="45" src="../images/logo.png" alt="">
-                  <small><b class="ml-2">ISEJA</b> <br><p class="text-center">Control de módulos</p></small><hr style="border-color: white;">
+                  <small><b class="ml-2">ISEJA</b> <br>
+                      <p class="text-center">Control de módulos</p>
+                  </small>
+                  <hr style="border-color: white;">
               </div>
               <?php menu(); ?>
           </nav>
@@ -90,6 +102,9 @@
           </div>
           <div class="container table-responsive">
               <br><br><br><br>
+              <center><label for="">
+                      <h4>REPORTE DE MODULOS</h4>
+                  </label></center>
               <form action="#" class="form" method="POST">
 
 
@@ -106,7 +121,7 @@
                           <div class="input-group" style="z-index: 0;">
                               <input type="search" name="codigo" id="codigo" placeholder="codigo" class="form-control shadow-sm border-0" autocomplete="off" value="<?php echo $_POST['codigo'] ?>">
                               <div class="input-group-prepend bg-white p-0">
-                                  <button name="buscar" type="submit" class="input-group-text btn btn-danger border-0 shadow-sm icofont-search-1"></button>
+                                  <button name="buscarcod" type="submit" class="input-group-text btn btn-danger border-0 shadow-sm icofont-search-1"></button>
                               </div>
                           </div>
                       </div>
@@ -166,7 +181,7 @@
                                   <th class='text-center'><small>Nivel</small></th>
                                   <th class='text-center'><small>Material</small></th>
                                   <th class='text-center'><small>Estado</small></th>
-
+                                  <th class='text-center'><small>Edición</small></th>
                                   <th colspan='2' class='text-center'><small>Acciones</small></th>
                               </tr>
                           </thead>
@@ -175,16 +190,17 @@
 
                                 require_once("../conexion/conexion.php");
                                 $filtro = " AND Activo=1 ";
-                                if (isset($_POST['buscar'])) {
+                                //if (isset($_POST['buscar'])) {
                                     if (isset($_POST['dato']) && ($_POST['dato']) != "") {
                                         $dato = $_POST['dato'];
                                         $filtro .= " AND Titulo LIKE '$dato%'";
                                     }
-                                }
-                                if (isset($_POST['codigo']) && ($_POST['codigo']) != "") {
-                                    $codigo = $_POST['codigo'];
-                                    $filtro .= " AND codigo LIKE '$codigo%'";
-                                }
+
+                                    if (isset($_POST['codigo']) && ($_POST['codigo']) != "") {
+                                        $codigo = $_POST['codigo'];
+                                        $filtro .= " AND codigo LIKE '$codigo%'";
+                                    }
+                                //}
                                 if (isset($_POST['nivel']) && ($_POST['nivel']) != "") {
                                     $nivel = $_POST['nivel'];
                                     $filtro .= " AND nivel='$nivel' ";
@@ -216,6 +232,7 @@
                                       <td><small><?php echo $fila['nivel']; ?></small></td>
                                       <td><small><?php echo $fila['material']; ?></small></td>
                                       <td><small><?php echo $fila['estado']; ?></small></td>
+                                      <td><small><?php echo $fila['edicion']; ?></small></td>
                                       <td class="text-right"><a class="bg-primary py-1 rounded-lg" href="modificar_libros.php?id=<?php echo $fila['Id_libro'] ?>"><span class='h6 text-white icofont-ui-edit px-1'></small></a></td>
                                       <td class="text-left"><a class="bg-danger py-1 rounded-lg" href="#" onclick="confirmar(<?php echo $id; ?>)"><span class='h6 text-white icofont-ui-delete px-1'></span></a></td>
                                   </tr>
@@ -273,7 +290,7 @@
                   $estado = $('#estado').val();
 
                   $filtros = "?dato=" + $dato + "&codigo=" + $codigo + "&nivel=" + $nivel + "&material=" + $material + "&estado=" + $estado;
-console.log($filtros);
+                  console.log($filtros);
                   // var filtros = "?dato=" + dato;
                   var url = "/biblioteca/phpxsls/ReportesXls/PhpOffice/reporte_modulos.php" + $filtros;
 

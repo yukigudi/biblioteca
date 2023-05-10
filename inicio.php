@@ -76,7 +76,7 @@ require_once("conexion/conexion.php");
                 <div class="row">
 
                    
-                    <div class="col-md-5 col-lg-3 p-0 p-1">
+                   <!-- <div class="col-md-5 col-lg-3 p-0 p-1">
                         <div class="row no-gutters bg-white shadow-sm">
                             <div class="col-md-3 bg-success p-3">
                                 <span class="icofont-listing-box h1 text-white"></span>
@@ -85,21 +85,21 @@ require_once("conexion/conexion.php");
                             <div class="col-md-9 pt-2">
                                 <small class="ml-3 h3 text-secondary border-success"><b class="count">
                                         <?php
-                                        $query = "SELECT COUNT(Id_henvio) AS Total FROM header_envio_modulos";
+                                       /* $query = "SELECT COUNT(Id_henvio) AS Total FROM header_envio_modulos";
                                         $resultado = $conexion->query($query);
 
                                         if (mysqli_num_rows($resultado) > 0) {
                                             $fila = $resultado->fetch_assoc();
                                             echo $fila['Total'];
-                                        }
+                                        }*/
                                         ?>
                                     </b></small>
                                 <br>
                                 <small class="ml-3 h6 text-secondary">Total envios</small>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-5 col-lg-3 p-0 p-1">
+                    </div>-->
+                   <!-- <div class="col-md-5 col-lg-3 p-0 p-1">
                         <div class="row no-gutters bg-white shadow-sm">
                             <div class="col-md-3 bg-success p-3">
                                 <span class="icofont-listing-box h1 text-white"></span>
@@ -108,20 +108,20 @@ require_once("conexion/conexion.php");
                             <div class="col-md-9 pt-2">
                                 <small class="ml-3 h3 text-secondary border-success"><b class="count">
                                         <?php
-                                        $query = "SELECT COUNT(Id_hretorno) AS Total FROM header_retorno_modulos";
+                                       /* $query = "SELECT COUNT(Id_hretorno) AS Total FROM header_retorno_modulos";
                                         $resultado = $conexion->query($query);
 
                                         if (mysqli_num_rows($resultado) > 0) {
                                             $fila = $resultado->fetch_assoc();
                                             echo $fila['Total'];
-                                        }
+                                        }*/
                                         ?>
                                     </b></small>
                                 <br>
                                 <small class="ml-3 h6 text-secondary">Total devoluciones</small>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                    
                 </div>
             </div>

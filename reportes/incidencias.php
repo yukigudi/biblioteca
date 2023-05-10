@@ -145,12 +145,12 @@
 
                                 require_once("../conexion/conexion.php");
                                 $filtro = "";
-                                if (isset($_POST['buscar'])) {
+                               // if (isset($_POST['buscar'])) {
                                     if (isset($_POST['dato'])) {
                                         $dato = $_POST['dato'];
-                                        $filtro .= " fechaenvio='$dato'";
+                                        $filtro .= " DATE(fecha)='$dato'";
                                     }
-                                }
+                                //}
                                 if ($filtro) {
                                     // $filtro = substr($filtro, 4);
                                     $filtro = "Where" . $filtro;
@@ -224,7 +224,7 @@
                                       <?php
                                         } else {
                                         ?>
-                                          <td id="acciones-<?php echo $fila['Id_incidencia']; ?>" class="text-center"><a class="rounded-lg" href="#" onclick="resolverIncidencia(<?php echo $id; ?>,<?php echo $orden; ?>,'<?php echo $tipo; ?>')"><span class='h6 icofont-ui-edit px-1'></span></a></td>
+                                          <td id="acciones-<?php echo $fila['Id_incidencia']; ?>" class="text-center"><a class="rounded-lg" href="#" onclick="resolverIncidencia(<?php echo $id; ?>,<?php echo $orden; ?>,'<?php echo $tipo; ?>')"><span class='h6 icofont-check px-1'></span></a></td>
                                       <?php
                                         }
                                         ?>

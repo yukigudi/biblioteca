@@ -33,18 +33,19 @@ $pdf->Cell(80);
 $pdf->Cell(110, 10, mb_convert_encoding('ISEJA Control de módulos', 'ISO-8859-1', 'UTF-8'), 1, 0, 'C');
 // Salto de línea
 $pdf->Ln(20);
-$pdf->Cell(80, 10, 'Registro de Inventarios - ' . date("d/m/Y, g:i a"), 0, 0, 'C');
+$pdf->Cell(80, 10, 'Registro de Incidencias - ' . date("d/m/Y, g:i a"), 0, 0, 'C');
 $pdf->Ln(20);
 //$pdf->cell(15, 10, 'ID', 1, 0, 'C', 0);
 $pdf->cell(25, 10, 'Fecha', 1, 0, 'C', 0);
-$pdf->cell(35, 10, 'Usuario envia', 1, 0, 'C', 0);
-$pdf->cell(35, 10, 'Usuario recibe', 1, 0, 'C', 0);
+$pdf->cell(30, 10, 'Usuario envia', 1, 0, 'C', 0);
+$pdf->cell(30, 10, 'Usuario recibe', 1, 0, 'C', 0);
 $pdf->cell(20, 10, 'Testigo', 1, 0, 'C', 0);
 $pdf->cell(25, 10, mb_convert_encoding('Ubicación envio', 'ISO-8859-1', 'UTF-8'), 1, 0, 'C', 0);
 $pdf->cell(25, 10, mb_convert_encoding('Ubicación destino', 'ISO-8859-1', 'UTF-8'), 1, 0, 'C', 0);
-$pdf->cell(70, 10, 'Detalle incidencia', 1, 0, 'C', 0);
 $pdf->cell(20, 10, 'Estatus', 1, 0, 'C', 0);
-$pdf->cell(25, 10, mb_convert_encoding('Fecha solución', 'ISO-8859-1', 'UTF-8'), 1, 1, 'C', 0);
+$pdf->cell(25, 10, mb_convert_encoding('Fecha solución', 'ISO-8859-1', 'UTF-8'), 1, 0, 'C', 0);
+$pdf->cell(70, 10, 'Detalle incidencia', 1, 1, 'C', 0);
+
 
 $pdf->SetFont('Arial', 'I', 7);
 
@@ -55,10 +56,10 @@ $status = array(
 
 $filtro = "";
 
-    if (isset($_POST['dato'])) {
-        $dato = $_POST['dato'];
-        $filtro .= " fecha='$dato'";
-    }
+if (isset($_GET['dato'])) {
+    $dato = $_GET['dato'];
+    $filtro .= " DATE(fecha)='$dato'";
+}
 
 if ($filtro) {
     // $filtro = substr($filtro, 4);
@@ -86,27 +87,41 @@ if ($resultado->num_rows > 0) {
         // echo $fila['nombre_lugar'];
     }
 }
-
+function getDetalleHeight($detalle)
+{
+    $maxWidth = 70;
+    $charPerLine = 56;
+    $charCount = strlen($detalle);
+    $lineCount = ceil($charCount / $charPerLine);
+    $cellHeight = 5;
+    $extraHeight = 10 + ($lineCount - 1) * 15;
+    if ($lineCount > 1) {
+        $extraHeight = ($lineCount - 1) * $cellHeight;
+    } else {
+        $extraHeight =  10;
+    }
+    return $extraHeight;
+}
 $query = "SELECT * FROM incidencias " . $filtro . " order by fecha desc";
-
 
 $resultado = $conexion->query($query);
 while ($fila = $resultado->fetch_assoc()) {
-
+    $detalle = $fila['detalle'];
+    $detalleHeight = getDetalleHeight($detalle);
     $fila['deubicacion'] = $ubicacion[$fila['deubicacion']];
     $fila['aubicacion'] = $ubicacion[$fila['aubicacion']];
     $fila['usuarioenvio'] = $remitente[$fila['usuarioenvio']];
     $fila['usuariorecibio'] = $destinatario[$fila['usuariorecibio']];
+    $totalHeight = $detalleHeight; // 5 es la altura de las otras celdas
 
-    //$pdf->Ln(10);
-    $pdf->cell(25, 10, $fila['fecha'], 1, 0, 'C', 0);
-    $pdf->cell(35, 10, mb_convert_encoding($fila['usuarioenvio'], 'ISO-8859-1', 'UTF-8'), 1, 0, 'C', 0);
-    $pdf->cell(35, 10, mb_convert_encoding($fila['usuariorecibio'], 'ISO-8859-1', 'UTF-8'), 1, 0, 'C', 0);
-    $pdf->cell(20, 10, $fila['testigo'], 1, 0, 'C', 0);
-    $pdf->cell(25, 10, $fila['deubicacion'], 1, 0, 'C', 0);
-    $pdf->cell(25, 10, $fila['aubicacion'], 1, 0, 'C', 0);
-    $pdf->cell(70, 10, $fila['detalle'], 1, 0, 'C', 0);
-    $pdf->cell(20, 10, $status[$fila['status']], 1, 0, 'C', 0);
-    $pdf->cell(25, 10, $fila['fecha_solucion'], 1, 1, 'C', 0);
+    $pdf->cell(25, $totalHeight, $detalleHeight.'-'.$fila['fecha'], 0, 0, 'C', 0);
+    $pdf->cell(30, $totalHeight, mb_convert_encoding($fila['usuarioenvio'], 'ISO-8859-1', 'UTF-8'), 0, 0, 'C', 0);
+    $pdf->cell(30, $totalHeight, mb_convert_encoding($fila['usuariorecibio'], 'ISO-8859-1', 'UTF-8'), 0, 0, 'C', 0);
+    $pdf->cell(20, $totalHeight, $fila['testigo'], 0, 0, 'C', 0);
+    $pdf->cell(25, $totalHeight, $fila['deubicacion'], 0, 0, 'C', 0);
+    $pdf->cell(25, $totalHeight, $fila['aubicacion'], 0, 0, 'C', 0);
+    $pdf->cell(20, $totalHeight, $status[$fila['status']], 0, 0, 'C', 0); // colocar la celda de estado aquí
+    $pdf->cell(25, $totalHeight, $fila['fecha_solucion'], 0, 0, 'C', 0);
+    $pdf->MultiCell(70, $detalleHeight, $detalle, 0, 'J', "");
 }
 $pdf->Output();

@@ -110,10 +110,10 @@
                                     'usado' => 'Usado'
                                 );
                                 $niveles = array(
-                                    'inicial' => 'Inicial',
+                                    'alfabetizacion' => 'Alfabetización',
                                     'primaria' => 'Primaria',
                                     'secundaria' => 'Secundaria',
-
+                            
                                 );
                                 $materiales = array(
                                     'basico' => 'Básico',
@@ -198,6 +198,16 @@
                                   Porfavor rellena el campo.
                               </div>
                           </div>
+                          <div class="col-md-4 col-lg-3 mb-4">
+                    <label for="validationCustom03">Edición</label>
+                    <input type="text" class="form-control" id="validationCustom03" required name="edicion" placeholder="Edición" maxlength="30">
+                    <div class="valid-feedback">
+                      Correcto!
+                    </div>
+                    <div class="invalid-feedback">
+                      Porfavor rellena el campo.
+                    </div>
+                  </div>
                       </div>
 
                       <button class="btn btn-warning text-white" type="submit" name="registrar">Actualizar</button>

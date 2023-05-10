@@ -44,7 +44,10 @@ $generos = array(
     <nav id="sidebar">
       <div class="sidebar-header">
         <img width="45" height="45" src="../images/logo.png" alt="">
-        <small><b class="ml-2">ISEJA</b> <br><p class="text-center">Control de módulos</p></small><hr style="border-color: white;">
+        <small><b class="ml-2">ISEJA</b> <br>
+          <p class="text-center">Control de módulos</p>
+        </small>
+        <hr style="border-color: white;">
       </div>
       <?php menu(); ?>
     </nav>
@@ -96,10 +99,10 @@ $generos = array(
               <h4>ACTUALIZAR TECNICO DOCENTE</h4>
             </label></center>
           <div class="form-row">
-
+            <input type="hidden" name="tipo_usuario" id="tipo_usuario" value="tecnico_docente">
             <div class="col-sm-12 col-md-4 col-lg-6 mb-4">
               <label for="nombre">Nombre de empleado</label>
-              <input type="text" value="<?php echo $fila['nombre_empleado'] ?>" class="form-control" id="nombre" required name="nombre" placeholder="Nombre completo" pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+" maxlength="40">
+              <input type="text" value="<?php echo $fila['nombre_empleado'] ?>" class="form-control" id="nombre" required name="nombre" placeholder="Nombre completo" maxlength="40">
               <div class="valid-feedback">
                 Correcto!
               </div>
@@ -109,7 +112,7 @@ $generos = array(
             </div>
             <div class="col-sm-6 col-md-6 col-lg-3 mb-4">
               <label for="usuario">Nombre de usuario</label>
-              <input type="text" class="form-control" id="usuario" value="<?php echo $fila['Nombre_usuario'] ?>" required name="usuario" placeholder="Usuario" autocomplete="off" pattern="[a-zA-Z0-9]+" maxlength="16">
+              <input type="text" class="form-control" id="usuario" value="<?php echo $fila['Nombre_usuario'] ?>" name="usuario" placeholder="Usuario" autocomplete="off" pattern="[a-zA-Z0-9]+" maxlength="16">
               <div class="valid-feedback">
                 Correcto!
               </div>
@@ -251,9 +254,9 @@ $generos = array(
               </select>
 
             </div>
-                  </div>
-            <br>
-            <button class="btn btn-warning text-white" type="submit" name="registrar">Actualizar</button>
+          </div>
+          <br>
+          <button class="btn btn-warning text-white" type="submit" name="registrar">Actualizar</button>
         </form>
       </div>
       <br>

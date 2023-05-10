@@ -25,19 +25,44 @@ $CntDisposition = $CntDisposition . $today . "\"_" . $filename . ".xlsx";
 header($CntDisposition);
 header('Cache-Control: max-age=0');
 
-$filtro = "";
-    if (isset($_GET['dato'])) {
+//$filtro = "";
+    /*if (isset($_GET['dato'])) {
         $dato = $_GET['dato'];
         $filtro .= " fecha='$dato'";
+    }*/
+
+   
+    $filtro = "";
+    //if (isset($_GET['buscar'])) {
+        if (isset($_GET['dato'])) {
+            $dato = $_GET['dato'];
+            $filtro .= " AND fecha='$dato'";
+        }
+    //}
+
+    if (isset($_GET['codigo']) && ($_GET['codigo']) != "") {
+        $codigo = $_GET['codigo'];
+        $filtro .= " AND libros.codigo LIKE '$codigo%'";
+    }
+    if (isset($_GET['nivel']) && ($_GET['nivel']) != "") {
+        $nivel = $_GET['nivel'];
+        $filtro .= " AND libros.nivel='$nivel' ";
+    }
+    if (isset($_GET['ubicacion']) && ($_GET['ubicacion']) != "") {
+        $ubicacion = $_GET['ubicacion'];
+        $filtro .= " AND ubicaciones.Id_ubicacion='$ubicacion' ";
+    }
+    if (isset($_GET['estado']) && ($_GET['estado']) != "") {
+        $estado = $_GET['estado'];
+        $filtro .= " AND libros.estado='$estado' ";
+    }
+    if ($filtro) {
+        $filtro = substr($filtro, 4);
+        $filtro = "Where" . $filtro;
     }
 
-if ($filtro) {
-    // $filtro = substr($filtro, 4);
-    $filtro = "Where" . $filtro;
-}
 
-
-$query = "SELECT ubicaciones_modulos.Id_ubic_mod,ubicaciones_modulos.fecha,libros.Titulo,libros.estado,ubicaciones.nombre_lugar as ubicacion_actual,ubicaciones_modulos.cantidad as Copias,libros.nivel,libros.material FROM ubicaciones_modulos left join ubicaciones on ubicaciones.Id_ubicacion=ubicaciones_modulos.ubicacion_Id left join libros on libros.Id_libro=ubicaciones_modulos.modulo_Id " . $filtro;
+$query = "SELECT ubicaciones_modulos.Id_ubic_mod,ubicaciones_modulos.fecha,libros.Titulo,libros.estado,ubicaciones.nombre_lugar as ubicacion_actual,ubicaciones_modulos.cantidad as Copias,libros.nivel,libros.material,libros.codigo FROM ubicaciones_modulos left join ubicaciones on ubicaciones.Id_ubicacion=ubicaciones_modulos.ubicacion_Id left join libros on libros.Id_libro=ubicaciones_modulos.modulo_Id " . $filtro;
 
 
 $resultado = $conexion->query($query);
@@ -65,7 +90,7 @@ $drawing->getShadow()->setDirection(45);
 $drawing->setWorksheet($spreadsheet->getActiveSheet());
 // Establecer el estilo de la celda que contiene el título
 $titulo='Inventarios';
-$sheet->getStyle('D5')->applyFromArray([
+$sheet->getStyle('D5:D6')->applyFromArray([
     'font' => [
         'bold' => true,
         'size' => 16,
@@ -78,26 +103,29 @@ $sheet->getStyle('D5')->applyFromArray([
 
 // Escribir el título en la celda H2
 $sheet->setCellValue('D5', 'Reporte '.$titulo);
+$sheet->setCellValue('D6', date("d/m/Y, g:i a"));
 
 // Escribir los encabezados en la primera fila
-$sheet->setCellValue('A10', 'Módulo');
-$sheet->setCellValue('B10', 'Ubicación');
-$sheet->setCellValue('C10', 'Cantidad');
-$sheet->setCellValue('D10', 'Nivel');
-$sheet->setCellValue('E10', 'Material');
-$sheet->setCellValue('F10', 'Estado');
-$sheet->setCellValue('G10', 'Fecha');
+$sheet->setCellValue('A10', 'Código');
+$sheet->setCellValue('B10', 'Módulo');
+$sheet->setCellValue('C10', 'Ubicación');
+$sheet->setCellValue('D10', 'Cantidad');
+$sheet->setCellValue('E10', 'Nivel');
+$sheet->setCellValue('F10', 'Material');
+$sheet->setCellValue('G10', 'Estado');
+$sheet->setCellValue('H10', 'Fecha');
 
 // Escribir los datos en las filas siguientes
 $fila = 11;
 while ($filaDatos = mysqli_fetch_array($resultado)) {
-    $sheet->setCellValue('A' . $fila, $filaDatos['Titulo']);
-    $sheet->setCellValue('B' . $fila, $filaDatos['ubicacion_actual']);
-    $sheet->setCellValue('C' . $fila, $filaDatos['Copias']);
-    $sheet->setCellValue('D' . $fila, $filaDatos['nivel']);
-    $sheet->setCellValue('E' . $fila, $filaDatos['material']);
-    $sheet->setCellValue('F' . $fila, $filaDatos['estado']);
-    $sheet->setCellValue('G' . $fila, $filaDatos['fecha']);
+    $sheet->setCellValue('A' . $fila, $filaDatos['codigo']);
+    $sheet->setCellValue('B' . $fila, $filaDatos['Titulo']);
+    $sheet->setCellValue('C' . $fila, $filaDatos['ubicacion_actual']);
+    $sheet->setCellValue('D' . $fila, $filaDatos['Copias']);
+    $sheet->setCellValue('E' . $fila, $filaDatos['nivel']);
+    $sheet->setCellValue('F' . $fila, $filaDatos['material']);
+    $sheet->setCellValue('G' . $fila, $filaDatos['estado']);
+    $sheet->setCellValue('H' . $fila, $filaDatos['fecha']);
     $fila++;
 }
 
@@ -109,7 +137,7 @@ while ($filaDatos = mysqli_fetch_array($resultado)) {
     ->getOutline()
     ->setBorderStyle(Border::BORDER_THIN)
     ->setColor(new Color('00000000'));*/
-$spreadsheet->getActiveSheet()->getStyle('A10:G10')->applyFromArray([
+$spreadsheet->getActiveSheet()->getStyle('A10:H10')->applyFromArray([
     'font' => [
         'bold' => true,
     ],

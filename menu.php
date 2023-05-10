@@ -32,7 +32,7 @@
             </li>
            <!-- <li>
                 <a href="/biblioteca/incidencias/registrar_incidencias.php" target="_blank">Incidencias</a>
-            </li>-->
+            </li>---->
             <li>
                 <a href="/biblioteca/modulos_asignaciones/registro.php">Asignaciones</a>
             </li>
@@ -63,7 +63,7 @@
                 <a href="/biblioteca/ubicaciones/delegacion.php">Consultar Delegaciones</a>
             </li>
             <li>
-                <a href="/biblioteca/ubicaciones/ubicaciones_resguardo.php">Consultar ubicación de resguardo</a>
+                <a href="/biblioteca/ubicaciones/ubicacionresguardo.php">Consultar ubicación de resguardo</a>
             </li>
 
         </ul>

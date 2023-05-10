@@ -210,9 +210,9 @@ $niveles = array(
                   },
                   function(isConfirm) {
                       if (isConfirm) {
-                        window.location="ubicaciones_resguardo.php";
+                        window.location="ubicacionresguardo.php";
                       } else {
-                        window.location="registrar_ubicacionesresguardo.php";
+                        window.location="registrar_ubicacionresguardo.php";
                       }
                     });
                     </script>';
@@ -231,9 +231,9 @@ $niveles = array(
                   },
                   function(isConfirm) {
                       if (isConfirm) {
-                        window.location="ubicaciones_resguardo.php";
+                        window.location="ubicacionresguardo.php";
                       } else {
-                        window.location="registrar_ubicacionesresguardo.php";
+                        window.location="registrar_ubicacionresguardo.php";
                       }
                     });
                     </script>';

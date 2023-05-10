@@ -46,8 +46,8 @@ $pdf->SetFont('Arial', 'I', 9);
 
 $filtro = "";
 
-    if (isset($_POST['dato'])) {
-        $dato = $_POST['dato'];
+    if (isset($_GET['dato'])) {
+        $dato = $_GET['dato'];
         $filtro .= " fechaenvio='$dato'";
     }
 

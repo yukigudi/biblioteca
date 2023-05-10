@@ -40,7 +40,7 @@ $resultado=$conexion->query($query);
 $pdf=new FPDF('L','mm','A4');
 $pdf->AddPage();
 $pdf->SetFont('Arial','B',12);
-$pdf->Image('../images/logo1.png',10,8,20);
+$pdf->Image('../images/logo2.png', 15, 8, 20);
     // Movernos a la derecha
     $pdf->Cell(80);
     // Título

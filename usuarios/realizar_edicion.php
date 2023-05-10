@@ -41,6 +41,13 @@ if ($id == null || $id == '') {
   $telefono = $_POST['telefono'];
   $correo = $_POST['correo'];
   $nivel = $_POST['nivel'];
+  $tipo_usuario = $_POST['tipo_usuario'];
+
+  if ($tipo_usuario == "tecnico_docente") {
+    $tipo_usuario = "tecnicod";
+  } else {
+    $tipo_usuario = "usuarios";
+  }
   //$fecha = date("Y-m-d"); ----fecha de registro no se actualiza
 
   //$query = "INSERT INTO usuarios (nombre_empleado,Nombre_usuario,Password,calle,numeroi,numeroe,ciudad,estado,genero,fecha_nac,telefono,correo,nivel,fecha) values('$nombre_empleado','$usuario','$pass','$calle','$numeroi','$numeroe','$ciudad','$estado','$genero','$fecha_nac','$telefono','$correo','$nivel','$fecha')";
@@ -58,7 +65,7 @@ if ($id == null || $id == '') {
                     confirmButtonText: "Regresar",
                   },
                   function(){
-                    window.location="usuarios.php";
+                    window.location="' . $tipo_usuario . '.php";
                   });
                     </script>';
   } else {
@@ -71,7 +78,7 @@ if ($id == null || $id == '') {
                     confirmButtonText: "Regresar",
                   },
                   function(){
-                    window.location="usuarios.php";
+                    window.location="' . $tipo_usuario . '.php";
                   });
                     </script>';
   }

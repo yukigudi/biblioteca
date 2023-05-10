@@ -1,5 +1,7 @@
 <?php
-session_start();
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+//session_start();
 include('../menu.php');
 $id = $_SESSION['Id_usuario'];
 $usuario = $id;
@@ -254,7 +256,7 @@ require_once("../conexion/conexion.php");
 
         if (isset($modulos) and is_array($modulos)) {
 
-            $query = "INSERT INTO header_envio_modulos (fecha,usuario,ubicacion,envioa,fechaenvio,recibe,testigo) values('$fecha',$usuario,'$ubicacion','$envioa','$fecha_actual',$recibe,'$testigo')";
+            $query = "INSERT INTO header_envio_modulos (fecha,usuario,ubicacion,envioa,fechaenvio,recibe,testigo) values('$fecha',$usuario,'$ubicacion','$envioa','$fecha_actual','$recibe','$testigo')";
             //echo  $query . "<br/>";
 
             $verificar5 = $conexion->query($query);
@@ -268,7 +270,7 @@ require_once("../conexion/conexion.php");
 
                 // Obtener la cantidad de módulos disponibles en la ubicación actual
                 $query2 = "SELECT cantidad as disponibles FROM ubicaciones_modulos WHERE ubicacion_id = $ubicacion AND modulo_id = $value";
-                 //echo $query . "<br/>";
+                // echo $query . "<br/>";
                 $resultado2 = $conexion->query($query2);
                 $fila = $resultado2->fetch_assoc();
                 $cantidad_disponible = $fila['disponibles'];
@@ -276,7 +278,7 @@ require_once("../conexion/conexion.php");
                 // Actualizar la cantidad disponible en la ubicación actual
                 $cantidad_actualizada = $cantidad_disponible - $cantidad[$key];
                 $querydetalle = "UPDATE ubicaciones_modulos SET cantidad = $cantidad_actualizada,fecha='$fechaactual' WHERE ubicacion_id = $ubicacion AND modulo_id = $value";
-                echo $querydetalle . "<br/>";
+                //echo $querydetalle . "<br/>";
                 $verificar2 = $conexion->query($querydetalle);
                 if (!$verificar2) {
                     echo "Error en la consulta 2: " . $conexion->$error;
@@ -284,7 +286,7 @@ require_once("../conexion/conexion.php");
 
                 // Insertar el detalle del envío en la tabla envio_modulos
                 $querydetalle4 = "INSERT INTO envio_modulos (Id_henvio, titulo, cantidad) VALUES ($Id_envio, $value, $cantidad[$key])";
-                echo  $querydetalle4 . "<br/>";
+                //echo  $querydetalle4 . "<br/>";
                 $verificar4 = $conexion->query($querydetalle4);
                 if (!$verificar4) {
                     echo "Error en la consulta 4: " . $conexion->$error;

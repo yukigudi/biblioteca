@@ -200,7 +200,7 @@
                           </div>
                           <div class="col-md-4 col-lg-3 mb-4">
                     <label for="validationCustom03">Edición</label>
-                    <input type="text" class="form-control" id="validationCustom03" required name="edicion" placeholder="Edición" maxlength="30">
+                    <input type="text" class="form-control" id="validationCustom03" required name="edicion" placeholder="Edición" maxlength="30" value="<?php echo $fila['edicion']; ?>">
                     <div class="valid-feedback">
                       Correcto!
                     </div>

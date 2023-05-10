@@ -131,12 +131,12 @@ $niveles = array(
 
                             require_once("../conexion/conexion.php");
                             $filtro = "";
-                            if (isset($_POST['buscar'])) {
+                           // if (isset($_POST['buscar'])) {
                                 if (isset($_POST['dato'])) {
                                     $dato = $_POST['dato'];
                                     $filtro .= "AND Nombre_empleado LIKE '%$dato%'";
                                 }
-                            }
+                            //}
                             if (isset($_POST['nivel']) && ($_POST['nivel']) != "") {
                                 $nivel = $_POST['nivel'];
                                 $filtro .= "AND nivel='$nivel' ";

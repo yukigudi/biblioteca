@@ -138,12 +138,12 @@
 
                                 require_once("../conexion/conexion.php");
                                 $filtro = "";
-                                if (isset($_POST['buscar'])) {
+                               // if (isset($_POST['buscar'])) {
                                     if (isset($_POST['dato'])) {
                                         $dato = $_POST['dato'];
                                         $filtro .= " fechaenvio='$dato'";
                                     }
-                                }
+                                //}
                                 if ($filtro) {
                                     // $filtro = substr($filtro, 4);
                                     $filtro = "Where" . $filtro;

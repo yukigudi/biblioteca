@@ -29,7 +29,7 @@ $filtro = "";
 
     if (isset($_GET['dato'])) {
         $dato = $_GET['dato'];
-        $filtro .= " fechaenvio='$dato'";
+        $filtro .= " header_recibido_modulos.fechaenvio='$dato'";
     }
 
 if ($filtro) {
@@ -86,7 +86,7 @@ if ($resultado->num_rows > 0) {
     }
 }
 //-----------
-$query = "SELECT header_recibido_modulos.Id_hrecibido,header_envio_modulos.ubicacion as ubicacion_actual,header_envio_modulos.envioa,header_envio_modulos.fechaenvio,header_recibido_modulos.fechaenvio,header_envio_modulos.usuario as envia,header_recibido_modulos.usuario as recibe,header_recibido_modulos.testigo FROM header_recibido_modulos LEFT JOIN header_envio_modulos ON header_envio_modulos.Id_henvio=header_recibido_modulos.orden " . $filtro . " order by header_recibido_modulos.fechaenvio desc,header_recibido_modulos.Id_hrecibido desc;";
+$query = "SELECT header_recibido_modulos.Id_hrecibido,header_envio_modulos.ubicacion as ubicacion_actual,header_envio_modulos.envioa,header_envio_modulos.fechaenvio,header_recibido_modulos.fechaenvio,header_envio_modulos.usuario as envia,header_recibido_modulos.usuario as recibe,header_recibido_modulos.testigo FROM header_recibido_modulos LEFT JOIN header_envio_modulos ON header_envio_modulos.Id_henvio=header_recibido_modulos.orden " . $filtro . " order by header_recibido_modulos.fechaenvio desc,header_recibido_modulos.Id_hrecibido desc";
 
 
 $resultado = $conexion->query($query);
@@ -115,7 +115,7 @@ $drawing->getShadow()->setDirection(45);
 $drawing->setWorksheet($spreadsheet->getActiveSheet());
 // Establecer el estilo de la celda que contiene el título
 $titulo='Recibidos';
-$sheet->getStyle('D5')->applyFromArray([
+$sheet->getStyle('D5:D6')->applyFromArray([
     'font' => [
         'bold' => true,
         'size' => 16,
@@ -128,6 +128,7 @@ $sheet->getStyle('D5')->applyFromArray([
 
 // Escribir el título en la celda H2
 $sheet->setCellValue('D5', 'Reporte '.$titulo);
+$sheet->setCellValue('D6', date("d/m/Y, g:i a"));
 
 // Escribir los encabezados en la primera fila
 $sheet->setCellValue('A10', 'ID');

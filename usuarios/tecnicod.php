@@ -41,7 +41,10 @@ $niveles = array(
         <nav id="sidebar">
             <div class="sidebar-header">
                 <img width="45" height="45" src="../images/logo.png" alt="">
-                <small><b class="ml-2">ISEJA</b> <br><p class="text-center">Control de módulos</p></small><hr style="border-color: white;">
+                <small><b class="ml-2">ISEJA</b> <br>
+                    <p class="text-center">Control de módulos</p>
+                </small>
+                <hr style="border-color: white;">
             </div>
             <?php menu(); ?>
         </nav>
@@ -82,6 +85,9 @@ $niveles = array(
         </div>
         <div class="container table-responsive">
             <br><br><br><br>
+            <center><label for="">
+                    <h4>REPORTE DE TECNICOS DOCENTES</h4>
+                </label></center>
             <form action="#" class="form" method="POST">
                 <div class="form-row container">
                     <div class="col-md-6 col-lg-5">
@@ -92,7 +98,7 @@ $niveles = array(
                             </div>
                         </div>
                     </div>
-                   <!-- <div class="col-md-4 col-lg-3 mb-4">
+                    <!-- <div class="col-md-4 col-lg-3 mb-4">
                         <select id="nivel" name="nivel" class="form-control" onchange="this.form.submit()">
                             <option value="">Nivel de usuario</option>
                             <?php /*foreach ($niveles as $var => $nivel) : ?>
@@ -102,7 +108,7 @@ $niveles = array(
                     </div>-->
                 </div>
                 <div class="form-row container mt-3">
-                <div class="col-md-4 col-lg-3 mb-4 text-right">
+                    <div class="col-md-4 col-lg-3 mb-4 text-right">
                         <button onclick="abrirReporteUsuarios()" style="background-color: #dc3545; color: white; border: none; padding: 8px 12px; border-radius: 5px;">
                             <i class="icofont-file-pdf"></i> Descargar en PDF
                         </button>
@@ -122,7 +128,7 @@ $niveles = array(
                                 <th class='text-center'><small>Lugar de asignación</small></th>
                                 <th class='text-center'><small>Nombre</small></th>
                                 <th class='text-center'><small>Fecha alta</small></th>
-                               <!-- <th class='text-center'><small>Nivel de usuario</small></th>-->
+                                <!-- <th class='text-center'><small>Nivel de usuario</small></th>-->
                                 <th class='text-center'><small>Correo</small></th>
 
                                 <th colspan='2' class='text-center'><small>Acciones</small></th>
@@ -133,23 +139,23 @@ $niveles = array(
 
                             require_once("../conexion/conexion.php");
                             $filtro = "";
-                            if (isset($_POST['buscar'])) {
+                           // if (isset($_POST['buscar'])) {
                                 if (isset($_POST['dato'])) {
                                     $dato = $_POST['dato'];
                                     $filtro .= "AND Nombre_empleado LIKE '%$dato%'";
                                 }
-                            }
-                        /*    if (isset($_POST['nivel']) && ($_POST['nivel']) != "") {
+                            //}
+                            /*    if (isset($_POST['nivel']) && ($_POST['nivel']) != "") {
                                 $nivel = $_POST['nivel'];
                                 $filtro .= "AND nivel='$nivel' ";
                             }*/
                             $queryubicacion = "SELECT Id_ubicacion, nombre_lugar FROM ubicaciones";
                             //$resultPlazas = mysqli_query($conn, $queryPlazas);
                             $resultubicacion = $conexion->query($queryubicacion);
-                        
+
                             // Crea un array para almacenar los resultados de las plazas
                             $ubicacion = array();
-                        
+
                             // Almacena los resultados de las plazas en el array
                             while ($row = mysqli_fetch_assoc($resultubicacion)) {
                                 $ubicacion[$row['Id_ubicacion']] = $row['nombre_lugar'];
@@ -165,7 +171,8 @@ $niveles = array(
                                     <td><small><?php echo $ubicacion[$fila['ubicacion']]; ?></small></td>
                                     <td><small><?php echo $fila['nombre_empleado']; ?></small></td>
                                     <td><small><?php echo $fila['fecha']; ?></small></td>
-                                    <!--<td><small><?php //echo $fila['nivel']; ?></small></td>-->
+                                    <!--<td><small><?php //echo $fila['nivel']; 
+                                                    ?></small></td>-->
                                     <td><small><?php echo $fila['correo']; ?></small></td>
 
                                     <td class="text-right"><a class="bg-primary py-1 rounded-lg" href="modificar_tecnicod.php?id=<?php echo $fila['Id_usuario'] ?>"><span class='h6 text-white icofont-ui-edit px-1'></small></a></td>
@@ -219,9 +226,9 @@ $niveles = array(
 
             $("#btnDescargarxls").click(function() {
                 console.log('entra aqui');
-                var dato = "<?php echo $_POST['dato']; ?>";
+                var dato = $('#dato').val();
                 var nivel = "tecnicodocente";
-                var filtros = "?dato=" + dato+"&nivel=" + nivel;
+                var filtros = "?dato=" + dato + "&nivel=" + nivel;
                 var url = "/biblioteca/phpxsls/ReportesXls/PhpOffice/reporte_usuariostd.php" + filtros;
 
                 // var url = "/biblioteca/phpxsls/ReportesXls/PhpOffice/reporte_ubicaciones_cordzona.php";
@@ -291,20 +298,20 @@ $niveles = array(
         function abrirReporteUsuarios() {
             $dato = $('#dato').val();
             $nivel = "tecnicodocente";
-            $material = $('#material').val();
-            $estado = $('#estado').val();
+           /* $material = $('#material').val();
+            $estado = $('#estado').val();*/
 
             $filtros = "";
-    
-    if ($dato != "") {
-        $filtros += "&dato=" + $dato;
-    }
-    if ($nivel != "") {
-        $filtros += "&nivel=" + $nivel;
-    }
-    if ($filtros != "") {
-        $filtros = "?" + $filtros.substring(1); // elimina el primer & y lo reemplaza por ?
-    }
+
+            if ($dato != "") {
+                $filtros += "&dato=" + $dato;
+            }
+            if ($nivel != "") {
+                $filtros += "&nivel=" + $nivel;
+            }
+            if ($filtros != "") {
+                $filtros = "?" + $filtros.substring(1); // elimina el primer & y lo reemplaza por ?
+            }
             //$filtros = "?dato=" + $dato + "&nivel=" + $nivel + "&material=" + $material + "&estado=" + $estado;
             console.log($filtros);
             window.open("../reporte_usuarios/index.php" + $filtros, "Reporte de Usuarios", "directories=no location=no");

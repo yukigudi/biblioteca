@@ -42,10 +42,12 @@ $filtro = "";
 if (isset($_GET['nivel']) && ($_GET['nivel']) != "") {
     $nivel = $_GET['nivel'];
     $filtro .= "AND nivel='$nivel' ";
+}else{
+    $filtro .= "AND nivel not in('tecnicodocente') ";
 }
 
-
-$query = "SELECT * FROM usuarios WHERE Activo=1 and nivel not in('tecnicodocente') " . $filtro;
+// and nivel not in('tecnicodocente') 
+$query = "SELECT * FROM usuarios WHERE Activo=1 " . $filtro;
 $resultado = $conexion->query($query);
 
 if (!$resultado) {
@@ -71,7 +73,7 @@ $drawing->getShadow()->setDirection(45);
 $drawing->setWorksheet($spreadsheet->getActiveSheet());
 // Establecer el estilo de la celda que contiene el título
 $titulo='Usuarios';
-$sheet->getStyle('D5')->applyFromArray([
+$sheet->getStyle('D5:D6')->applyFromArray([
     'font' => [
         'bold' => true,
         'size' => 16,
@@ -84,6 +86,7 @@ $sheet->getStyle('D5')->applyFromArray([
 
 // Escribir el título en la celda H2
 $sheet->setCellValue('D5', 'Reporte '.$titulo);
+$sheet->setCellValue('D6', date("d/m/Y, g:i a"));
 
 // Escribir los encabezados en la primera fila
 $sheet->setCellValue('A10', 'ID');

@@ -174,9 +174,9 @@
                  Porfavor rellena el campo.
                </div>
              </div>
-             <!-- <div class="col-md-4 col-lg-3 mb-4">
-                    <label for="validationCustom03">Editorial</label>
-                    <input type="text" class="form-control" id="validationCustom03" required name="editorial" placeholder="Editorial" pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+" maxlength="30">
+              <div class="col-md-4 col-lg-3 mb-4">
+                    <label for="validationCustom03">Edición</label>
+                    <input type="text" class="form-control" id="validationCustom03" required name="edicion" placeholder="Edición" maxlength="30">
                     <div class="valid-feedback">
                       Correcto!
                     </div>
@@ -184,7 +184,7 @@
                       Porfavor rellena el campo.
                     </div>
                   </div>
-                </div>
+                <!--</div>
                  <div class="form-row">
                   <div class="col-md-6 col-lg-4 mb-3">
                     <label for="validationCustom04">Fecha de ultima edición</label>
@@ -257,9 +257,10 @@
       $fecha = date("Y-m-d");
       $cate = $_POST['cate'];
       $estante = $_POST['estante'];
+      $edicion = $_POST['edicion'];
       $ubicacion = 7; //bodega grande en tabla ubicaciones
 
-      $query = "INSERT INTO libros (Titulo,codigo,Copias,estado,nivel,material,Activo) values('$titulo','$codigo',$copias,'$estado','$nivel','$material',1)";
+      $query = "INSERT INTO libros (Titulo,codigo,Copias,estado,nivel,material,edicion,Activo) values('$titulo','$codigo',$copias,'$estado','$nivel','$material','$edicion',1)";
       $verificar = $conexion->query($query);
       $last_id = $conexion->insert_id;
       // $Id_envio = $last_id;

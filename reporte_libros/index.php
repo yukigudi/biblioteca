@@ -27,25 +27,25 @@ $filtro = "";
 
 $filtro = " AND Activo=1 ";
 
-    if (isset($_POST['dato']) && ($_POST['dato']) != "") {
-        $dato = $_POST['dato'];
+    if (isset($_GET['dato']) && ($_GET['dato']) != "") {
+        $dato = $_GET['dato'];
         $filtro .= " AND Titulo LIKE '$dato%'";
     }
 
-if (isset($_POST['codigo']) && ($_POST['codigo']) != "") {
-    $codigo = $_POST['codigo'];
+if (isset($_GET['codigo']) && ($_GET['codigo']) != "") {
+    $codigo = $_GET['codigo'];
     $filtro .= " AND codigo LIKE '$codigo%'";
 }
-if (isset($_POST['nivel']) && ($_POST['nivel']) != "") {
-    $nivel = $_POST['nivel'];
+if (isset($_GET['nivel']) && ($_GET['nivel']) != "") {
+    $nivel = $_GET['nivel'];
     $filtro .= " AND nivel='$nivel' ";
 }
-if (isset($_POST['material']) && ($_POST['material']) != "") {
-    $material = $_POST['material'];
+if (isset($_GET['material']) && ($_GET['material']) != "") {
+    $material = $_GET['material'];
     $filtro .= " AND material='$material' ";
 }
-if (isset($_POST['estado']) && ($_POST['estado']) != "") {
-    $estado = $_POST['estado'];
+if (isset($_GET['estado']) && ($_GET['estado']) != "") {
+    $estado = $_GET['estado'];
     $filtro .= " AND estado='$estado' ";
 }
 if ($filtro) {
@@ -60,11 +60,11 @@ $resultado=$conexion->query($query);
 $pdf=new FPDF('L','mm','A4');
 $pdf->AddPage();
 $pdf->SetFont('Arial','B',12);
-$pdf->Image('../images/logo1.png',10,8,20);
+$pdf->Image('../images/logo2.png', 15, 8, 20);
     // Movernos a la derecha
     $pdf->Cell(80);
     // Título
-    $pdf->Cell(110,10,'ISEJA Control de módulos',1,0,'C');
+    $pdf->Cell(110,10,mb_convert_encoding('ISEJA Control de módulos', 'ISO-8859-1', 'UTF-8'),1,0,'C');
     // Salto de línea
     $pdf->Ln(20);
     $pdf->Cell(100,10,'Libros registrados - '.date("F j, Y, g:i a"),0,0,'C');

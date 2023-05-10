@@ -40,7 +40,10 @@ $niveles = array(
         <nav id="sidebar">
             <div class="sidebar-header">
                 <img width="45" height="45" src="../images/logo.png" alt="">
-                <small><b class="ml-2">ISEJA</b> <br><p class="text-center">Control de módulos</p></small><hr style="border-color: white;">
+                <small><b class="ml-2">ISEJA</b> <br>
+                    <p class="text-center">Control de módulos</p>
+                </small>
+                <hr style="border-color: white;">
             </div>
             <?php menu(); ?>
         </nav>
@@ -82,12 +85,14 @@ $niveles = array(
             <div class="bg-white rounded-lg formulario">
                 <?php
                 $id = $_REQUEST['id'];
+                $ubic = $_REQUEST['ubic'];
+
                 require_once("../conexion/conexion.php");
                 $query = "SELECT * FROM ubicaciones WHERE Id_ubicacion=$id";
                 $resultado = $conexion->query($query);
                 $fila = $resultado->fetch_assoc();
                 ?>
-                <form class="p-4 needs-validation" action="realizar_edicion.php?id=<?php echo $fila['Id_ubicacion'] ?> method="POST" novalidate>
+                <form class="p-4 needs-validation" action="realizar_edicion.php?ubic=<?php echo $ubic ?>&id=<?php echo $fila['Id_ubicacion'] ?> " method="POST" novalidate>
                     <center><label for="">
                             <h4>MODIFICAR UBICACIONES</h4>
                         </label></center>
@@ -95,7 +100,7 @@ $niveles = array(
 
                         <div class="col-sm-12 col-md-4 col-lg-6 mb-4">
                             <label for="nombre_lugar">Nombre del lugar</label>
-                            <input type="text" class="form-control" id="nombre_lugar" required name="nombre_lugar" placeholder="Nombre del lugar" pattern="^[a-zA-Z0-9À-ÿ\s]*$" maxlength="40" value="<?php echo $fila['nombre_lugar']; ?>">>
+                            <input type="text" class="form-control" id="nombre_lugar" required name="nombre_lugar" placeholder="Nombre del lugar" pattern="^[a-zA-Z0-9À-ÿ\s]*$" maxlength="40" value="<?php echo $fila['nombre_lugar']; ?>">
                             <div class="valid-feedback">
                                 Correcto!
                             </div>
@@ -106,7 +111,7 @@ $niveles = array(
 
                         <div class="col-sm-12 col-md-4 col-lg-6 mb-4">
                             <label for="calle">Dirección</label>
-                            <input type="text" class="form-control" id="direccion" required name="direccion" placeholder="Dirección" pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+" maxlength="30" value="<?php echo $fila['direccion']; ?>">
+                            <input type="text" class="form-control" id="direccion" required name="direccion" placeholder="Dirección" pattern="^[a-zA-Z0-9À-ÿ\s]*$" maxlength="30" value="<?php echo $fila['direccion']; ?>">
                             <div class="valid-feedback">
                                 Correcto!
                             </div>
@@ -117,7 +122,7 @@ $niveles = array(
 
                         <div class="col-sm-6 col-md-6 col-lg-3 mb-3">
                             <label for="localidad">Localidad</label>
-                            <input type="text" class="form-control" id="localidad" required name="localidad" placeholder="Localidad" pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+" maxlength="30" value="<?php echo $fila['localidad']; ?>">
+                            <input type="text" class="form-control" id="localidad" required name="localidad" placeholder="Localidad"  pattern="^[a-zA-Z0-9À-ÿ\s]*$" maxlength="30" value="<?php echo $fila['localidad']; ?>">
                             <div class="valid-feedback">
                                 Correcto!
                             </div>
@@ -127,7 +132,7 @@ $niveles = array(
                         </div>
                         <div class="col-sm-6 col-md-6 col-lg-3 mb-3">
                             <label for="municipio">Municipio</label>
-                            <input type="text" class="form-control" id="municipio" required name="municipio" placeholder="Municipio" pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+" maxlength="30" value="<?php echo $fila['municipio']; ?>">
+                            <input type="text" class="form-control" id="municipio" required name="municipio" placeholder="Municipio"  pattern="^[a-zA-Z0-9À-ÿ\s]*$" maxlength="30" value="<?php echo $fila['municipio']; ?>">
                             <div class="valid-feedback">
                                 Correcto!
                             </div>
@@ -147,7 +152,7 @@ $niveles = array(
                         </div>
                         <div class="col-sm-6 col-md-4 col-lg-3 mb-3">
                             <label for="telefono">Teléfono</label>
-                            <input type="tel" class="form-control" id="telefono" required name="telefono" placeholder="Teléfono" pattern="[0-9]{8,10}" value="<?php echo $fila['telefono']; ?>">
+                            <input type="tel" class="form-control" id="telefono" required name="telefono" placeholder="Teléfono" pattern="[0-9]{10}" value="<?php echo $fila['telefono']; ?>">
                             <div class="valid-feedback">
                                 Correcto!
                             </div>
@@ -200,7 +205,7 @@ $niveles = array(
 
         //$query = "INSERT INTO ubicaciones (tipo,direccion,localidad,municipio,codigo_postal,telefono,nombre_lugar,fecha_registro) values('$tipo','$direccion','$localidad','$municipio','$cod_pos','$telefono','$nombre_lugar','$fecha')";
         $query = "UPDATE ubicaciones set direccion='$direccion',localidad='$localidad',municipio='$municipio',codigo_postal='$cod_pos',telefono='$telefono',nombre_lugar='$nombre_lugar' where Id_ubicacion=" . $id;
-        //echo $query;
+        echo $query;
         $verificar = $conexion->query($query);
         if ($verificar) {
             echo '<script>
@@ -217,9 +222,9 @@ $niveles = array(
                   },
                   function(isConfirm) {
                       if (isConfirm) {
-                        window.location="cordzona.php";
+                        window.location="' . $ubic . '.php";
                       } else {
-                        window.location="registrar_cordzona.php";
+                        window.location="registrar_' . $ubic . '.php";
                       }
                     });
                     </script>';
@@ -238,9 +243,9 @@ $niveles = array(
                   },
                   function(isConfirm) {
                       if (isConfirm) {
-                        window.location="cordzona.php";
+                        window.location="' . $ubic . '.php";
                       } else {
-                        window.location="registrar_cordzona.php";
+                        window.location="registrar_' . $ubic . '.php";
                       }
                     });
                     </script>';
@@ -276,7 +281,7 @@ $niveles = array(
     <script src="../vendor/jquery/jquery.min.js" type="text/javascript"></script>
     <!-- Bootstrap JS -->
     <script src="../vendor/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-    
+
     <script>
         $(document).ready(function() {
             $('.toast').toast('show');

@@ -138,12 +138,12 @@
 
                                 require_once("../conexion/conexion.php");
                                 $filtro = "";
-                                if (isset($_POST['buscar'])) {
+                               // if (isset($_POST['buscar'])) {
                                     if (isset($_POST['dato'])) {
                                         $dato = $_POST['dato'];
-                                        $filtro .= " fechaenvio='$dato'";
+                                        $filtro .= "  header_recibido_modulos.fechaenvio='$dato'";
                                     }
-                                }
+                                //}
                                 if ($filtro) {
                                     // $filtro = substr($filtro, 4);
                                     $filtro = "Where" . $filtro;
@@ -198,7 +198,7 @@
                                     }
                                 }
                                 //-----------
-                                $query = "SELECT header_recibido_modulos.Id_hrecibido,header_envio_modulos.ubicacion as ubicacion_actual,header_envio_modulos.envioa,header_envio_modulos.fechaenvio,header_recibido_modulos.fechaenvio,header_envio_modulos.usuario as envia,header_recibido_modulos.usuario as recibe,header_recibido_modulos.testigo FROM header_recibido_modulos LEFT JOIN header_envio_modulos ON header_envio_modulos.Id_henvio=header_recibido_modulos.orden " . $filtro . " order by header_recibido_modulos.fechaenvio desc,header_recibido_modulos.Id_hrecibido desc;";
+                                $query = "SELECT header_recibido_modulos.Id_hrecibido,header_envio_modulos.ubicacion as ubicacion_actual,header_envio_modulos.envioa,header_envio_modulos.fechaenvio,header_recibido_modulos.fechaenvio,header_envio_modulos.usuario as envia,header_recibido_modulos.usuario as recibe,header_recibido_modulos.testigo FROM header_recibido_modulos LEFT JOIN header_envio_modulos ON header_envio_modulos.Id_henvio=header_recibido_modulos.orden " . $filtro . " order by header_recibido_modulos.fechaenvio desc,header_recibido_modulos.Id_hrecibido desc";
 
                                 //$query = "SELECT * FROM header_recibido_modulos " . $filtro." order by fechaenvio desc,Id_hrecibido desc";
                                 //$query = "SELECT ubicaciones_modulos.Id_ubic_mod,libros.Titulo,libros.estado,ubicaciones.nombre_lugar as ubicacion_actual,ubicaciones_modulos.cantidad as Copias,libros.nivel,libros.material FROM ubicaciones_modulos left join ubicaciones on ubicaciones.Id_ubicacion=ubicaciones_modulos.ubicacion_Id left join libros on libros.Id_libro=ubicaciones_modulos.modulo_Id " . $filtro;

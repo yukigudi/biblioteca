@@ -50,8 +50,8 @@ $pdf->SetFont('Arial', 'I', 8);
 
 $filtro = "";
 
-    if (isset($_POST['dato'])) {
-        $dato = $_POST['dato'];
+    if (isset($_GET['dato'])) {
+        $dato = $_GET['dato'];
         $filtro .= " fechaenvio='$dato'";
     }
 
@@ -92,24 +92,24 @@ if ($resultado->num_rows > 0) {
 $query = "SELECT * FROM header_retorno_modulos " . $filtro . " order by fechaenvio desc,Id_hretorno desc";
 $resultado = $conexion->query($query);
 
-while ($row = $resultado->fetch_assoc()) {
+while ($fila = $resultado->fetch_assoc()) {
    // $row['regresara'] = $regresara[$row['regresara']];
    $id = $fila['Id_hretorno'];
 
-   $fila['ubicacion'] = $ubicacion_actual[$fila['ubicacion']];
+   /*$fila['ubicacion'] = $ubicacion_actual[$fila['ubicacion']];
    $fila['envioa'] = $envioa[$fila['envioa']];
    $fila['usuario'] = $remitente[$fila['usuario']];
-   $fila['recibe'] = $destinatario[$fila['recibe']];
+   $fila['recibe'] = $destinatario[$fila['recibe']];*/
 
     $pdf->Ln(10);
-    $pdf->cell(15, 10, $row['Id_hretorno'], 1, 0, 'C', 0);
-    $pdf->cell(15, 10, $row['orden'], 1, 0, 'C', 0);
-    $pdf->cell(30, 10, $row['fecha'], 1, 0, 'C', 0);
-    $pdf->cell(50, 10, $usuario[$row['recibe']], 1, 0, 'C', 0);
-    $pdf->cell(50, 10, $usuario[$row['usuario']], 1, 0, 'C', 0);
-    $pdf->cell(38, 10, $row['testigo'], 1, 0, 'C', 0);
-    $pdf->cell(38, 10, $ubicaciones[$row['ubicacion']], 1, 0, 'C', 0);
-    $pdf->cell(38, 10, $ubicaciones[$row['envioa']], 1, 0, 'C', 0);
+    $pdf->cell(15, 10, $fila['Id_hretorno'], 1, 0, 'C', 0);
+    $pdf->cell(15, 10, $fila['orden'], 1, 0, 'C', 0);
+    $pdf->cell(30, 10, $fila['fecha'], 1, 0, 'C', 0);
+    $pdf->cell(50, 10, mb_convert_encoding($usuario[$fila['recibe']], 'ISO-8859-1', 'UTF-8'), 1, 0, 'C', 0);
+    $pdf->cell(50, 10, mb_convert_encoding($usuario[$fila['usuario']], 'ISO-8859-1', 'UTF-8'), 1, 0, 'C', 0);
+    $pdf->cell(38, 10, mb_convert_encoding($fila['testigo'], 'ISO-8859-1', 'UTF-8'), 1, 0, 'C', 0);
+    $pdf->cell(38, 10, mb_convert_encoding($ubicaciones[$fila['ubicacion']], 'ISO-8859-1', 'UTF-8'), 1, 0, 'C', 0);
+    $pdf->cell(38, 10, mb_convert_encoding($ubicaciones[$fila['envioa']], 'ISO-8859-1', 'UTF-8'), 1, 0, 'C', 0);
   
 }
 $pdf->Output();

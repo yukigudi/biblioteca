@@ -320,7 +320,7 @@ require_once("../conexion/conexion.php");
                             //aqui checa si hay registro de la ubicacionactual
                             $querydetalle4 = "UPDATE ubicaciones_modulos SET cantidad = $cantidad_actualizada, fecha='$fechaactual' WHERE ubicacion_Id = $ubicacion AND modulo_Id = $value";
                             $verificar4 = $conexion->query($querydetalle4);
-                            echo '302querydetalle4 ' . $querydetalle4 . '<br>';
+                            //echo '302querydetalle4 ' . $querydetalle4 . '<br>';
                             if (!$verificar4) {
                                 echo "Error en la consulta: " . $conexion->error;
                             }
@@ -335,7 +335,7 @@ require_once("../conexion/conexion.php");
                             $cantidad_nueva = $fila['cantidad'] + $cantidad[$key];
                             $querydetalle3 = "UPDATE ubicaciones_modulos SET cantidad = $cantidad_nueva, fecha='$fechaactual' WHERE ubicacion_Id = $regresara AND modulo_Id = $value";
                             $verificar3 = $conexion->query($querydetalle3);
-                            echo '317querydetalle3 ' . $querydetalle3 . '<br>';
+                            //echo '317querydetalle3 ' . $querydetalle3 . '<br>';
                             if (!$verificar3) {
                                 echo "Error en la consulta: " . $conexion->error;
                             }

@@ -27,8 +27,8 @@ header('Cache-Control: max-age=0');
 
 $filtro = "";
 
-if (isset($_POST['dato'])) {
-    $dato = $_POST['dato'];
+if (isset($_GET['dato'])) {
+    $dato = $_GET['dato'];
     $filtro .= " fechaasignacion='$dato'";
 }
 
@@ -115,7 +115,7 @@ $drawing->getShadow()->setDirection(45);
 $drawing->setWorksheet($spreadsheet->getActiveSheet());
 // Establecer el estilo de la celda que contiene el título
 $titulo='Asignaciones';
-$sheet->getStyle('D5')->applyFromArray([
+$sheet->getStyle('D5:D6')->applyFromArray([
     'font' => [
         'bold' => true,
         'size' => 16,
@@ -128,6 +128,7 @@ $sheet->getStyle('D5')->applyFromArray([
 
 // Escribir el título en la celda H2
 $sheet->setCellValue('D5', 'Reporte '.$titulo);
+$sheet->setCellValue('D6', date("d/m/Y, g:i a"));
 
 // Escribir los encabezados en la primera fila
 $sheet->setCellValue('A10', 'ID');

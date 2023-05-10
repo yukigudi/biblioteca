@@ -27,10 +27,12 @@
   $nivel = $_POST['nivel'];
   $material = $_POST['material'];
   $codigo = $_POST['codigo'];
+  $edicion = $_POST['edicion'];
+
 
   //var_dump($_POST);
 
-  $query = "UPDATE libros SET Titulo='$titulo', Copias=$copias, estado='$estado', nivel='$nivel', material='$material', codigo='$codigo' WHERE Id_libro=$id_libro ";
+  $query = "UPDATE libros SET Titulo='$titulo', Copias=$copias, estado='$estado', nivel='$nivel', material='$material', codigo='$codigo', edicion='$edicion' WHERE Id_libro=$id_libro ";
   $verificar = $conexion->query($query);
   //echo $query . "<br>";
 

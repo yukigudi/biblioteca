@@ -26,10 +26,13 @@ if (isset($_GET['dato'])) {
     $dato = $_GET['dato'];
     $filtro .= "and nombre_empleado like '%$dato%' ";
 }
-if (isset($_GET['nivel'])) {
+if (isset($_GET['nivel']) && ($_GET['nivel']) != "") {
     $nivel = $_GET['nivel'];
     $filtro .= "and nivel='$nivel' ";
+}else{
+    $filtro .= "AND nivel not in('tecnicodocente') ";
 }
+
 /*if ($filtro) {
     $filtro = substr($filtro, 4);
     $filtro = "Where" . $filtro;
@@ -49,7 +52,7 @@ $pdf->Image('../images/logo2.png', 15, 8, 20);
 $pdf->Cell(40, 10, 'ISEJA Control de libros', 1, 0, 'C');
 // Salto de línea
 $pdf->Ln(20);
-$pdf->Cell(50, 10, 'Usuarios registrados', 0, 0, 'C');
+$pdf->Cell(50, 10, 'Usuarios registrados - ' . date("d/m/Y, g:i a"), 0, 0, 'C');
 $pdf->Ln(20);
 //ID	Usuario	Nombre	Fecha alta	Nivel de usuario	Correo
 $pdf->cell(20, 10, 'ID', 1, 0, 'C', 0);
@@ -60,6 +63,7 @@ $pdf->cell(40, 10, 'Nivel de usuario', 1, 0, 'C', 0);
 //$this->cell(40,10,utf8_decode('Contratación'),1,0,'C',0);
 $pdf->cell(45, 10, 'Correo', 1, 1, 'C', 0);
 
+//and nivel not in('tecnicodocente') 
 $query = "SELECT * FROM usuarios WHERE Activo=1 " . $filtro;
 /*$query="SELECT empleados.Id_empleado,personas.Nombre,empleados.Fecha_contratacion,puesto.Descripcion
                                 FROM personas,empleados,puesto WHERE personas.Id_persona=empleados.Id_persona

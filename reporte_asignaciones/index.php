@@ -33,7 +33,7 @@ $pdf->Cell(80);
 $pdf->Cell(110, 10, mb_convert_encoding('ISEJA Control de módulos', 'ISO-8859-1', 'UTF-8'), 1, 0, 'C');
 // Salto de línea
 $pdf->Ln(20);
-$pdf->Cell(80, 10, 'Registro de Recibidos ' . date("d/m/Y, g:i a"), 0, 0, 'C');
+$pdf->Cell(80, 10, 'Registro de Asignaciones ' . date("d/m/Y, g:i a"), 0, 0, 'C');
 $pdf->Ln(20);
 $pdf->cell(15, 10, 'ID', 1, 0, 'C', 0);
 //$pdf->cell(15, 10, 'Orden', 1, 0, 'C', 0);
@@ -51,8 +51,8 @@ $pdf->SetFont('Arial', 'I', 8);
 
 $filtro = "";
 
-if (isset($_POST['dato'])) {
-    $dato = $_POST['dato'];
+if (isset($_GET['dato'])) {
+    $dato = $_GET['dato'];
     $filtro .= " fechaasignacion='$dato'";
 }
 
@@ -122,8 +122,8 @@ while ($row = $resultado->fetch_assoc()) {
 
     $pdf->Ln(10);
     $pdf->cell(15, 10, $row['Id_hasignacion'], 1, 0, 'C', 0);
-    $pdf->cell(30, 10, $row['usuario'], 1, 0, 'C', 0);
-    $pdf->cell(50, 10, $row['ubicacion'], 1, 0, 'C', 0);
+    $pdf->cell(30, 10, mb_convert_encoding($row['usuario'], 'ISO-8859-1', 'UTF-8'), 1, 0, 'C', 0);
+    $pdf->cell(50, 10, mb_convert_encoding($row['ubicacion'], 'ISO-8859-1', 'UTF-8'), 1, 0, 'C', 0);
     $pdf->cell(50, 10, $row['tipo'], 1, 0, 'C', 0);
     $pdf->cell(38, 10, $row['orden'], 1, 0, 'C', 0);
     $pdf->cell(38, 10, $row['testigo'], 1, 0, 'C', 0);

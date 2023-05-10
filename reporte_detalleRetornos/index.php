@@ -57,16 +57,16 @@ $resultado=$conexion->query($query);
 $pdf=new FPDF('L','mm','A4');
 $pdf->AddPage();
 $pdf->SetFont('Arial','B',12);
-$pdf->Image('../images/logo1.png',10,8,20);
+$pdf->Image('../images/logo2.png', 15, 8, 20);
     // Movernos a la derecha
     $pdf->Cell(80);
     // Título
     $pdf->Cell(110,10,'ISEJA Control de libros',1,0,'C');
     // Salto de línea
     $pdf->Ln(20);
-    $pdf->Cell(50,10,'Detalle de Retorno Numero '.$dato,0,0,'C');
+    $pdf->Cell(110,10,'Detalle de Retorno Numero '.$dato . ' - ' . date("d/m/Y, g:i a"),0,0,'C');
     $pdf->Ln(20);
-    $pdf->cell(15,10,'ID',1,0,'C',0);
+    $pdf->cell(15,10,mb_convert_encoding('Código', 'ISO-8859-1', 'UTF-8'),1,0,'C',0);
     $pdf->cell(65,10,mb_convert_encoding('Módulo', 'ISO-8859-1', 'UTF-8'),1,0,'C',0);
     $pdf->cell(20,10,'Cantidad',1,0,'C',0);
     $pdf->cell(20,10,'Nivel',1,0,'C',0);
@@ -82,7 +82,7 @@ $pdf->SetFont('Arial','I',9);
 while ($row=$resultado->fetch_assoc()) {
     $row['titulo'] = $libro[$row['titulo']];
     $pdf->Ln(10);
-	$pdf->cell(15,10,$row['Id_retorno'],1,0,'C',0);
+	$pdf->cell(15,10,$row['codigo'],1,0,'C',0);
     $pdf->cell(65,10,mb_convert_encoding($row['titulo'], 'ISO-8859-1', 'UTF-8'),1,0,'C',0);
     $pdf->cell(20,10,$row['cantidad'],1,0,'C',0);
     $pdf->cell(20,10,$row['nivel'],1,0,'C',0);
@@ -90,4 +90,3 @@ while ($row=$resultado->fetch_assoc()) {
     $pdf->cell(20,10,$row['material'],1,0,'C',0);
 }
 $pdf->Output();
- ?>

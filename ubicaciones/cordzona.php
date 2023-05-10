@@ -90,14 +90,17 @@ $materiales = array(
             </nav>
         </div>
         <div class="container table-responsive">
-            <br><br><br><br>
+        <br><br><br><br>
+              <center><label for="">
+                      <h4>REPORTE DE COORDINACIONES DE ZONA</h4>
+                  </label></center>
             <form action="#" class="form" method="POST">
 
 
                 <div class="form-row container">
                     <div class="col-md-6 col-lg-5">
                         <div class="input-group" style="z-index: 0;">
-                            <input type="search" name="dato" id="dato" placeholder="Titulo" class="form-control shadow-sm border-0" autocomplete="off" value="<?php echo $_POST['dato'] ?>">
+                            <input type="search" name="dato" id="dato" placeholder="Nombre del lugar" class="form-control shadow-sm border-0" autocomplete="off" value="<?php echo $_POST['dato'] ?>">
                             <div class="input-group-prepend bg-white p-0">
                                 <button name="buscar" type="submit" class="input-group-text btn btn-danger border-0 shadow-sm icofont-search-1"></button>
                             </div>
@@ -136,12 +139,12 @@ $materiales = array(
 
                             require_once("../conexion/conexion.php");
                             // $filtro = " AND Activo=1 ";
-                            if (isset($_POST['buscar'])) {
+                           // if (isset($_POST['buscar'])) {
                                 if (isset($_POST['dato'])) {
                                     $dato = $_POST['dato'];
                                     $filtro .= " AND nombre_lugar LIKE '$dato%'";
                                 }
-                            }
+                           // }
                             /* if ($filtro) {
                                     $filtro = substr($filtro, 4);
                                     $filtro = "Where" . $filtro;
@@ -161,7 +164,7 @@ $materiales = array(
                                     <td><small><?php echo $fila['municipio']; ?></small></td>
                                     <td><small><?php echo $fila['telefono']; ?></small></td>
                                     <td><small><?php echo $fila['codigo_postal']; ?></small></td>
-                                    <td class="text-right"><a class="bg-primary py-1 rounded-lg" href="modificar.php?id=<?php echo $fila['Id_ubicacion'] ?>"><span class='h6 text-white icofont-ui-edit px-1'></small></a></td>
+                                    <td class="text-right"><a class="bg-primary py-1 rounded-lg" href="modificar.php?ubic=cordzona&id=<?php echo $fila['Id_ubicacion'] ?>"><span class='h6 text-white icofont-ui-edit px-1'></small></a></td>
                                     <td class="text-left"><a class="bg-danger py-1 rounded-lg" href="#" onclick="confirmar(<?php echo $id; ?>)"><span class='h6 text-white icofont-ui-delete px-1'></span></a></td>
                                 </tr>
                             <?php
@@ -212,7 +215,7 @@ $materiales = array(
 
             $("#btnDescargarxls").click(function() {
                 console.log('entra aqui');
-                var dato = "<?php echo $_POST['dato']; ?>";
+                var dato = $('#dato').val();
                 var filtros = "?dato=" + dato;
                 var url = "/biblioteca/phpxsls/ReportesXls/PhpOffice/reporte_ubicaciones_cordzona.php" + filtros;
 
